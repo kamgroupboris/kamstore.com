@@ -5,9 +5,12 @@ namespace app\controllers;
 use Yii;
 use app\models\Products;
 use yii\data\ActiveDataProvider;
+use yii\data\SqlDataProvider;
+use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Options;
 
 /**
  * ItemsController implements the CRUD actions for Products model.
@@ -87,10 +90,64 @@ class ItemsController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('update', [
-                'model' => $model,
+/*
+              $dataProvider = new ActiveDataProvider([
+                    'query' => Options::find()
+                        ->where(['product_id' => $model->id])
+                        ->with(['features']),
+             ]);
+            */
+            $dataProvider = new SqlDataProvider([
+                'sql' => 'SELECT
+                    s_options.product_id,
+                    s_options.feature_id,
+                    s_options.`value`,
+                    s_features.id,
+                    s_features.`name`,
+                    s_features.position,
+                    s_features.in_filter
+                    FROM
+                    s_features
+                    INNER JOIN s_options ON s_options.feature_id = s_features.id
+                    WHERE
+                    s_options.product_id = '.$model->id
+
             ]);
+
+             return $this->render('update', [
+                  'model' => $model, 'dataProvider' => $dataProvider,
+              ]);
+
+        /*
+            $models =   Options::find()
+                ->where(['product_id' => $model->id])
+                ->with(['features'])
+                ->asArray()
+                ->all();
+print('<pre>');
+print_r($models);*/
+
+          /*  foreach($models as $model) {
+                echo $model->value;
+
+                foreach($model->features as $item) {
+                    echo $item->name;
+                }
+            }*/
+
+
         }
+    }
+
+    public function Options()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Options::find(),
+        ]);
+
+        return $this->render('options', [
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**
