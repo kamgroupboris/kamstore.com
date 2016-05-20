@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Brands;
 use Yii;
 use app\models\Products;
 use yii\data\ActiveDataProvider;
@@ -11,6 +12,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\Options;
+use app\models\Images;
+use app\models\Categories;
+use yii\helpers\ArrayHelper;
 
 /**
  * ItemsController implements the CRUD actions for Products model.
@@ -88,7 +92,11 @@ class ItemsController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        //    return $this->redirect(['view', 'id' => $model->id]);
+        //    return true;
+            return $this->render('_product', [
+                'model' => $model,
+            ]);
         } else {
 /*
               $dataProvider = new ActiveDataProvider([
@@ -97,37 +105,50 @@ class ItemsController extends Controller
                         ->with(['features']),
              ]);
             */
+
             $dataProvider = new SqlDataProvider([
                 'sql' => 'SELECT
-                    s_options.product_id,
-                    s_options.feature_id,
-                    s_options.`value`,
-                    s_features.id,
-                    s_features.`name`,
-                    s_features.position,
-                    s_features.in_filter
+                        s_options.product_id,
+                        s_options.feature_id,
+                        s_options.`value`,
+                        s_features.id,
+                        s_features.`name`,
+                        s_features.position,
+                        s_features.in_filter
                     FROM
                     s_features
                     INNER JOIN s_options ON s_options.feature_id = s_features.id
                     WHERE
                     s_options.product_id = '.$model->id
-
             ]);
 
-             return $this->render('update', [
-                  'model' => $model, 'dataProvider' => $dataProvider,
+            $image = new Images();
+
+
+
+
+                 $category = ArrayHelper::map(Categories::find()->all(), 'id', 'name');
+                 $brand = ArrayHelper::map(Brands::find()->all(), 'id', 'name');
+
+
+
+            return $this->render('update', [
+                'model' => $model,
+                'dataProvider' => $dataProvider,
+                'image' => $image,
+                'category' => $category,
+                'brand' => $brand,
               ]);
 
-        /*
-            $models =   Options::find()
+        /*   $models =   Options::find()
                 ->where(['product_id' => $model->id])
                 ->with(['features'])
                 ->asArray()
                 ->all();
-print('<pre>');
-print_r($models);*/
+            print('<pre>');
+            print_r($models);*/
 
-          /*  foreach($models as $model) {
+        /*  foreach($models as $model) {
                 echo $model->value;
 
                 foreach($model->features as $item) {
@@ -149,6 +170,23 @@ print_r($models);*/
             'dataProvider' => $dataProvider,
         ]);
     }
+
+    public function actionImage()
+    {
+        $model = new Images();
+
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate()) {
+                // form inputs are valid, do something here
+                return;
+            }
+        }
+
+        return $this->render('_image', [
+            'model' => $model,
+        ]);
+    }
+
 
     /**
      * Deletes an existing Products model.
