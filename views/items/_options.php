@@ -2,8 +2,14 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
-use kartik\widgets\Select2;
-use yii\web\JsExpression;
+use yii\helpers\Url;
+
+use yii\widgets\ActiveForm;
+use yii\widgets\Pjax;
+
+use kartik\widgets\Typeahead;
+
+
 
 ?>
 <div class="options-index">
@@ -13,58 +19,54 @@ use yii\web\JsExpression;
     </p>
 
 
-    <?
-        $data = [
-            "red" => "red",
-            "green" => "green",
-            "blue" => "blue",
-            "orange" => "orange",
-            "white" => "white",
-            "black" => "black",
-            "purple" => "purple",
-            "cyan" => "cyan",
-            "teal" => "teal"
-        ];
-    ?>
+<?Pjax::begin();?>
+    <?php $form = ActiveForm::begin(['options' => ['data-pjax' => true ]]); ?>
+
 
     <?=  GridView::widget([
         'dataProvider'=>$dataProvider,
-  //     'filterModel'=>$searchModel,
-    //    'showPageSummary'=>true,
         'pjax'=>true,
         'striped'=>true,
         'hover'=>true,
-        'panel'=>['type'=>'primary', 'heading'=>'Grid Grouping Example'],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            //    'id',
             [
-                'attribute' => 'name',
+                'attribute' => 'features.name',
                 'format' => 'text',
                 'label' => 'Имя',
             ],
             [
                 'attribute' => 'value',
-                'format' => 'html',
+                'format' => 'text',
                 'label' => 'Значение',
-           //     'content'=> function($data){return Html::input('text', 'username', $data['value'],['class' => 'form-control']);},
                 'content'=> function($data){
-                    return  Select2::widget([
-                        'name' => 'state_125',
-                        'value' => ['red', 'green'],
-                        'data' => $data,
-                        'options' => ['placeholder' => 'Select a state ...', 'multiple' => true],
-                        'pluginOptions' => [
-                            'templateResult' => new JsExpression('format'),
-                            'templateSelection' => new JsExpression('format'),
-                            'allowClear' => true
-                        ],
+                    return Typeahead::widget([
+                        'name' => $data['feature_id'],
+                        'value' => $data['value'],
+                        'options' => ['placeholder' => 'Filter as you type ...'],
+                        'pluginOptions' => ['highlight'=>true, 'minLength' => 0],
+                        'dataset' => [
+                            [
+                                'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
+                                'display' => 'value',
+                                'remote' => [
+                                    'url' => Url::to(['items/featurelist', 'id'=> $data['feature_id']]) . '&q=%QUERY',
+                                    'wildcard' => '%QUERY'
+                                ]
+                            ]
+                        ]
                     ]);
                 },
 
             ],
-            //  ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 
+
+
+        <div class="form-group">
+            <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
+        </div>
+    <?php ActiveForm::end(); ?>
+  <?Pjax::end();?>
 </div>
