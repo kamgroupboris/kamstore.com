@@ -4,6 +4,8 @@ namespace app\models;
 
 use Yii;
 
+use \app\models\Options;
+
 /**
  * This is the model class for table "s_features".
  *
@@ -46,4 +48,9 @@ class Features extends \yii\db\ActiveRecord
             'in_filter' => 'In Filter',
         ];
     }
+
+ /*   public function getOptions()
+    {
+        return $this->hasOne(Options::className(), ['feature_id' => 'id']);
+    }*/
 }

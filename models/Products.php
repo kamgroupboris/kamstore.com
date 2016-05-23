@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use \app\models\Images;
+
 
 /**
  * This is the model class for table "s_products".
@@ -39,7 +41,7 @@ class Products extends \yii\db\ActiveRecord
     {
         return [
             [['brand_id', 'visible', 'position', 'featured'], 'integer'],
-            [['name', 'annotation', 'body', 'meta_title', 'meta_keywords', 'meta_description', 'external_id'], 'required'],
+            [['name', 'annotation', 'body', 'meta_title', 'meta_keywords', 'meta_description'], 'required'],
             [['annotation', 'body'], 'string'],
             [['created'], 'safe'],
             [['url'], 'string', 'max' => 255],
@@ -70,4 +72,11 @@ class Products extends \yii\db\ActiveRecord
             'external_id' => 'External ID',
         ];
     }
+
+
+    public function getImages()
+    {
+        return $this->hasOne(Images::className(), ['id' => 'product_id']);
+    }
+
 }

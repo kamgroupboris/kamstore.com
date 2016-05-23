@@ -12,9 +12,15 @@ use Yii;
  * @property integer $product_id
  * @property string $filename
  * @property integer $position
+ * @property string $name_original
+ * @property string $type_file
  */
 class Images extends \yii\db\ActiveRecord
 {
+
+    public $imageFile;
+    public $file_id;
+    public $cat_id;
     /**
      * @inheritdoc
      */
@@ -29,9 +35,12 @@ class Images extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'position'], 'required'],
+            [['name', 'position', 'type_file'], 'safe'],
             [['product_id', 'position'], 'integer'],
-            [['name', 'filename'], 'string', 'max' => 255],
+            [['name', 'filename', 'name_original'], 'string', 'max' => 255],
+            [['type_file'], 'string', 'max' => 11],
+            [['imageFile'], 'file'],
+
         ];
     }
 
@@ -46,6 +55,8 @@ class Images extends \yii\db\ActiveRecord
             'product_id' => 'Product ID',
             'filename' => 'Filename',
             'position' => 'Position',
+            'name_original' => 'Name Original',
+            'type_file' => 'Type File',
         ];
     }
 }

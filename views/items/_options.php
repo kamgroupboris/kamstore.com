@@ -50,7 +50,7 @@ use kartik\widgets\Typeahead;
                                 'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
                                 'display' => 'value',
                                 'remote' => [
-                                    'url' => Url::to(['items/featurelist', 'id'=> $data['feature_id']]) . '&q=%QUERY',
+                                    'url' => Url::to(['items/feature-list', 'id'=> $data['feature_id']]) . '&q=%QUERY',
                                     'wildcard' => '%QUERY'
                                 ]
                             ]

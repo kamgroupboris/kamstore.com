@@ -12,9 +12,11 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\Options;
+use app\models\Features;
 use app\models\Images;
 use app\models\Categories;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 
 /**
  * ItemsController implements the CRUD actions for Products model.
@@ -87,44 +89,48 @@ class ItemsController extends Controller
      * @param integer $id
      * @return mixed
      */
+
+    public function actionFeatureList($id, $q = null)
+    {
+       $query =  Options::find()
+            ->select(['value'])
+            ->where([
+                 'and',
+                ['like','value', $q],
+                ['feature_id' => $id]
+           ] )
+            ->distinct(true);
+        $command = $query->createCommand();
+        $data = $command->queryAll();
+
+
+     $out = [];
+    foreach ($data as $d) {
+        $out[] = ['value' => $d['value']];
+    }
+    echo Json::encode($out);
+
+    }
+
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-        //    return $this->redirect(['view', 'id' => $model->id]);
-        //    return true;
             return $this->render('_product', [
                 'model' => $model,
             ]);
         } else {
-/*
-              $dataProvider = new ActiveDataProvider([
-                    'query' => Options::find()
-                        ->where(['product_id' => $model->id])
-                        ->with(['features']),
-             ]);
-            */
 
-            $dataProvider = new SqlDataProvider([
-                'sql' => 'SELECT
-                        s_options.product_id,
-                        s_options.feature_id,
-                        s_options.`value`,
-                        s_features.id,
-                        s_features.`name`,
-                        s_features.position,
-                        s_features.in_filter
-                    FROM
-                    s_features
-                    INNER JOIN s_options ON s_options.feature_id = s_features.id
-                    WHERE
-                    s_options.product_id = '.$model->id
-            ]);
 
             $image = new Images();
+            $related =  ArrayHelper::map(Products::find()->all(),'id','name');
 
-
+            $dataProvider = new ActiveDataProvider([
+                'query' => Options::find()
+                    ->where(['product_id' => $model->id])
+                    ->joinWith(['features']),
+            ]);
 
 
                  $category = ArrayHelper::map(Categories::find()->all(), 'id', 'name');
@@ -132,30 +138,14 @@ class ItemsController extends Controller
 
 
 
-            return $this->render('update', [
-                'model' => $model,
-                'dataProvider' => $dataProvider,
-                'image' => $image,
-                'category' => $category,
-                'brand' => $brand,
-              ]);
-
-        /*   $models =   Options::find()
-                ->where(['product_id' => $model->id])
-                ->with(['features'])
-                ->asArray()
-                ->all();
-            print('<pre>');
-            print_r($models);*/
-
-        /*  foreach($models as $model) {
-                echo $model->value;
-
-                foreach($model->features as $item) {
-                    echo $item->name;
-                }
-            }*/
-
+                    return $this->render('update', [
+                           'model' => $model,
+                           'dataProvider' => $dataProvider,
+                           'image' => $image,
+                           'related' => $related,
+                           'category' => $category,
+                           'brand' => $brand,
+                         ]);
 
         }
     }

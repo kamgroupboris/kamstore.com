@@ -57,13 +57,9 @@ class ImagesController extends Controller
             if (isset($file) && $file->tempName){
                 $model->imageFile = $file;
                if ($model->validate()) {
-                  if(!isset($_POST['cat_id']))
-                    $dir = Yii::getAlias('@app/public_html/files/uploads/');
-                  else{
-                       $dir = Yii::getAlias('@app/public_html/files/'.$_POST['cat_id'].'/');
-                  }
+                    $dir = Yii::getAlias('@app/public_html/files/');
                     $fileName = $model->imageFile->baseName . '.' . $model->imageFile->extension;
-                    $model->imageFile->saveAs($dir . $fileName);
+                    $model->imageFile->saveAs($dir .'originals/'. $fileName);
 
                     $originalName = $model->imageFile->baseName;
                     $typeFile = $model->imageFile->extension;
@@ -77,11 +73,14 @@ class ImagesController extends Controller
                     $model->type_file = $typeFile;
 
                     if ($model->save()) {
-                       Image::thumbnail($dir . $fileName, 300, 300)
-                         ->save($dir .$originalName.'-300x300.'. $typeFile, ['quality' => 80])
+                       Image::thumbnail($dir .'originals/'. $fileName, 200, 200)
+                         ->save($dir .'products/'.$originalName.'.200x200.'. $typeFile, ['quality' => 80]);
 
-                        Image::thumbnail($dir . $fileName, 25, 25)
-                            ->save($dir .$originalName.'-25x25.'. $typeFile, ['quality' => 80]);;
+                        Image::thumbnail($dir .'originals/'. $fileName, 100, 100)
+                            ->save($dir .'products/'.$originalName.'.100x100.'. $typeFile, ['quality' => 80]);
+
+                        Image::thumbnail($dir .'originals/'. $fileName, 35, 35)
+                            ->save($dir .'products/'.$originalName.'.35x35.'. $typeFile, ['quality' => 80]);
                        return true;
                     }
 
@@ -151,8 +150,8 @@ class ImagesController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        return true;
+      //  return $this->redirect(['index']);
     }
 
     /**

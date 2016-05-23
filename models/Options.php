@@ -54,7 +54,8 @@ class Options extends \yii\db\ActiveRecord
 
     public function getFeatures()
     {
-        return $this->hasMany(Features::className(), ['id' => 'feature_id']);
+        return $this->hasOne(Features::className(), ['id' => 'feature_id']);
     }
+
 
 }

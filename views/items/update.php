@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = 'Update';
     ]);?>
 
     <?= $this->render('_product', [
-        'model' => $model,
+        'model' => $model, 'related' => $related,
     ]) ?>
 
     <?= $this->render('_options', [
