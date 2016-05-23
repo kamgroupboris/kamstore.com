@@ -78,7 +78,10 @@ class ImagesController extends Controller
 
                     if ($model->save()) {
                        Image::thumbnail($dir . $fileName, 300, 300)
-                         ->save($dir .$originalName.'-300x300.'. $typeFile, ['quality' => 80]);
+                         ->save($dir .$originalName.'-300x300.'. $typeFile, ['quality' => 80])
+
+                        Image::thumbnail($dir . $fileName, 25, 25)
+                            ->save($dir .$originalName.'-25x25.'. $typeFile, ['quality' => 80]);;
                        return true;
                     }
 
