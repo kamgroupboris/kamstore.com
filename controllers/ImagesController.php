@@ -7,7 +7,6 @@ use app\models\Images;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\base\ErrorException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
@@ -74,11 +73,12 @@ class ImagesController extends Controller
 
                     $model->filename = $fileName;
                     $model->name_original = $originalName;
+                   if(!isset($model->name))$model->name = $originalName;
                     $model->type_file = $typeFile;
 
                     if ($model->save()) {
-                  //     Image::thumbnail($dir . $fileName, 300, 300)
-                  //         ->save($dir .$originalName.'-300x300'. $typeFile, ['quality' => 80]);
+                       Image::thumbnail($dir . $fileName, 300, 300)
+                         ->save($dir .$originalName.'-300x300.'. $typeFile, ['quality' => 80]);
                        return true;
                     }
 
