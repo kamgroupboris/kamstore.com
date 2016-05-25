@@ -18,6 +18,8 @@ use app\models\Categories;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 
+use app\models\CategoriesFeatures;
+
 /**
  * ItemsController implements the CRUD actions for Products model.
  */
@@ -42,6 +44,14 @@ class ItemsController extends Controller
      * Lists all Products models.
      * @return mixed
      */
+    public function actionCreateOptions()
+    {
+
+
+        return true;
+    }
+
+
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
@@ -73,13 +83,76 @@ class ItemsController extends Controller
     public function actionCreate()
     {
         $model = new Products();
+        $image = new Images();
+
+      /*
+        $options = CategoriesFeatures::find()
+           ->select('s_features.*, category_id')
+            ->leftJoin('s_features','s_categories_features.feature_id = s_features.id')
+            ->where(['s_categories_features.category_id' => 5])
+            ->asArray()
+            ->all();
+
+        */
+        //       print('<pre>');
+        //        print_r($options);
+
+
+/*
+        $options =   Options::find()
+                        ->where(['product_id' => $model->id])
+                        ->with('features')
+                        ->asArray()
+                        ->all();
+
+        $options = CategoriesFeatures::find()
+                                    ->with('feature')
+                                    ->asArray()
+                                    ->all();
+        */
+      //      print('<pre>');
+     //   print_r($options);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => Options::find()
+                ->where(['product_id' => $model->id])
+                ->with(['features']),
+        ]);
+
+
+
+  //    $options = new Options();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => CategoriesFeatures::find()
+                ->with(['feature'])
+                ->where(['category_id' => 5])
+
+            ,
+        ]);
+
+        $related =  ArrayHelper::map(Products::find()->all(),'id','name');
+        $category = ArrayHelper::map(Categories::find()->all(), 'id', 'name');
+        $brand = ArrayHelper::map(Brands::find()->all(), 'id', 'name');
+
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+        /*    return $this->render('create', [
+                'model' => $model,
+            ]);*/
+
             return $this->render('create', [
                 'model' => $model,
+                'dataProvider' => $dataProvider,
+           //     'options' => $options,
+                'image' => $image,
+                'related' => $related,
+                'category' => $category,
+                'brand' => $brand,
             ]);
+
         }
     }
 
@@ -90,27 +163,6 @@ class ItemsController extends Controller
      * @return mixed
      */
 
-    public function actionFeatureList($id, $q = null)
-    {
-       $query =  Options::find()
-            ->select(['value'])
-            ->where([
-                 'and',
-                ['like','value', $q],
-                ['feature_id' => $id]
-           ] )
-            ->distinct(true);
-        $command = $query->createCommand();
-        $data = $command->queryAll();
-
-
-     $out = [];
-    foreach ($data as $d) {
-        $out[] = ['value' => $d['value']];
-    }
-    echo Json::encode($out);
-
-    }
 
     public function actionUpdate($id)
     {
@@ -125,6 +177,7 @@ class ItemsController extends Controller
 
             $image = new Images();
             $related =  ArrayHelper::map(Products::find()->all(),'id','name');
+
 
             $dataProvider = new ActiveDataProvider([
                 'query' => Options::find()
@@ -148,6 +201,29 @@ class ItemsController extends Controller
                          ]);
 
         }
+    }
+
+
+    public function actionFeatureList($id, $q = null)
+    {
+        $query =  Options::find()
+            ->select(['value'])
+            ->where([
+                'and',
+                ['like','value', $q],
+                ['feature_id' => $id]
+            ] )
+            ->distinct(true);
+        $command = $query->createCommand();
+        $data = $command->queryAll();
+
+
+        $out = [];
+        foreach ($data as $d) {
+            $out[] = ['value' => $d['value']];
+        }
+        echo Json::encode($out);
+
     }
 
     public function Options()
