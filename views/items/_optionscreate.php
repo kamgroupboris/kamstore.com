@@ -18,8 +18,10 @@ use app\models\Options;
 
 <?php $form = \yii\bootstrap\ActiveForm::begin([
     'id' => 'tabular-form',
+
+    'action'=>Url::to(['items/options-create', 'action'=> 'create']),
     'options' => [
-        'enctype' => 'multipart/form-data'
+        'enctype' => 'multipart/form-data',
     ]
 ]) ?>
 
@@ -93,46 +95,9 @@ $count = 0;
         [
             'name' => 'value',
             'title' => 'Описание',
-       //     'type'  => 'static',
             'type'  => Typeahead::className(),
-            'value' => function($data) {
-            //    print('<pre>');
-            //   print_r($data);
 
-                /*  return Typeahead::widget(
-                      [
-                      'name' =>  'value' ,
-               /*     'options' => ['placeholder' => ' ...'],
-                      'pluginOptions' => ['highlight'=>true, 'minLength' => 0],
-                      'dataset' => [
-                          [
-                              'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
-                              'display' => 'value',
-                              'remote' => [
-                                  'url' => Url::to(['items/feature-list', 'id'=> $data->id]) . '&q=%QUERY',
-                                  'wildcard' => '%QUERY'
-                              ]
-                          ]
-                      ]
-                ]
-                );*/
-            },
         ],
-    /*    [
-            'name' => 'description',
-            'title' => 'Description',
-        ],*/
-//        [
-//            'name'  => 'file',
-//            'title' => 'File',
-//            'type'  => \vova07\fileapi\Widget::className(),
-//            'options' => [
-//                'settings' => [
-//                    'url' => ['site/fileapi-upload']
-//                ]
-//            ]
-//        ],
-
     ],
 ]) ?>
 
