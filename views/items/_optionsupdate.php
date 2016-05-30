@@ -20,12 +20,15 @@ use app\models\Options;
 /* @var $models Item[] */
 ?>
 
-    <div class="products-form">
+    <div class="products-form" id="option-form1">
         <?php Pjax::begin([
             'enableReplaceState'=>false,
             'enablePushState'=>false,
             'clientOptions'=>[
-                'container'=>'x3',
+                'container'=>'kv-unique-id-1',
+            ],
+            'options'=>[
+                'id'=>'kv-unique-id-1',
             ]
         ]); ?>
 

@@ -5,6 +5,7 @@ use yii\helpers\Html;
 use app\models\Item;
 use unclead\widgets\TabularColumn;
 use yii\helpers\Url;
+use yii\widgets\Pjax;
 
 use kartik\typeahead\Typeahead;
 
@@ -16,12 +17,24 @@ use app\models\Options;
 /* @var $models Item[] */
 ?>
 
+    <div class="products-form">
+<?php Pjax::begin([
+    'enableReplaceState'=>false,
+    'enablePushState'=>false,
+    'clientOptions'=>[
+        'container'=>'x3',
+    ]
+]); ?>
+
 <?php $form = \yii\bootstrap\ActiveForm::begin([
     'id' => 'tabular-form',
-
+    'method' => 'post',
+   // 'enableAjaxValidation' => false,
     'action'=>Url::to(['items/options-create', 'action'=> 'create']),
+
     'options' => [
         'enctype' => 'multipart/form-data',
+        'data-pjax'=>'#x2'
     ]
 ]) ?>
 
@@ -31,9 +44,11 @@ use app\models\Options;
 
 $dataProvider = new SqlDataProvider([
     'sql' => "SELECT
-		s_features.id,
+        s_features.id ,
+		s_features.id `feature_id`,
 		s_features.`name`,
-		CONCAT('') `value`
+		CONCAT('') `value`,
+		CONCAT('50') `product_id`
 FROM
 s_features
 WHERE id IN (
@@ -48,34 +63,20 @@ WHERE id IN (
 $data = $dataProvider->getModels();
 
 
-
-
-$data1 = [
-    [
-        'id' => 1,
-        'title' => 'Title 1',
-        'description' => 'Description 1'
-    ],
-    [
-        'id' => 2,
-        'title' => 'Title 2',
-        'description' => 'Description 2'
-    ],
-];
 $items = [];
 foreach ($data as $row) {
     $item = new Item();
     $item->setAttributes($row);
     $items[] = $item;
 }
-//$models = $items;
-$count = 0;
+
 ?>
 
 <?= TabularInput::widget([
     'models' => $items,
     'attributeOptions' => [
-        'enableAjaxValidation' => true,
+
+        'enableAjaxValidation' => false,
         'enableClientValidation' => false,
         'validateOnChange' => false,
         'validateOnSubmit' => true,
@@ -83,7 +84,11 @@ $count = 0;
     ],
     'columns' => [
         [
-            'name' => 'id',
+            'name' => 'product_id',
+            'type' => TabularColumn::TYPE_HIDDEN_INPUT
+        ],
+        [
+            'name' => 'feature_id',
             'type' => TabularColumn::TYPE_HIDDEN_INPUT
         ],
         [
@@ -104,3 +109,5 @@ $count = 0;
 
 <?= Html::submitButton('Обновить', ['class' => 'btn btn-success']); ?>
 <?php ActiveForm::end(); ?>
+<?Pjax::end();?>
+        </div>

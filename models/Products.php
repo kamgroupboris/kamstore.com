@@ -5,6 +5,9 @@ namespace app\models;
 use Yii;
 use \app\models\Images;
 
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
+
 
 /**
  * This is the model class for table "s_products".
@@ -29,6 +32,18 @@ class Products extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+/*
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created',
+                'value' => new Expression('NOW()'),
+            ],
+        ];
+    }
+*/
     public static function tableName()
     {
         return 's_products';
@@ -40,8 +55,10 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['name'], 'required'],
             [['brand_id', 'visible', 'position', 'featured'], 'integer'],
-            [['name', 'annotation', 'body', 'meta_title', 'meta_keywords', 'meta_description'], 'required'],
+            //  [['name', 'annotation', 'body', 'meta_title', 'meta_keywords', 'meta_description'], 'required'],
+            [['name', 'annotation', 'body', 'meta_title', 'meta_keywords', 'meta_description','created'], 'safe'],
             [['annotation', 'body'], 'string'],
             [['created'], 'safe'],
             [['url'], 'string', 'max' => 255],
@@ -62,21 +79,21 @@ class Products extends \yii\db\ActiveRecord
             'name' => 'Name',
             'annotation' => 'Annotation',
             'body' => 'Body',
-            'visible' => 'Visible',
+            'visible' => 'Активен',//'Visible',
             'position' => 'Position',
             'meta_title' => 'Meta Title',
             'meta_keywords' => 'Meta Keywords',
             'meta_description' => 'Meta Description',
             'created' => 'Created',
             'featured' => 'Featured',
-            'external_id' => 'External ID',
+            'external_id' => 'Рекомендуемый',//'External ID',
         ];
     }
 
 
     public function getImages()
     {
-        return $this->hasOne(Images::className(), ['id' => 'product_id']);
+        return $this->hasOne(Images::className(), ['product_id' => 'id']);
     }
 
 }

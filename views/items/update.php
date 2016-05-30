@@ -1,37 +1,64 @@
 <?php
 
 use yii\helpers\Html;
-use  kartik\grid\GridView;
-use yii\grid\DataColumn;
+
+
+use app\models\Products;
+use app\models\Options;
+use app\models\Features;
+use app\models\Images;
+use app\models\CategoriesFeatures;
+
+use yii\widgets\Pjax;
+
+use yii\web\View;
+
+use yii\data\ActiveDataProvider;
+
+use yii\widgets\ListView;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Products */
 
-$this->title = 'Update Products: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Обновить продукт';
+$this->params['breadcrumbs'][] = ['label' => 'Продукты', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="products-update">
+
+<?$this->registerJs("
+$(document).on('pjax:beforeSend', function(xhr, options, settings) {
+settings.url =  settings.url+'&id='+$('input[name=\"Products[id]\"]').val()+'&category='+JSON.stringify($('select').val());
+});
+", View::POS_END);?>
+
+
+<div class="products-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_category', [
-    'category' => $category, 'brand' => $brand,
+    <?= $this->render('_categorycreate', [
+           'model' => $category,// 'brand' => $brand,
     ]);?>
 
 
-   <?= $this->render('_image', [
-    'model' => $image,
+    <?= $this->render('_image', [
+        'model' => $image,
     ]);?>
 
-    <?= $this->render('_product', [
-        'model' => $model, 'related' => $related,
+    <?= $this->render('_productcreate', [
+        'model' => $model,// 'related' => $related,
     ]) ?>
 
-    <?= $this->render('_options', [
-        'dataProvider' => $dataProvider,
+    <?= $this->render('_featured', [
+        //     'model' => $model,
+    ]);
+    ?>
+
+    <?= $this->render('_optionsupdate', [
+        'items' => $items,
     ]) ?>
+
+
 
 </div>
-

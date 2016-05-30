@@ -5,6 +5,8 @@ use yii\widgets\ActiveForm;
 use kartik\widgets\FileInput;
 use yii\helpers\Url;
 use app\models\Images;
+use yii\web\View;
+use yii\web\JsExpression;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Images */
@@ -15,6 +17,23 @@ use app\models\Images;
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?
+
+$js = <<< SCRIPT
+function () {
+    return {
+        product_id: $('input[name="Products[id]"]').val(),
+        cat_id: 'products',
+        position: 1
+     };
+}
+SCRIPT;
+
+  //  $this->registerJs($js);
+ //   $escape = new JsExpression("function(m) { return m; }");
+
+
+
+
 
    $product_id = Yii::$app->getRequest()->getQueryParam('id');
 
@@ -42,12 +61,15 @@ use app\models\Images;
                //     [
                 //    Html::img($model->filename?'/uploads/category/'.$model->filename:'/img/no_image-250x250.jpg', ['class'=>'file-preview-image col-md-12', 'alt'=>'', 'title'=>'']),
             //    ],
-                'uploadExtraData' => [
-                    'product_id' => $product_id,
+                'uploadExtraData' => new JsExpression($js),
+               /*     [
+               //     'product_id' => $product_id,
+                    'product_id' =>  new JsExpression($js),
                     'cat_id' => 'products',
                     'position' => 1,
-                ],
+                ],*/
                 'uploadUrl' => Url::to(['/images/file-upload']),
+                'overwriteInitial'=>false,
                 'maxFileCount' => 10,
             ],
         ]) ?>

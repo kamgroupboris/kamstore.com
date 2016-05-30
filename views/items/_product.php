@@ -8,6 +8,8 @@ use yii\widgets\Pjax;
 
 use kartik\widgets\Select2;
 use yii\web\JsExpression;
+use \app\models\Images;
+use \yii\helpers\ArrayHelper;
 
 use yii\web\View;
 
@@ -57,6 +59,19 @@ use yii\web\View;
 
     <?
 
+   $arrProduct = Images::find()->select(['product_id','filename'])->groupBy(['product_id'])->asArray()->all();
+  //  $flag = ArrayHelper::map($arrProduct,'product_id','filename');
+    $flag = [];
+    foreach($arrProduct as $ap){
+        $flag[$ap['product_id']] = str_replace('.','.35x35.', $ap['filename']);
+    }
+   // echo  json_encode($flag);
+
+    $this->registerJs("var flagimg = ".json_encode($flag).";", View::POS_HEAD);
+
+ //   print('<pre>');
+ //   print_r($flag);
+
     $data = [
         "red" => "red",
         "green" => "green",
@@ -79,12 +94,13 @@ use yii\web\View;
         }
     ");
     // Templating example of formatting each list element
-    $url = \Yii::$app->urlManager->baseUrl . '/img/flags/';
+    $url = \Yii::$app->urlManager->baseUrl . '/files/products/';
     $format = <<< SCRIPT
 function format(state) {
+    console.log(state);
     if (!state.id) return state.text; // optgroup
     //src = '$url' +  state.id.toLowerCase() + '.png'
-    src = '$url' +  'ak.png'
+   src = '$url'+ flagimg[state.id];
     return '<img class="flag" src="' + src + '"/>' + state.text;
 }
 SCRIPT;

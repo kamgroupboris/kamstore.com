@@ -5,6 +5,8 @@ namespace app\models;
 use Yii;
 
 use \app\models\Options;
+use \app\models\CategoriesFeatures;
+
 
 /**
  * This is the model class for table "s_features".
@@ -49,8 +51,13 @@ class Features extends \yii\db\ActiveRecord
         ];
     }
 
- /*   public function getOptions()
+   public function getOptions()
     {
-        return $this->hasOne(Options::className(), ['feature_id' => 'id']);
-    }*/
+        return $this->hasMany(Options::className(), ['feature_id' => 'id']);
+    }
+
+    public function getCategories()
+    {
+        return $this->hasOne(CategoriesFeatures::className(), ['feature_id' => 'id']);
+    }
 }

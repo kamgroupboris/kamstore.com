@@ -6,23 +6,33 @@ use dosamigos\ckeditor\CKEditor;
 use kartik\checkbox\CheckboxX;
 use yii\widgets\Pjax;
 use yii\helpers\Url;
-
-use kartik\widgets\Select2;
-use yii\web\JsExpression;
-use \app\models\Images;
-use \yii\helpers\ArrayHelper;
-
+use app\models\Brands;
+use kartik\select2\Select2;
 use yii\web\View;
+
+use yii\helpers\ArrayHelper;
+use yii\db\Expression;
+use yii\behaviors\TimestampBehavior;
+
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Products */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
+
+<?
+    $this->registerJsFile('/js/main.js',['depends' => [\yii\web\JqueryAsset::className()]]);
+?>
+
+
+
 <div class="products-form">
     <?php Pjax::begin([
         'enableReplaceState'=>false,
         'enablePushState'=>false,
+        'id' => 'product',
         'clientOptions'=>[
             'container'=>'x1',
         ]
@@ -37,9 +47,18 @@ use yii\web\View;
             'data-pjax'=>'#x'
         ],
         'enableClientValidation' => true]); ?>
-    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'id')->textInput()->hiddenInput()->label(false); ?>
 
-    <?= $form->field($model, 'brand_id')->textInput() ?>
+    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
+    <?$data = ArrayHelper::map(Brands::find()->all(), 'id', 'name');?>
+    <?= $form->field($model, 'brand_id')->widget(Select2::classname(), [
+        'data' => $data,
+     //   'options' => ['placeholder' => 'Select a state ...'],
+        'pluginOptions' => [
+
+            'allowClear' => true
+        ],
+    ]);?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -55,90 +74,41 @@ use yii\web\View;
 
     <?=  $form->field($model, 'visible')->widget(CheckboxX::classname(), [
         'autoLabel'=>true,
+        'options'=>['value'=>'1'],
         'pluginOptions' => [
           'threeState' => false,
         ],
     ])->label(false); ?>
 
-    <?= $form->field($model, 'position')->textInput() ?>
+    <?= $form->field($model, 'position')->textInput(['value'=> 1]) ?>
 
     <?= $form->field($model, 'meta_title')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'meta_keywords')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'meta_description')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'meta_description')->textArea(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'created')->textInput() ?>
+    <?= $form->field($model, 'created')->textInput([ 'value' => date("c")])->hiddenInput() //  2011-10-23 15:06:26 ?>
 
     <?//= $form->field($model, 'featured')->textInput() ?>
 
-    <?
-
-   $arrProduct = Images::find()->select(['product_id','filename'])->groupBy(['product_id'])->asArray()->all();
-  //  $flag = ArrayHelper::map($arrProduct,'product_id','filename');
-    $flag = [];
-    foreach($arrProduct as $ap){
-        $flag[$ap['product_id']] = str_replace('.','.35x35.', $ap['filename']);
-    }
-   // echo  json_encode($flag);
-
-    $this->registerJs("var flagimg = ".json_encode($flag).";", View::POS_HEAD);
-
- //   print('<pre>');
- //   print_r($flag);
-
-    $data = [
-        "red" => "red",
-        "green" => "green",
-        "blue" => "blue",
-        "orange" => "orange",
-        "white" => "white",
-        "black" => "black",
-        "purple" => "purple",
-        "cyan" => "cyan",
-        "teal" => "teal"
-    ];
-    View::registerCss("
-        img.flag {
-            height: 10px;
-            padding-right: 10px;
-            width: 25px;
-        }
-        .select2-dropdown .select2-search__field, .select2-search--inline .select2-search__field:focus{
-        border:none;
-        }
-    ");
-    // Templating example of formatting each list element
-    $url = \Yii::$app->urlManager->baseUrl . '/files/products/';
-    $format = <<< SCRIPT
-function format(state) {
-    console.log(state);
-    if (!state.id) return state.text; // optgroup
-    //src = '$url' +  state.id.toLowerCase() + '.png'
-   src = '$url'+ flagimg[state.id];
-    return '<img class="flag" src="' + src + '"/>' + state.text;
-}
-SCRIPT;
-
-    $escape = new JsExpression("function(m) { return m; }");
-    $this->registerJs($format, View::POS_HEAD); //
-    echo '<label class="control-label">Provinces features</label>';
-    echo Select2::widget([
-        'name' => 'featured',
-        'value' => ['red', 'green'],
-        'data' => $related,
-        'options' => ['placeholder' => 'Select a state ...', 'multiple' => true],
+    <?=  $form->field($model, 'featured')->widget(CheckboxX::classname(), [
+        'autoLabel'=>true,
+        'options'=>['value'=>'1'],
         'pluginOptions' => [
-            'templateResult' => new JsExpression('format'),
-            'templateSelection' => new JsExpression('format'),
-            'escapeMarkup' => $escape,
-            'allowClear' => true
+            'threeState' => false,
         ],
-    ]);
-    ?>
+    ])->label(false); ?>
 
+    <?//= $form->field($model, 'external_id')->textInput() ?>
 
-    <?= $form->field($model, 'external_id')->textInput() ?>
+    <?=  $form->field($model, 'external_id')->widget(CheckboxX::classname(), [
+        'autoLabel'=>true,
+        'options'=>['value'=>'0'],
+        'pluginOptions' => [
+            'threeState' => false,
+        ],
+    ])->label(false); ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
@@ -147,3 +117,5 @@ SCRIPT;
     <?php ActiveForm::end(); ?>
 <?Pjax::end();?>
 </div>
+
+

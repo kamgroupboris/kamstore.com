@@ -27,7 +27,8 @@ class ProductsCategories extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_id', 'category_id', 'position'], 'required'],
+         //   [['product_id', 'category_id', 'position'], 'required'],
+            [['product_id', 'category_id', 'position'], 'safe'],
             [['product_id', 'category_id', 'position'], 'integer'],
         ];
     }

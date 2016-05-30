@@ -5,6 +5,8 @@ namespace app\models;
 use Yii;
 
 use \app\models\Features;
+use yii\base\Model;
+use \yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "s_options".
@@ -13,12 +15,20 @@ use \app\models\Features;
  * @property integer $feature_id
  * @property string $value
  */
-class Options extends \yii\db\ActiveRecord
+class Options extends ActiveRecord //Model //\yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
 
+
+    public $id;
+
+    public $name;
+
+    public $title;
+
+    public $description;
 
     public static function tableName()
     {
@@ -33,7 +43,9 @@ class Options extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_id', 'feature_id', 'value'], 'required'],
+        //    [['product_id', 'feature_id', 'value'], 'required'],
+        //    [['product_id', 'feature_id', 'value'], 'safe'],
+            [['title', 'description', 'name', 'value', 'feature_id', 'product_id', 'id'], 'safe'],
             [['product_id', 'feature_id'], 'integer'],
             [['value'], 'string', 'max' => 1024],
 
