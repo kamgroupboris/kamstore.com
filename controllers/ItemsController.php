@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Brands;
+use app\models\RelatedProducts;
 use Yii;
 use app\models\Products;
 use yii\data\ActiveDataProvider;
@@ -75,6 +76,24 @@ class ItemsController extends Controller
     s_options.product_id = 50 AND
     s_options.feature_id = 7
      */
+
+    public function actionFeatured($action=null)
+    {
+   //   print_r($_POST['featured']);
+        $featured =   json_decode($_POST['featured']);
+        $id = $_POST['id'];
+
+        RelatedProducts::deleteAll(['product_id' => $id]);
+
+     foreach($featured as $ft){
+         $model=  new RelatedProducts();
+         $model->product_id = (int)$id;
+         $model->related_id = (int)$ft;
+         $model->save();
+     }
+
+
+    }
 
     public function actionOptionsCategory($action=null,$category=1,$id=null)
     {
@@ -224,6 +243,7 @@ ORDER BY category.feature_id ASC"
 
         $model = new Products();
         $image = new Images();
+        $related = new RelatedProducts();
 
 
         $dataProvider = new ActiveDataProvider([
@@ -248,6 +268,7 @@ ORDER BY category.feature_id ASC"
                 'image' => $image,
                 //        'category' => $category,
                 'items' => $items,
+                'related' => $related,
                 //      'brand' => $brand,
             ]);
 
@@ -269,7 +290,11 @@ ORDER BY category.feature_id ASC"
 
         $model = $this->findModel($id);
         $category = ProductsCategories::find()->where(['product_id'=>$id])->asArray()->all();
+       $related = RelatedProducts::find()->where(['product_id'=>$id])->asArray()->all();
 
+        if(!$related) $related = new  RelatedProducts();
+
+        $related = ArrayHelper::getColumn($related, 'related_id');
 
         if($category)
             $category = ArrayHelper::getColumn($category, 'category_id');
@@ -307,6 +332,7 @@ ORDER BY category.feature_id ASC"
                 'image' => $image,
                 'category' => $category,
                 'items' => $items,
+                'related' => $related,
                 //      'brand' => $brand,
             ]);
 

@@ -27,7 +27,8 @@ class RelatedProducts extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_id', 'related_id', 'position'], 'required'],
+          //  [['product_id', 'related_id', 'position'], 'required'],
+		    [['product_id', 'related_id', 'position'], 'safe'],
             [['product_id', 'related_id', 'position'], 'integer'],
         ];
     }

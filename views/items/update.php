@@ -51,7 +51,7 @@ settings.url =  settings.url+'&id='+$('input[name=\"Products[id]\"]').val()+'&ca
     ]) ?>
 
     <?= $this->render('_featured', [
-        //     'model' => $model,
+            'model' => $related,
     ]);
     ?>
 

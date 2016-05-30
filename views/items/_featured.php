@@ -6,6 +6,7 @@ use kartik\widgets\Select2;
 use yii\web\JsExpression;
 use \app\models\Images;
 use \yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 
 use yii\web\View;
 
@@ -16,6 +17,7 @@ use yii\web\View;
 <?
 
 $related =  ArrayHelper::map(Products::find()->all(),'id','name');
+if(!isset($model)) $model = [];
 
 $arrProduct = Images::find()->select(['product_id','filename'])->groupBy(['product_id'])->asArray()->all();
 //  $flag = ArrayHelper::map($arrProduct,'product_id','filename');
@@ -68,7 +70,8 @@ $this->registerJs($format, View::POS_HEAD); //
 echo '<label class="control-label">Provinces features</label>';
 echo Select2::widget([
     'name' => 'featured',
-    'value' => ['red', 'green'],
+    'id'=>'select-featured',
+    'value' => $model,
     'data' => $related,
     'options' => ['placeholder' => 'Select a state ...', 'multiple' => true],
     'pluginOptions' => [
@@ -76,6 +79,13 @@ echo Select2::widget([
         'templateSelection' => new JsExpression('format'),
         'escapeMarkup' => $escape,
         'allowClear' => true
+    ],
+    'pluginEvents'=>[
+        "select2:select" => "function(env) {
+                    var dataText = { featured : JSON.stringify($('select#select-featured').val()), id:$('input[name=\"Products[id]\"]').val() };
+                  //  console.log(dataText);
+                   $.post('".Url::to(['/items/featured','action'=> 'create' ])."',dataText);
+        }",
     ],
 ]);
 ?>
