@@ -53,7 +53,7 @@ class Images extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
             'product_id' => 'Product ID',
-            'filename' => 'Filename',
+            'filename' => 'Имя файла',
             'position' => 'Position',
             'name_original' => 'Name Original',
             'type_file' => 'Type File',

@@ -44,42 +44,29 @@ class ItemsController extends Controller
         ];
     }
 
-    /**
-     * Lists all Products models.
-     * @return mixed
-     */
 
 
-    public function actionProductCreate($action=null)
+    public function actionProductCreate($action=null,$id=null)
     {
-        //   print_r($_POST);
-        $model = new Products();
+        if(isset($id))
+            $model = $this->findModel($id);
+
+        if(!$model)
+            $model = new Products();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            //    return   true;
-            //  return $this->redirect(['view', 'id' => $model->id]);
-            $model = $this->findModel($model->id);
-            echo   $this->renderAjax('_productcreate', [
-                'model' => $model,// 'related' => $related,
+            return   $this->renderAjax('_productcreate', [
+                'model' => $model,
             ]);
         } else {
             return   false;
-            //    return $this->render('create', [                'model' => $model,            ]);
         }
 
     }
 
-    /*
-    SELECT *
-    FROM `s_options`
-    WHERE
-    s_options.product_id = 50 AND
-    s_options.feature_id = 7
-     */
 
     public function actionFeatured($action=null)
     {
-   //   print_r($_POST['featured']);
         $featured =   json_decode($_POST['featured']);
         $id = $_POST['id'];
 

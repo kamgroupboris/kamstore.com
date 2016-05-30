@@ -17,33 +17,24 @@ use yii\helpers\ArrayHelper;
 <div class="categories-form">
     <div class="row">
         <div class="col-md-12">
-            <?= '<label class="control-label">Category</label>';
+            <?= '<label class="control-label">Категории</label>';
             $category = ArrayHelper::map(Categories::find()->all(), 'id', 'name');
 
             if(isset($model)){}
             else $model = [];
-//print_r($value);
+
 
             echo Select2::widget([
                 'name' => 'category',
                 'id'=>'select-category',
                 'value' => $model,//['red', 'green'], // initial value
                 'data' => $category,
-                'options' => ['placeholder' => 'Select a category ...', 'multiple' => true,],
+                'options' => ['placeholder' => 'Выберете категорию ...', 'multiple' => true,],
 
                 'pluginOptions' => [
 
                 ],
                 'pluginEvents'=>[
-                    //      "change" => "function() { console.log('change'); }",
-                    //     "select2:opening" => "function() { console.log('select2:opening'); }",
-                    //      "select2:open" => "function() { console.log('open'); }",
-                    //      "select2:closing" => "function() { console.log('close'); }",
-                    //      "select2:close" => "function() { console.log('close'); }",
-              //      "select2:selecting" => "function(env) {}",
-
-
-
                     "select2:select" => "function(env) {
                     var dataText = { category : JSON.stringify($('select#select-category').val()) };
 
@@ -67,12 +58,9 @@ use yii\helpers\ArrayHelper;
                             replaceRedirect:false,
                             replace    : false
                         });}",
-                    //     "select2:unselect" => "function() { console.log('unselect'); }"
                 ],
                 'pluginOptions' => [
                     'tags' => true,
-                    //      'url' => Url::to(['items/options-create', 'action'=> 'category']),
-
                     'maximumInputLength' => 10
                 ],
             ]);
