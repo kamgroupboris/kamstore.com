@@ -8,13 +8,8 @@ use yii\widgets\Pjax;
 use yii\helpers\Url;
 use app\models\Brands;
 use kartik\select2\Select2;
-use yii\web\View;
 
 use yii\helpers\ArrayHelper;
-use yii\db\Expression;
-use yii\behaviors\TimestampBehavior;
-
-
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Products */
@@ -22,10 +17,7 @@ use yii\behaviors\TimestampBehavior;
 ?>
 
 
-<?
-    $this->registerJsFile('/js/main.js',['depends' => [\yii\web\JqueryAsset::className()]]);
-?>
-
+    <? $this->registerJsFile('/js/main.js',['depends' => [\yii\web\JqueryAsset::className()]]); ?>
 
 
 <div class="products-form">
@@ -49,18 +41,18 @@ use yii\behaviors\TimestampBehavior;
         'enableClientValidation' => true]); ?>
     <?= $form->field($model, 'id')->textInput()->hiddenInput()->label(false); ?>
 
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
     <?$data = ArrayHelper::map(Brands::find()->all(), 'id', 'name');?>
     <?= $form->field($model, 'brand_id')->widget(Select2::classname(), [
         'data' => $data,
-     //   'options' => ['placeholder' => 'Select a state ...'],
+        'options' => ['placeholder' => 'Выберете бренд ...'],
         'pluginOptions' => [
-
             'allowClear' => true
         ],
     ]);?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'annotation')->widget(CKEditor::className(), [
         'options' => ['rows' => 6],
@@ -88,23 +80,17 @@ use yii\behaviors\TimestampBehavior;
 
     <?= $form->field($model, 'meta_description')->textArea(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'created')->textInput([ 'value' => date("c")])->hiddenInput() //  2011-10-23 15:06:26 ?>
-
-    <?//= $form->field($model, 'featured')->textInput() ?>
+    <?= $form->field($model, 'created')->textInput([ 'value' => date("Y-m-d G:i:s")])->hiddenInput(); ?>
 
     <?=  $form->field($model, 'featured')->widget(CheckboxX::classname(), [
         'autoLabel'=>true,
-        'options'=>['value'=>'1'],
         'pluginOptions' => [
             'threeState' => false,
         ],
     ])->label(false); ?>
 
-    <?//= $form->field($model, 'external_id')->textInput() ?>
-
     <?=  $form->field($model, 'external_id')->widget(CheckboxX::classname(), [
         'autoLabel'=>true,
-        'options'=>['value'=>'0'],
         'pluginOptions' => [
             'threeState' => false,
         ],

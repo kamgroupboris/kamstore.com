@@ -18,6 +18,7 @@ use yii\web\View;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
+
 <div class="products-form">
 <?Pjax::begin();?>
     <?php $form = ActiveForm::begin(['options' => ['data-pjax' => true ]]); ?>

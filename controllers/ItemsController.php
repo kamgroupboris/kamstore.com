@@ -48,10 +48,9 @@ class ItemsController extends Controller
 
     public function actionProductCreate($action=null,$id=null)
     {
-        if(isset($id))
+        if(isset($id)&&$id!=null)
             $model = $this->findModel($id);
-
-        if(!$model)
+        else
             $model = new Products();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -67,27 +66,23 @@ class ItemsController extends Controller
 
     public function actionFeatured($action=null)
     {
-        $featured =   json_decode($_POST['featured']);
-        $id = $_POST['id'];
+        $request = Yii::$app->request->post();
+        $featured =   json_decode($request['featured']);
+        RelatedProducts::deleteAll(['product_id' => $request['id']]);
 
-        RelatedProducts::deleteAll(['product_id' => $id]);
-
-     foreach($featured as $ft){
-         $model=  new RelatedProducts();
-         $model->product_id = (int)$id;
-         $model->related_id = (int)$ft;
-         $model->save();
-     }
-
-
+         foreach($featured as $ft){
+             $model=  new RelatedProducts();
+             $model->product_id = (int)$id;
+             $model->related_id = (int)$ft;
+             $model->save();
+         }
     }
 
     public function actionOptionsCategory($action=null,$category=1,$id=null)
     {
-
-        ProductsCategories::deleteAll(['product_id' => $id]);
-
         $catp =  json_decode($category);
+        if($id!=null){
+            ProductsCategories::deleteAll(['product_id' => $id]);
 
         foreach($catp as $cat) {
             $model = new ProductsCategories();
@@ -95,9 +90,9 @@ class ItemsController extends Controller
             $model->category_id = $cat;
             $model->save();
         }
+    }
 
-
-        if(is_array($catp)) {$category = implode(', ',(array)$catp);};
+    if(is_array($catp)) {$category = implode(', ',(array)$catp);};
 
         echo $this->renderAjax('_optionsupdate', [
             'items' => $this->itemsCart ($category,$id),
@@ -153,7 +148,7 @@ class ItemsController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Products::find(),
+            'query' => Products::find()->orderBy(['created' => SORT_DESC ]),
         ]);
 
         return $this->render('index', [
@@ -272,58 +267,15 @@ ORDER BY category.feature_id ASC"
 
     public function actionUpdate($id)
     {
-
-        //$items =  $this->itemsCart(1,8);
-
-        $model = $this->findModel($id);
-        $category = ProductsCategories::find()->where(['product_id'=>$id])->asArray()->all();
-       $related = RelatedProducts::find()->where(['product_id'=>$id])->asArray()->all();
-
-        if(!$related) $related = new  RelatedProducts();
-
-        $related = ArrayHelper::getColumn($related, 'related_id');
-
-        if($category)
-            $category = ArrayHelper::getColumn($category, 'category_id');
-        else   $category = [1];
-       // print_r($category);
-      //  $catp = ArrayHelper::getColumn($category, 'category_id');
-     //   if(is_array($catp)) {$category = implode(', ',(array)$catp);};
-
-        $cat = implode(', ',(array)$category);
-
-       // print_r($category);
+        $model = Products::find()->where(['id'=>$id])->with(['productsCategories', 'relatedProducts', 'images'])->one();
+        $category = ArrayHelper::getColumn($model['productsCategories'], 'category_id');
+        if(($cat = implode(', ',(array)$category))==null) $cat = 1;
         $items =  $this->itemsCart($cat ,$id);
-        $image = new Images();
 
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => CategoriesFeatures::find()
-                ->with(['feature'])
-                ->where(['category_id' => 5]),
+        return $this->render('update', [
+            'model' => $model,
+            'items' => $items,
         ]);
-
-
-        //    $category = ArrayHelper::map(Categories::find()->all(), 'id', 'name');
-
-
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-
-
-            return $this->render('update', [
-                'model' => $model,
-                'dataProvider' => $dataProvider,
-                'image' => $image,
-                'category' => $category,
-                'items' => $items,
-                'related' => $related,
-                //      'brand' => $brand,
-            ]);
-
-        }
     }
 
 
@@ -402,7 +354,7 @@ ORDER BY category.feature_id ASC"
         if (($model = Products::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException('Запрашиваемая страница не существует.');
         }
     }
 }

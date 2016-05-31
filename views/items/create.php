@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?$this->registerJs("
 $(document).on('pjax:beforeSend', function(xhr, options, settings) {
    // console.log(settings);
-   settings.url =  settings.url+'&id='+$('input[name=\"Products[id]\"]').val()+'&category='+JSON.stringify($('select').val());
+   settings.url =  settings.url+'&id='+$('input[name=\"Products[id]\"]').val()+'&category='+JSON.stringify($('select#select-category').val());
 });
 ", View::POS_END);?>
 
@@ -38,23 +38,22 @@ $(document).on('pjax:beforeSend', function(xhr, options, settings) {
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_categorycreate', [
-        //    'category' => $category,// 'brand' => $brand,
-    ]);?>
+    <?= $this->render('_productcreate', [
+        'model' => $model,// 'related' => $related,
+    ]) ?>
 
     <?= $this->render('_image', [
         'model' => $image,
     ]);?>
 
-    <?= $this->render('_productcreate', [
-        'model' => $model,// 'related' => $related,
-    ]) ?>
-
-
     <?= $this->render('_featured', [
         //     'model' => $model,
     ]);
     ?>
+
+    <?= $this->render('_categorycreate', [
+        //    'category' => $category,// 'brand' => $brand,
+    ]);?>
 
     <?= $this->render('_optionsupdate', [
         'items' => $items,

@@ -3,10 +3,26 @@
 namespace app\models;
 
 use Yii;
-use \app\models\Images;
+
 
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+
+
+
+
+use app\models\Brands;
+use app\models\RelatedProducts;
+use app\models\Options;
+use app\models\Features;
+use app\models\Images;
+use app\models\Categories;
+use app\models\Item;
+use app\models\ProductsCategories;
+
+
+
+
 
 
 /**
@@ -32,18 +48,19 @@ class Products extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-/*
+
     public function behaviors()
     {
         return [
             [
                 'class' => TimestampBehavior::className(),
                 'createdAtAttribute' => 'created',
+                'updatedAtAttribute' => 'update',
                 'value' => new Expression('NOW()'),
             ],
         ];
     }
-*/
+
     public static function tableName()
     {
         return 's_products';
@@ -58,9 +75,8 @@ class Products extends \yii\db\ActiveRecord
             [['name'], 'required'],
             [['brand_id', 'visible', 'position', 'featured'], 'integer'],
             //  [['name', 'annotation', 'body', 'meta_title', 'meta_keywords', 'meta_description'], 'required'],
-            [['name', 'annotation', 'body', 'meta_title', 'meta_keywords', 'meta_description','created'], 'safe'],
+            [['name', 'annotation', 'body', 'meta_title', 'meta_keywords', 'meta_description'], 'safe'],
             [['annotation', 'body'], 'string'],
-            [['created'], 'safe'],
             [['url'], 'string', 'max' => 255],
             [['name', 'meta_title', 'meta_keywords', 'meta_description'], 'string', 'max' => 500],
             [['external_id'], 'string', 'max' => 36],
@@ -94,6 +110,16 @@ class Products extends \yii\db\ActiveRecord
     public function getImages()
     {
         return $this->hasOne(Images::className(), ['product_id' => 'id']);
+    }
+
+    public function getProductsCategories()
+    {
+        return $this->hasMany(ProductsCategories::className(), ['product_id' => 'id']);
+    }
+
+    public function getRelatedProducts()
+    {
+        return $this->hasMany(RelatedProducts::className(), ['product_id' => 'id']);
     }
 
 }

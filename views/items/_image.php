@@ -28,6 +28,7 @@ function () {
 }
 SCRIPT;
 
+    if(!isset($model)) $model = new Images();
 
     $product_id = Yii::$app->getRequest()->getQueryParam('id');
     $initPrev = Images::find()->where(['product_id'=>$product_id])->asArray()->all();
