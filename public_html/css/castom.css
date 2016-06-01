@@ -1,0 +1,26 @@
+#topNaw > li > a:hover,#topNaw > li > a:focus{
+    background-color: #008a4a;
+    border-radius: 0;
+    border:none;
+}
+#topNaw > li > a{
+    color:#fff;
+}
+#topNaw > li > a{
+    padding:11px;
+    margin:0;
+    text-shadow: -0.5px -0.5px 3px #000;
+}
+
+#topNaw li {
+    height: 39px;
+}
+
+.mtt20 {
+    float: left;
+    width: 25%;
+}
+
+.mtt20 a{
+    color: #000;
+}

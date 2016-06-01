@@ -14,19 +14,19 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Products', ['create'], ['class' => 'btn btn-success']) ?>
+        <?//= Html::a('Create Products', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'url:url',
-            'brand_id',
+       //     'id',
+        //    'url:url',
+        //    'brand_id',
             'name',
-            'annotation:ntext',
-            // 'body:ntext',
+        //    'annotation:ntext',
+             'body:html',
             // 'visible',
             // 'position',
             // 'meta_title',

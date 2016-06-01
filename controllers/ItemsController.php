@@ -20,6 +20,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use app\models\Item;
 use app\models\ProductsCategories;
+use yii\filters\AccessControl;
 
 
 use app\models\CategoriesFeatures;
@@ -35,6 +36,19 @@ class ItemsController extends Controller
     public function behaviors()
     {
         return [
+
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => [],
+                'rules' => [
+                    // разрешаем аутентифицированным пользователям
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    // всё остальное по умолчанию запрещено
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -68,12 +82,13 @@ class ItemsController extends Controller
     {
         $request = Yii::$app->request->post();
         $featured =   json_decode($request['featured']);
-        RelatedProducts::deleteAll(['product_id' => $request['id']]);
+        $id =  $request['id'];
+        RelatedProducts::deleteAll(['product_id' => $id]);
 
          foreach($featured as $ft){
              $model=  new RelatedProducts();
-             $model->product_id = (int)$id;
-             $model->related_id = (int)$ft;
+             $model->product_id = $id;
+             $model->related_id = $ft;
              $model->save();
          }
     }

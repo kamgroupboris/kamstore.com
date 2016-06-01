@@ -32,26 +32,27 @@
                 'items' => [
 					['label' => 'Меню', 'options' => ['class' => 'header']],				
 					
-					['label' => 'Товары', 'icon' => 'fa fa-file-code-o', 'url' => ['/items']],
-					['label' => 'Страницы', 'icon' => 'fa fa-file-code-o', 'url' => ['/pages']],
-					['label' => 'Блог', 'icon' => 'fa fa-file-code-o', 'url' => ['/blog']],					
+					['label' => 'Товары', 'icon' => 'fa fa-file-code-o', 'url' => ['/items/index']],
+					['label' => 'Страницы', 'icon' => 'fa fa-file-code-o', 'url' => ['/pages/index']],
+					['label' => 'Блог', 'icon' => 'fa fa-file-code-o', 'url' => ['/blog/index']],
+                    ['label' => 'Меню', 'icon' => 'fa fa-file-code-o', 'url' => ['/menu-link/index']],
+
+                    ['label' => 'Коментарии', 'icon' => 'fa fa-file-code-o', 'url' => ['/comments/index']],
+					['label' => 'Обратная связь', 'icon' => 'fa fa-file-code-o', 'url' => ['/feedbacks/index']],
 					
-					['label' => 'Коментарии', 'icon' => 'fa fa-file-code-o', 'url' => ['/comments']],					
-					['label' => 'Обратная связь', 'icon' => 'fa fa-file-code-o', 'url' => ['/feedbacks']],					
+					['label' => 'Заказы', 'icon' => 'fa fa-file-code-o', 'url' => ['/orders/index']],
 					
-					['label' => 'Заказы', 'icon' => 'fa fa-file-code-o', 'url' => ['/orders']],
-					
-					['label' => 'Бренды', 'icon' => 'fa fa-file-code-o', 'url' => ['/brands']],					
-					['label' => 'Категории', 'icon' => 'fa fa-file-code-o', 'url' => ['/categories']],
-					['label' => 'Свойства', 'icon' => 'fa fa-file-code-o', 'url' => ['/features']],
+					['label' => 'Бренды', 'icon' => 'fa fa-file-code-o', 'url' => ['/brands/index']],
+					['label' => 'Категории', 'icon' => 'fa fa-file-code-o', 'url' => ['/categories/index']],
+					['label' => 'Свойства', 'icon' => 'fa fa-file-code-o', 'url' => ['/features/index']],
 					
 					[
                         'label' => 'Пользователи',
                         'icon' => 'fa fa-share',
                         'url' => '#',
                         'items' => [
-							['label' => 'Пользователи', 'icon' => 'fa fa-file-code-o', 'url' => ['/users']],
-							['label' => 'Группы', 'icon' => 'fa fa-file-code-o', 'url' => ['/groups']],	
+							['label' => 'Пользователи', 'icon' => 'fa fa-file-code-o', 'url' => ['/users/index']],
+							['label' => 'Группы', 'icon' => 'fa fa-file-code-o', 'url' => ['/groups/index']],
                         ],
                     ],
 					
@@ -60,9 +61,9 @@
                         'icon' => 'fa fa-share',
                         'url' => '#',
                         'items' => [
-							['label' => 'Продукты', 'icon' => 'fa fa-file-code-o', 'url' => ['/products']],
-							['label' => 'Вариат Продукта', 'icon' => 'fa fa-file-code-o', 'url' => ['/variants']],
-							['label' => 'Свойства Продукта', 'icon' => 'fa fa-file-code-o', 'url' => ['/options']],	
+							['label' => 'Продукты', 'icon' => 'fa fa-file-code-o', 'url' => ['/products/index']],
+							['label' => 'Вариат Продукта', 'icon' => 'fa fa-file-code-o', 'url' => ['/variants/index']],
+							['label' => 'Свойства Продукта', 'icon' => 'fa fa-file-code-o', 'url' => ['/options/index']],
                         ],
                     ],
 
@@ -71,10 +72,10 @@
                         'icon' => 'fa fa-share',
                         'url' => '#',
                         'items' => [							
-							['label' => 'Купоны', 'icon' => 'fa fa-file-code-o', 'url' => ['/coupons']],
-							['label' => 'Валюта', 'icon' => 'fa fa-file-code-o', 'url' => ['/currencies']],
-							['label' => 'Доставка', 'icon' => 'fa fa-file-code-o', 'url' => ['/delivery']],							
-							['label' => 'Настройки сайта', 'icon' => 'fa fa-file-code-o', 'url' => ['/settings']],
+							['label' => 'Купоны', 'icon' => 'fa fa-file-code-o', 'url' => ['/coupons/index']],
+							['label' => 'Валюта', 'icon' => 'fa fa-file-code-o', 'url' => ['/currencies/index']],
+							['label' => 'Доставка', 'icon' => 'fa fa-file-code-o', 'url' => ['/delivery/index']],
+							['label' => 'Настройки сайта', 'icon' => 'fa fa-file-code-o', 'url' => ['/settings/index']],
                         ],
                     ],
                 ],

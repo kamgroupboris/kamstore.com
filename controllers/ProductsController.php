@@ -14,6 +14,8 @@ use yii\filters\VerbFilter;
  */
 class ProductsController extends Controller
 {
+
+    public $layout = "/kamstorePage";
     /**
      * @inheritdoc
      */

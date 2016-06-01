@@ -33,38 +33,54 @@ settings.url =  settings.url+'&id='+$('input[name=\"Products[id]\"]').val()+'&ca
 });
 ", View::POS_END);?>
 
+<h1><?= Html::encode($this->title) ?></h1>
 
-<div class="products-create">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="row">
 
 
-    <?= $this->render('_image', [
-      //  'model' => $image,
-        'model' =>  $model['images'],
-    ]);?>
+    <div class="col-lg-6">
+
+
+
+
 
     <?= $this->render('_productcreate', [
         'model' => $model,// 'related' => $related,
     ]) ?>
 
-    <?$related = ArrayHelper::getColumn($model['relatedProducts'], 'related_id');?>
 
-    <?= $this->render('_featured', [
+
+
+
+
+</div>
+    <div class="col-lg-6">
+
+
+        <?= $this->render('_image', [
+            //  'model' => $image,
+            'model' =>  $model['images'],
+        ]);?>
+
+        <?$related = ArrayHelper::getColumn($model['relatedProducts'], 'related_id');?>
+
+        <?= $this->render('_featured', [
             'model' => $related,
-    ]);
-    ?>
+        ]);
+        ?>
 
-    <?$category = ArrayHelper::getColumn($model['productsCategories'], 'category_id');?>
-    <?= $this->render('_categorycreate', [
-        'model' => $category,// 'brand' => $brand,
-    ]);?>
-
-
-    <?= $this->render('_optionsupdate', [
-        'items' => $items,
-    ]) ?>
+        <?$category = ArrayHelper::getColumn($model['productsCategories'], 'category_id');?>
+        <?= $this->render('_categorycreate', [
+            'model' => $category,// 'brand' => $brand,
+        ]);?>
 
 
+        <?= $this->render('_optionsupdate', [
+            'items' => $items,
+        ]) ?>
+
+
+
+    </div>
 
 </div>

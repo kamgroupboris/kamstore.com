@@ -4,6 +4,8 @@ $params = require(__DIR__ . '/params.php');
 
 $config = [
     'id' => 'basic',
+    'name'=>'Кам - Стор',
+    'language'=>'ru',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'modules' => [
@@ -22,6 +24,10 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'defaultRoles' => ['user','moderator','admin','superadmin' ],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -43,6 +49,15 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+
+                '<alias:[\w\d\-]+>/'=>'site/artikle',
+      //          '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+            ],
+        ],
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,

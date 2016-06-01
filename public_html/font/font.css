@@ -1,0 +1,48 @@
+@font-face {
+    font-family: 'helveticaneuecyr-light';
+    src: url('helveticaneuecyr-light.otf');
+    }
+@font-face {
+    font-family: 'helveticaneuecyr-bold';
+    src: url('helveticaneuecyr-bold.otf');
+    }
+@font-face {
+    font-family: 'Lato-Bold';
+    src: url('Lato-Bold.ttf');
+    }
+@font-face {
+    font-family: 'Lato-Light';
+    src: url('Lato-Light.ttf');
+    }
+@font-face {
+    font-family: 'Lato-Regular';
+    src: url('Lato-Regular.ttf');
+    }
+@font-face {
+    font-family: 'helveticaneuecyr-thin';
+    src: url('helveticaneuecyr-thin.otf');
+    }
+@font-face {
+    font-family: 'Arial-Regular';
+    src: url('Arial-Regular.ttf');
+    }  
+@font-face {
+    font-family: 'Arial-Bold';
+    src: url('Arial-Bold.ttf');
+    } 
+@font-face {
+    font-family: 'Candara';
+    src: url('Candara.ttf');
+    }
+@font-face {
+    font-family: 'Candarai';
+    src: url('Candarai.ttf');
+    }  
+@font-face {
+    font-family: 'Candarab';
+    src: url('Candarab.ttf');
+    } 
+@font-face {
+    font-family: 'Candaraz';
+    src: url('Candaraz.ttf');
+    } 

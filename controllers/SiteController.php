@@ -9,8 +9,13 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 
+use app\models\Articles;
+use yii\web\NotFoundHttpException;
+
 class SiteController extends Controller
 {
+    public $layout = "/kamstorePage";
+
     public function behaviors()
     {
         return [
@@ -49,13 +54,49 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+        $this->layout = "/kamstore";
         return $this->render('index');
     }
+
+
+    public function actionArticles()
+    {
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => Articles::find()->where(['viseble' => 1]),
+        ]);
+
+        return $this->render('articles', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionArtikle($alias)
+    {
+
+
+        $model = Articles::find()->where(['url' => $alias])->one();
+
+
+        if($model){
+            return $this->render('/articles/view', [
+                'model' => $model,
+            ]);
+        }else{
+            //return $this->render('index');
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+
 
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+          //  return $this->goHome();
+
+
+         return $this->redirect(['/control/index']);
         }
 
         $model = new LoginForm();
