@@ -27,8 +27,13 @@ $config = [
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
-            'defaultRoles' => ['user','moderator','admin','superadmin' ],
+            'defaultRoles' => ['admin', 'BRAND', 'TALENT'],
+          //  'defaultRoles' => ['user','moderator','admin','superadmin' ],
         ],
+      /*  'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'defaultRoles' => ['user','moderator','admin','superadmin' ],
+        ],*/
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
@@ -53,8 +58,10 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-
+                'product/<alias:[\w\d\-]+>' => 'site/product',
+                'category/<alias:[\w\d\-]+>' => 'site/category',
                 '<alias:[\w\d\-]+>/'=>'site/artikle',
+          //      'products/<alias:[\w\d\-]+>'=>'products/product',
       //          '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ],
         ],

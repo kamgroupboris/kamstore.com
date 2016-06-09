@@ -66,6 +66,11 @@ class GroupsController extends Controller
         $model = new Groups();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            $permit = Yii::$app->authManager->createPermission($model->id);
+            $permit->description = $model->name;
+            Yii::$app->authManager->add($permit);
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -102,6 +107,10 @@ class GroupsController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+
+        $permission = Yii::$app->authManager->getPermission($id);
+
+       $permit = Yii::$app->authManager->remove($permission);
 
         return $this->redirect(['index']);
     }

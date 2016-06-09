@@ -3,6 +3,10 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+use \app\models\Categories;
+use yii\helpers\ArrayHelper;
+use kartik\checkbox\CheckboxX;
+
 /* @var $this yii\web\View */
 /* @var $model app\models\Categories */
 /* @var $form yii\widgets\ActiveForm */
@@ -12,7 +16,12 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'parent_id')->textInput() ?>
+    <? $parent = Categories::find()->all();
+   $arr = ArrayHelper::map($parent,'id','name');
+    array_unshift($arr,'Родительская категория');
+    ?>
+    <?= $form->field($model, 'parent_id')->dropDownList($arr);
+        //->textInput() ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -30,7 +39,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'position')->textInput() ?>
 
-    <?= $form->field($model, 'visible')->textInput() ?>
+    <?= $form->field($model, 'visible')->widget(CheckboxX::classname(), [
+        'autoLabel'=>true,
+        'pluginOptions' => [
+            'threeState' => false,
+        ],
+    ])->label(false);?>
 
     <?= $form->field($model, 'external_id')->textInput(['maxlength' => true]) ?>
 

@@ -28,18 +28,21 @@ function () {
 }
 SCRIPT;
 
-    if(!isset($model)) $model = new Images();
+  //  if(!isset($model[0]->attributes))
 
     $product_id = Yii::$app->getRequest()->getQueryParam('id');
     $initPrev = Images::find()->where(['product_id'=>$product_id])->asArray()->all();
     $initialPreview = [];
     $initialPreviewConfig = [];
     foreach( $initPrev as $ip){
-        $img35 = str_replace(".", ".100x100.", $ip['filename']);
+        $img35 = str_replace(".", ".200x200.", $ip['filename']);
+       // $initialPreview[] = file_exists('/files/products/'.$img35)?Html::img('/files/products/'.$img35, ['class'=>'col-md-12', 'alt'=>'', 'title'=>'']):Html::img('/files/originals/'.$ip['filename'], ['class'=>'col-md-12', 'alt'=>'', 'title'=>'']);
         $initialPreview[] = Html::img('/files/products/'.$img35, ['class'=>'col-md-12', 'alt'=>'', 'title'=>'']);
         $url = Url::to(['/images/delete','id'=>$ip['id']]);
         $initialPreviewConfig[] = ['caption' => $ip['name'], 'url' => $url, 'key'=> $ip['id']];
     }
+    $model = new Images();
+
     ?>
 
         <?= $form->field($model, 'filename')->widget(FileInput::classname(), [

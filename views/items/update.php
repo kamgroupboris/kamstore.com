@@ -40,7 +40,9 @@ settings.url =  settings.url+'&id='+$('input[name=\"Products[id]\"]').val()+'&ca
 
     <div class="col-lg-6">
 
-
+        <?= $this->render('_variants', [
+            'model' => $model['variants'],
+        ]) ?>
 
 
 
@@ -60,7 +62,8 @@ settings.url =  settings.url+'&id='+$('input[name=\"Products[id]\"]').val()+'&ca
         <?= $this->render('_image', [
             //  'model' => $image,
             'model' =>  $model['images'],
-        ]);?>
+        ]);
+        ?>
 
         <?$related = ArrayHelper::getColumn($model['relatedProducts'], 'related_id');?>
 

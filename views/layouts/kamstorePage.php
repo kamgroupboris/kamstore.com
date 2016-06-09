@@ -1,39 +1,48 @@
 <?php
-
-/* @var $this \yii\web\View */
-/* @var $content string */
-
-use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
-use app\assets\AppBasic;
-
-AppBasic::register($this);
+	use yii\helpers\Html;
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
-<head>
-    <meta charset="<?= Yii::$app->charset ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
-    <? $this->registerCssFile('/css/bootstrap.css'); ?>
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700' rel='stylesheet' type='text/css'>
-</head>
-<body>
-<?php $this->beginBody() ?>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]><html dir="ltr" lang="1" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html dir="ltr" lang="1" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html dir="ltr" lang="<?= Yii::$app->language ?>">
+<!--<![endif]-->
+<?=$this->render('/site/head');?>
 
+<body class="information-information ltr res layout-0 no-bgbody ">
+<div id="wrapper" class="wrapper-full">
+       
 	<?=$this->render('/site/header');?>
+	
+	<?=$this->render('/site/breadcrumb');?>
+
+    <div id="content" class="">		
         <div class="container">
-            <?= $content ?>
-        </div>
+		    <?= $content ?>
+		</div>
+    </div>
+  
+
+	
 	<?=$this->render('/site/footer');?>
+    <!-- //end Footer -->
+	
+			<div class="back-to-top"><i class="fa fa-angle-up"></i></div>
+		
 
-<?php $this->endBody() ?>
+
+<script type="text/javascript"><!--
+var themes = 'so-maxshop7';
+var selected = 'cyan';
+//--></script>
+
+
+
+    </div>
+
+
+
 </body>
-
 </html>
-<?php $this->endPage() ?>

@@ -35,10 +35,11 @@ class ProductsController extends Controller
      * Lists all Products models.
      * @return mixed
      */
+
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Products::find(),
+            'query' => Products::find()->with(['image']),
         ]);
 
         return $this->render('index', [
@@ -55,6 +56,14 @@ class ProductsController extends Controller
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
+        ]);
+    }
+
+    public function actionProducts($alias)
+    {
+        $model = Products::find()->where(['url'=>$alias])->with(['productsCategories', 'relatedProducts', 'img'])->one();
+        return $this->render('_view', [
+            'model' => $model,
         ]);
     }
 

@@ -34,7 +34,7 @@ class Users extends \yii\db\ActiveRecord
         return [
             [['email'], 'required'],
             [['group_id', 'enabled'], 'integer'],
-            [['created'], 'safe'],
+            [['created','username'], 'safe'],
             [['email', 'password', 'name'], 'string', 'max' => 255],
             [['last_ip'], 'string', 'max' => 15],
         ];
@@ -56,4 +56,15 @@ class Users extends \yii\db\ActiveRecord
             'created' => 'Created',
         ];
     }
+
+    public function setPassword($password)
+    {
+        $this->password = Yii::$app->security->generatePasswordHash($password);
+    }
+
+    public function generateAuthKey()
+    {
+        $this->auth_key = Yii::$app->security->generateRandomString();
+    }
+
 }

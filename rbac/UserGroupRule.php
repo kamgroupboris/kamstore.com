@@ -10,19 +10,16 @@ class UserGroupRule extends Rule
  
     public function execute($user, $item, $params)
     {
-        if (!Yii::$app->user->isGuest) {
-            $role = Yii::$app->user->identity->role;
- 
-            if ($item->name === 'superadmin') {
-                return $role === $item->name;
-            } elseif ($item->name === 'admin') {
-                return $role === $item->name || $role === 'superadmin';
-            } elseif ($item->name === 'moderator ') {
-                return $role === $item->name || $role === 'superadmin' || $role === 'admin';
-            } elseif ($item->name === 'user') {
-                return $role === $item->name || $role === 'superadmin' || $role === 'admin' || $role === 'moderator';
+     /*  if (!\Yii::$app->user->isGuest) {
+            $group = \Yii::$app->user->identity->group;
+            if ($item->name === 'admin') {
+                return $group == 'admin';
+            } elseif ($item->name === 'BRAND') {
+                return $group == 'admin' || $group == 'BRAND';
+            } elseif ($item->name === 'TALENT') {
+                return $group == 'admin' || $group == 'TALENT';
             }
-        }
-        return false;
+        }*/
+        return true;
     }
 }

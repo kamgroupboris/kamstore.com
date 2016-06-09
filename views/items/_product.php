@@ -66,24 +66,10 @@ use yii\web\View;
     foreach($arrProduct as $ap){
         $flag[$ap['product_id']] = str_replace('.','.35x35.', $ap['filename']);
     }
-   // echo  json_encode($flag);
 
     $this->registerJs("var flagimg = ".json_encode($flag).";", View::POS_HEAD);
 
- //   print('<pre>');
- //   print_r($flag);
 
-    $data = [
-        "red" => "red",
-        "green" => "green",
-        "blue" => "blue",
-        "orange" => "orange",
-        "white" => "white",
-        "black" => "black",
-        "purple" => "purple",
-        "cyan" => "cyan",
-        "teal" => "teal"
-    ];
     View::registerCss("
         img.flag {
             height: 10px;

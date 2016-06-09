@@ -14,21 +14,38 @@
           <p class="text-muted text-center">
 
            <?
-         //  print('<pre>');
-      //  print_r(Yii::$app->user);
-       // echo Yii::$app->user->can();
 
-        /*  if (Yii::$app->user->can('admin')) {
-            echo 'Hello, Admin!';
-            }*/?>
+           $group = Yii::$app->user->identity->group;
+
+        //   print_r($group);
+
+           // Вот тут происходит сама привязка:
+       /*    $auth = Yii::$app->authManager;
+           $adminRole = $auth->getRole('admin');
+           $auth->assign($adminRole,Yii::$app->user->id);*/
+           if(Yii::$app->user->can('deleteUser')){
+             echo 'Можно удалять пользователей'."<br>";
+           }
+
+           if (Yii::$app->user->can('admin')) {
+        //    throw new ForbiddenHttpException('Access denied');
+             echo 'Здравствуйте, Администратор!';
+          }else{
+             echo 'Access denied';
+
+          }
+  ?>
           </p>
 
           <ul class="list-group list-group-unbordered">
             <li class="list-group-item">
-              <b>Followers</b> <a class="pull-right">1,322</a>
+              <b>Идентификатор</b> <a class="pull-right"><?=Yii::$app->user->id;?></a>
             </li>
             <li class="list-group-item">
-              <b>Following</b> <a class="pull-right">543</a>
+              <b>Роли</b> <a class="pull-right"><?
+                $role=Yii::$app->authManager->getRolesByUser(Yii::$app->user->id);
+               print_r($role);
+                ?></a>
             </li>
             <li class="list-group-item">
               <b>Friends</b> <a class="pull-right">13,287</a>
@@ -104,11 +121,15 @@
               </div>
               <!-- /.user-block -->
               <p>
-                Lorem ipsum represents a long-held tradition for designers,
-                typographers and the like. Some people hate it and argue for
-                its demise, but others ignore the hate as they create awesome
-                tools to help create filler text for everyone from bacon lovers
-                to Charlie Sheen fans.
+                <?
+                print('<pre>');
+                $role=Yii::$app->authManager->getRolesByUser(Yii::$app->user->id);
+                print_r($role);
+                ?>
+                <?
+             //    print('<pre>');
+             //    print_r(Yii::$app->user);
+                ?>
               </p>
               <ul class="list-inline">
                 <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>

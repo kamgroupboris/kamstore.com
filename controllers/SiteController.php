@@ -2,19 +2,27 @@
 
 namespace app\controllers;
 
+use app\models\Categories;
+use app\models\ProductsCategories;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
+use app\models\RegisterForm;
 use app\models\ContactForm;
+use app\models\Users;
+use app\models\Products;
+use yii\data\ActiveDataProvider;
+
+use yii\data\SqlDataProvider;
 
 use app\models\Articles;
 use yii\web\NotFoundHttpException;
 
 class SiteController extends Controller
 {
-    public $layout = "/kamstorePage";
+    public $layout = "/page";
 
     public function behaviors()
     {
@@ -71,6 +79,89 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionCategory($alias=null)
+    {
+
+        $model = Categories::find()->where(['url'=>$alias])->one();
+        $proucts_cat = ProductsCategories::find()->where(['category_id'=>$model->id])->with('products')->all();
+    //    print('<pre>');
+        //print_r($proucts_cat);
+     /*   $dataProvider = new ActiveDataProvider([
+            'query' => $proucts_cat['products'],
+            'pagination' => [
+                'pageSize' => 8,
+            ],
+        ]);*/
+
+        $dataProvider = new SqlDataProvider([
+            'sql' => 'SELECT
+s_products.id,
+s_products.url,
+s_products.`name`,
+s_products.brand_id,
+s_products.annotation,
+s_products.body,
+s_products.visible,
+s_products.position,
+s_products.meta_title,
+s_products.meta_keywords,
+s_products.meta_description
+FROM
+s_categories
+INNER JOIN s_products_categories ON s_categories.id = s_products_categories.category_id
+INNER JOIN s_products ON s_products_categories.product_id = s_products.id
+WHERE
+s_categories.url = :url',
+          'params' => [':url' => $alias],
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);
+     //   $models = $dataProvider->getModels();
+
+        return $this->render('/products/category', [
+            'dataProvider' => $dataProvider,
+        ]);
+/*
+        $model = Articles::find()->where(['url' => $alias])->one();
+
+
+        if($model){
+            return $this->render('/articles/view', [
+                'model' => $model,
+            ]);
+        }else{
+            //return $this->render('index');
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }*/
+    }
+
+    public function actionProduct($alias=null)
+    {
+
+        $model = Products::find()->where(['url'=>$alias])->with(['productsCategories', 'relatedProducts', 'images', 'variants', 'brands'])->one();
+
+      if($model){
+        return $this->render('/products/product', [
+          'model' => $model,
+        ]); }else{
+           return $this->render('index');
+         throw new NotFoundHttpException('The requested page does not exist.');
+       }
+        /*
+                $model = Articles::find()->where(['url' => $alias])->one();
+
+
+                if($model){
+                    return $this->render('/articles/view', [
+                        'model' => $model,
+                    ]);
+                }else{
+                    //return $this->render('index');
+                    throw new NotFoundHttpException('The requested page does not exist.');
+                }*/
+    }
+
     public function actionArtikle($alias)
     {
 
@@ -101,9 +192,39 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+           // return $this->goBack();
+            return $this->redirect(['/control/index']);
         }
         return $this->render('login', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionRegister()
+    {
+       /* if (!Yii::$app->user->isGuest) {
+            //  return $this->goHome();
+
+
+            return $this->redirect(['/control/index']);
+        }*/
+
+        $model = new Users();
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->setPassword($model->password);
+            $model->generateAuthKey();
+            $model->name = $model->username;
+
+          if( $model->save(false)) {
+              $userRole = Yii::$app->authManager->getRole('user');
+              Yii::$app->authManager->assign($userRole,$model->id);
+          }
+
+            return $this->redirect(['/site/login']);
+        }
+        return $this->render('register', [
             'model' => $model,
         ]);
     }

@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Brands;
 use app\models\RelatedProducts;
+use app\models\Variants;
 use Yii;
 use app\models\Products;
 use yii\data\ActiveDataProvider;
@@ -21,6 +22,7 @@ use yii\helpers\Json;
 use app\models\Item;
 use app\models\ProductsCategories;
 use yii\filters\AccessControl;
+
 
 
 use app\models\CategoriesFeatures;
@@ -112,6 +114,54 @@ class ItemsController extends Controller
         echo $this->renderAjax('_optionsupdate', [
             'items' => $this->itemsCart ($category,$id),
         ]);
+    }
+    public function actionVariantsDelete($action=null,$id=null)
+    {
+        //print_r($_POST);
+        foreach ($_POST['Variants'] as $row) {
+            Variants::find()->where(['id' => $row['id']])->One()->delete();
+        }
+    }
+
+    public function actionOptionsVariants($action=null,$id=null)
+    {
+
+        if(isset($id) && $id!='') {
+            foreach ($_POST['Variants'] as $row) {
+
+                if (isset($row['price']) && $row['price'] != '') {
+
+
+                   $model = Variants::find()->where(['id' => $row['id']])->One();
+                    if (!$model) {
+                        $model = new Variants();
+                        $model->setAttributes($row);
+                        $model->product_id = $id;
+                    } else {
+                        $model->setAttributes($row);
+
+                    //    $model->price = $row['price'];
+                     //   $model->product_id = $id;
+                    }
+
+                    $model->save();
+                }
+            }
+
+            $model = Variants::find()->where(['product_id'=>$id])->all();
+            echo $this->renderAjax('_variants', [
+                'model' => $model,
+            ]);
+
+
+        }else{ die('asdfdasf');
+
+            echo $this->renderAjax('_variants', [
+            //    'items' => $this->itemsCart ($category, $id),
+            ]);
+
+        }
+
     }
 
 
@@ -240,6 +290,7 @@ ORDER BY category.feature_id ASC"
 
         $model = new Products();
         $image = new Images();
+    //    $variants = new Variants();
         $related = new RelatedProducts();
 
 
@@ -265,6 +316,7 @@ ORDER BY category.feature_id ASC"
                 'image' => $image,
                 //        'category' => $category,
                 'items' => $items,
+            //    'variants' => $variants,
                 'related' => $related,
                 //      'brand' => $brand,
             ]);
@@ -282,7 +334,7 @@ ORDER BY category.feature_id ASC"
 
     public function actionUpdate($id)
     {
-        $model = Products::find()->where(['id'=>$id])->with(['productsCategories', 'relatedProducts', 'images'])->one();
+        $model = Products::find()->where(['id'=>$id])->with(['productsCategories', 'relatedProducts', 'images', 'variants'])->one();
         $category = ArrayHelper::getColumn($model['productsCategories'], 'category_id');
         if(($cat = implode(', ',(array)$category))==null) $cat = 1;
         $items =  $this->itemsCart($cat ,$id);

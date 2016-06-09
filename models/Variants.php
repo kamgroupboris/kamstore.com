@@ -34,7 +34,8 @@ class Variants extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_id', 'sku', 'name', 'price', 'position', 'attachment', 'external_id'], 'required'],
+        //    [['product_id', 'sku', 'name', 'price', 'position', 'attachment', 'external_id'], 'required'],
+            [['product_id', 'sku', 'name', 'price', 'position', 'attachment', 'external_id'], 'safe'],
             [['product_id', 'stock', 'position'], 'integer'],
             [['price', 'compare_price'], 'number'],
             [['sku', 'name', 'attachment'], 'string', 'max' => 255],

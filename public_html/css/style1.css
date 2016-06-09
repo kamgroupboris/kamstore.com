@@ -95,6 +95,10 @@ ul{
 .control-box {
     text-align: right;
     width: 100%;
+
+    position: relative;
+    top: -166px;
+
     }
     .carousel-control{
         background: #666;
@@ -108,6 +112,7 @@ ul{
         padding: 14px 10px 0px;
         width:35px;
         height:50px;
+        top:40%;
         }
 
 

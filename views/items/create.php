@@ -7,6 +7,7 @@ use app\models\Products;
 use app\models\Options;
 use app\models\Features;
 use app\models\Images;
+use app\models\Variants;
 use app\models\CategoriesFeatures;
 
 use yii\widgets\Pjax;
@@ -38,8 +39,13 @@ $(document).on('pjax:beforeSend', function(xhr, options, settings) {
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+
     <?= $this->render('_productcreate', [
         'model' => $model,// 'related' => $related,
+    ]) ?>
+
+    <?= $this->render('_variants', [
+     //   'model' => $variants,
     ]) ?>
 
     <?= $this->render('_image', [

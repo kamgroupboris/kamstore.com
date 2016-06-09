@@ -19,6 +19,7 @@ use app\models\Images;
 use app\models\Categories;
 use app\models\Item;
 use app\models\ProductsCategories;
+use app\models\Variants;
 
 
 
@@ -101,15 +102,20 @@ class Products extends \yii\db\ActiveRecord
             'meta_keywords' => 'Meta Keywords',
             'meta_description' => 'Meta Description',
             'created' => 'Создано',
-            'featured' => 'Связанные товары',
-            'external_id' => 'Рекомендуемый',//'External ID',
+            'featured' => 'Рекомендуемый',
+            'external_id' => 'Внешний',//'External ID',
         ];
     }
 
 
     public function getImages()
     {
-        return $this->hasOne(Images::className(), ['product_id' => 'id']);
+        return $this->hasMany(Images::className(), ['product_id' => 'id']);
+    }
+
+    public function getBrands()
+    {
+        return $this->hasOne(Brands::className(), ['id' => 'brand_id']);
     }
 
     public function getProductsCategories()
@@ -120,6 +126,18 @@ class Products extends \yii\db\ActiveRecord
     public function getRelatedProducts()
     {
         return $this->hasMany(RelatedProducts::className(), ['product_id' => 'id']);
+    }
+
+    public function getVariants()
+    {
+        return $this->hasMany(Variants::className(), ['product_id' => 'id']);
+    }
+
+//viaTable
+
+    public function getImg()
+    {
+        return $this->hasMany(Images::className(), ['product_id' => 'id']);
     }
 
 }

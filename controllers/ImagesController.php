@@ -72,7 +72,14 @@ class ImagesController extends Controller
                    if(!isset($model->name))$model->name = $originalName;
                     $model->type_file = $typeFile;
 
+                     $imgyes =  $this->findModel($model->product_id);
+                   if(!$imgyes) $model->position = 0; else $model->position = count($imgyes)+1;
+
                     if ($model->save()) {
+
+                        Image::thumbnail($dir .'originals/'. $fileName, 600, 600)
+                            ->save($dir .'products/'.$originalName.'.600x600.'. $typeFile, ['quality' => 80]);
+
                        Image::thumbnail($dir .'originals/'. $fileName, 200, 200)
                          ->save($dir .'products/'.$originalName.'.200x200.'. $typeFile, ['quality' => 80]);
 
