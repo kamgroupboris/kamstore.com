@@ -23,99 +23,11 @@ use yii\helpers\ArrayHelper;
 	    		<div class="select_category filter_type  icon-select">
 
 					<?php
-					$items = ArrayHelper::map(Categories::find()->all(), 'id', 'name');
-				echo	Html::dropDownList('category_id',null,$items, ['class'=>'no-border']);
-
+						$items = ArrayHelper::map(Categories::find()->all(), 'id', 'name');
+						array_unshift($items, "Все категории");
+						echo Html::dropDownList('category_id',null,$items, ['class'=>'no-border']);
 					?>
-			<!--<select class="no-border" name="category_id">
-				<option value="0">All Categories</option>
-						        		        <option value="78">Apparel</option>
-		        							        		        		        <option value="77">Cables &amp; Connectors</option>
-		        							        		        		        <option value="82">Cameras &amp; Photo</option>
-		        							        		        		        <option value="80">Flashlights &amp; Lamps</option>
-		        							        		        		        <option value="81">Mobile Accessories</option>
-		        							        		        		        <option value="79">Video Games</option>
-		        							        		        		        <option value="20">Mobiles &amp; Tablets</option>
-		        															<option value="76">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Earings</option>
-																
-															<option value="83">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Monitor</option>
-																
-															<option value="86">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Refrigerator</option>
-																
-															<option value="85">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Washing machine</option>
-																
-															<option value="26">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wedding Rings</option>
-																
-															<option value="27">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Men Watches</option>
-																
-							        		        		        <option value="18">Electronics</option>
-		        															<option value="89">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hixeg misgu vocabu</option>
-																
-															<option value="46">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Smartphone</option>
-																
-															<option value="45">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tablet</option>
-																
-															<option value="91">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ttis maseis igme</option>
-																
-															<option value="30">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Memory Card</option>
-																
-															<option value="32">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mobile Accessories</option>
-																
-							        		        		        <option value="25">Computer</option>
-		        															<option value="35">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Camping &amp; Hiking</option>
-																
-															<option value="92">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lostete solites </option>
-																
-															<option value="94">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Voliste mesite</option>
-																
-															<option value="31">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fishing</option>
-																
-															<option value="29">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Golf Supplies</option>
-																
-															<option value="28">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Outdoor &amp; Traveling</option>
-																
-							        		        		        <option value="57">Toys &amp; Hobbies</option>
-		        															<option value="73">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FPV System &amp; Parts</option>
-																
-															<option value="75">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Helicopters &amp; Parts</option>
-																
-															<option value="74">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RC Cars &amp; Parts</option>
-																
-															<option value="72">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Walkera</option>
-																
-							        		        		        <option value="17">Bags, Holiday Supplies</option>
-		        															<option value="68">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gift &amp; Lifestyle Gadgets</option>
-																
-															<option value="70">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gift for Woman</option>
-																
-															<option value="71">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lighter &amp; Cigar Supplies</option>
-																
-							        		        		        <option value="24">Health &amp; Beauty</option>
-		        															<option value="64">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bath &amp; Body</option>
-																
-															<option value="66">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fragrances</option>
-																
-															<option value="67">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Salon &amp; Spa Equipment</option>
-																
-															<option value="65">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shaving &amp; Hair Removal</option>
-																
-							        		        		        <option value="33">Automotive</option>
-		        															<option value="61">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Car Alarms and Security</option>
-																
-															<option value="62">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Car Audio &amp; Speakers</option>
-																
-															<option value="63">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gadgets &amp; Auto Parts</option>
-																
-															<option value="60">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;More Car Accessories</option>
-																
-							        		        		        <option value="34">Smartphone &amp; Tablets</option>
-		        															<option value="44">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accessories for i Pad</option>
-																
-															<option value="43">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accessories for iPhone</option>
-																
-															<option value="47">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accessories for Tablet PC</option>
-																
-							        			</select>-->
+
 		</div>
 			
 	    <input class="autosearch-input form-control" type="text" value="" size="50" autocomplete="off" placeholder="Поиск" name="search">
@@ -215,11 +127,11 @@ use yii\helpers\ArrayHelper;
 						if (!json[i]['category']) {
 						html += '<li class="media" data-value="' + json[i]['value'] + '">';
 						if(json[i]['image'] && json[i]['show_image'] && json[i]['show_image'] == 1 ) {
-							html += '	<a class="media-left pull-left" href="/'&#32;+&#32;json[i]['link']&#32;+&#32;'.html"><img class="pull-left" src="'&#32;+&#32;json[i]['image']&#32;+&#32;'.html"></a>';	
+							html += '	<a class="media-left pull-left" href="/'+json[i]['link']+'.html"><img class="pull-left" src="'+json[i]['image']+'.html"></a>';
 						}
 						
 						html += '<div class="media-body">';	
-						html += '<a href="/'&#32;+&#32;json[i]['link']&#32;+&#32;'.html"><span>' + json[i]['label'] + '</span></a>';
+						html += '<a href="/'+json[i]['link']+'.html"><span>' + json[i]['label'] + '</span></a>';
 						if(json[i]['price'] && json[i]['show_price'] && json[i]['show_price'] == 1){
 							html += '	<div class="price">';
 							if (!json[i]['special']) {

@@ -8,8 +8,8 @@
 														<ul class="thumb-vertical previews-list ">
 														<?foreach($model['images'] as $img):?>
 																<li class="owl2-item">
-																	<a data-index="0" class="img thumbnail" data-image="/files/products/<?=str_replace('.','.600x600.',$img->attributes['filename']);?>" title="Dail miren tukan potrem">
-																		<img src="/files/products/<?=str_replace('.','.100x100.',$img->attributes['filename']);?>" title="Dail miren tukan potrem" alt="Dail miren tukan potrem" />
+																	<a data-index="0" class="img thumbnail" data-image="/files/products/<?=str_replace('.','.600x600.',$img->attributes['filename']);?>" title="<?=$model->name?>">
+																		<img src="/files/products/<?=str_replace('.','.200x200.',$img->attributes['filename']);?>" title="<?=$model->name?>" alt="<?=$model->name?>" />
 																	</a>
 																</li>
 														<?endforeach;?>
@@ -44,7 +44,10 @@
                     </div>
                                         
 					<div class="large-image  vertical  ">
-						<img itemprop="image" class="product-image-zoom" src="/files/products/<?=str_replace('.','.600x600.',$model['images'][0]->attributes['filename']);?>" data-zoom-image="/files/products/<?=str_replace('.','.600x600.',$model['images'][0]->attributes['filename']);?>" title="Dail miren tukan potrem" alt="Dail miren tukan potrem" />
+						<?
+						$filename =	str_replace('.','.600x600.',$model['images'][0]->attributes['filename']);
+						$img600 = file_exists($filename)?$filename:$filename =	str_replace('.','.200x200.',$model['images'][0]->attributes['filename'])?>
+						<img itemprop="image" class="product-image-zoom" src="/files/products/<?=$img600?>" data-zoom-image="/files/products/<?=$img600?>" title="<?=$model->name?>" alt="<?=$model->name?>" />
 						
 						<!--New Label-->
 																							
@@ -121,7 +124,7 @@
 						  <div class="input-group quantity-control">
 							  <label>Кол-во</label>
 							  <input class="form-control" type="text" name="quantity" value="1" />
-							  <input type="hidden" name="product_id" value="48" />
+							  <input type="hidden" name="product_id" value="<?=$model['variants'][0]->id?>" />
 							  <span class="input-group-addon product_quantity_down">-</span>
 							  <span class="input-group-addon product_quantity_up">+</span>
 						  </div>
@@ -133,10 +136,10 @@
 						<div class="add-to-links wish_comp">
 							<ul class="blank">
 								<li class="wishlist">
-									<a class="icon" data-toggle="tooltip" title="Добавить в список желаний" onclick="wishlist.add('48');"><i class="fa fa-heart"></i></a>
+									<a class="icon" data-toggle="tooltip" title="Добавить в список желаний" onclick="wishlist.add('<?=$model->variants[0]->id?>');"><i class="fa fa-heart"></i></a>
 								</li>
 								<li class="compare">
-									<a class="icon" data-toggle="tooltip" title="Сравнить этот продукт" onclick="compare.add('48');"><i class="fa fa-exchange"></i></a>
+									<a class="icon" data-toggle="tooltip" title="Сравнить этот продукт" onclick="compare.add('<?=$model->variants[0]->id?>');"><i class="fa fa-exchange"></i></a>
 								</li>
 							</ul>
 						</div>

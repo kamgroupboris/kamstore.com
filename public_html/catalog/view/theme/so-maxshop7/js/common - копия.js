@@ -85,7 +85,7 @@ $(document).ready(function() {
 
 	
 	// tooltips on hover
-//	$('[data-toggle=\'tooltip\']').tooltip({container: 'body'});
+	$('[data-toggle=\'tooltip\']').tooltip({container: 'body'});
 
 	// Makes tooltips work on ajax generated content
 	/*$(document).ajaxStop(function() {
@@ -100,11 +100,8 @@ var cart = {
 		$.ajax({
 			url: '/cart/add',
 			type: 'post',
-			data: {
-				   "product_id": product_id,
-				   "_csrf": yii.getCsrfToken()
-				},//'product_id=' + product_id, 
-			dataType: 'json',
+			data: 'product_id=' + product_id, 
+		//	dataType: 'json',
 			
 			success: function(json) {
 				$('.alert').remove();
@@ -124,8 +121,7 @@ var cart = {
 					$('#cart  .text-shopping-cart').html(json['text_items_full'] );
 					
 				}, 100);
-			//	$('#cart > ul').load('index.php?route=common/cart/info ul li');
-				$('#cart > ul').load('/cart/info');
+				$('#cart > ul').load('index.php?route=common/cart/info ul li');
 			},
 			error: function(xhr, ajaxOptions, thrownError) {
 				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -155,7 +151,7 @@ var cart = {
 	},
 	'remove': function(key) {
 		$.ajax({
-			url: '/cart/remove',
+			url: 'index.php?route=soconfig/cart/remove',
 			type: 'post',
 			data: 'key=' + key,
 			dataType: 'json',
@@ -169,7 +165,7 @@ var cart = {
 				if (getURLVar('route') == 'checkout/cart' || getURLVar('route') == 'checkout/checkout') {
 					location = 'index.php?route=checkout/cart';
 				} else {
-					$('#cart > ul').load('/cart/info');
+					$('#cart > ul').load('index.php?route=common/cart/info ul li');
 				}
 			}
 		});
@@ -211,7 +207,7 @@ var voucher = {
 var wishlist = {
 	'add': function(product_id) {
 		$.ajax({
-			url: '/wishlist/add',
+			url: 'index.php?route=soconfig/wishlist/add',
 			type: 'post',
 			data: 'product_id=' + product_id,
 			dataType: 'json',
@@ -232,7 +228,7 @@ var wishlist = {
 var compare = {
 	'add': function(product_id) {
 		$.ajax({
-			url: '/compare/add',
+			url: 'index.php?route=soconfig/compare/add',
 			type: 'post',
 			data: 'product_id=' + product_id,
 			dataType: 'json',

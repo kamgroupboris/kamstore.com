@@ -1,4 +1,5 @@
 <?
+	use yii\web\View;
 //	$this->title = $model->title;
 	$this->params['breadcrumbs'][] = $model->name;
 ?>
@@ -28,6 +29,9 @@
 
     </div>
 	</div>
+
+
+
 <script type="text/javascript"><!--
 $('select[name=\'recurring_id\'], input[name="quantity"]').change(function(){
 	$.ajax({
@@ -52,7 +56,7 @@ $('select[name=\'recurring_id\'], input[name="quantity"]').change(function(){
 <script type="text/javascript"><!--
 $('#button-cart').on('click', function() {
 	$.ajax({
-		url: 'index.php?route=soconfig/cart/add',
+		url: '/cart/add',
 		type: 'post',
 		data: $('#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea'),
 		dataType: 'json',
@@ -88,15 +92,17 @@ $('#button-cart').on('click', function() {
 				 addProductNotice(json['title'], json['thumb'], json['success'], 'success');
 				// Need to set timeout otherwise it wont update the total
 				setTimeout(function () {
-						$('#cart  .text-shopping-cart');//.html(json['total'] );
+						$('#cart  .text-shopping-cart').html(json['text_items_full'] );
 						$('.text-danger').remove();
 					}, 100);
-					$('#cart > ul').load('index.php?route=common/cart/info ul li');
+					$('#cart > ul').load('/cart/info');
 			}
 		}
 	});
 });
-//--></script> 
+//--></script>
+
+
 <script type="text/javascript"><!--
 $('.date').datetimepicker({
 	pickTime: false

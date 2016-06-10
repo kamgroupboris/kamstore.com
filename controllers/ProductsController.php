@@ -61,7 +61,7 @@ class ProductsController extends Controller
 
     public function actionProducts($alias)
     {
-        $model = Products::find()->where(['url'=>$alias])->with(['productsCategories', 'relatedProducts', 'img'])->one();
+        $model = Products::find()->where(['url'=>$alias])->with(['productsCategories', 'relatedProducts', 'img', 'variants'])->one();
         return $this->render('_view', [
             'model' => $model,
         ]);

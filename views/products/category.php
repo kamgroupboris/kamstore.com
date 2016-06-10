@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
             	
     <div id="content" class="col-sm-8 col-md-9 col-xs-12">        <div class="products-category">
 									  <div class="row">
-													<div class="col-sm-12"><p><img src="image/catalog/category/fashion-cat.png"><br></p></div>
+													<div class="col-sm-12"><p><img src="/image/catalog/category/fashion-cat.png"><br></p></div>
 							  </div>
 					
 				
@@ -36,29 +36,29 @@ $this->params['breadcrumbs'][] = $this->title;
 				</div>
 				<div class="short-by-show form-inline text-right col-md-10 col-xs-12">
 					<div class="form-group short-by">
-						<label class="control-label" for="input-sort">Sort By:</label>
+						<label class="control-label" for="input-sort">Сортировка:</label>
 						<select id="input-sort" class="form-control" onchange="location = this.value;">
-						  						  						  <option value="http://opencart.magentech.com/themes/so_maxshop/layout7/index.php?route=product/category&amp;path=25&amp;sort=p.sort_order&amp;order=ASC" selected="selected">Default</option>
-						  						  						  						  <option value="http://opencart.magentech.com/themes/so_maxshop/layout7/index.php?route=product/category&amp;path=25&amp;sort=pd.name&amp;order=ASC">Name (A - Z)</option>
-						  						  						  						  <option value="http://opencart.magentech.com/themes/so_maxshop/layout7/index.php?route=product/category&amp;path=25&amp;sort=pd.name&amp;order=DESC">Name (Z - A)</option>
-						  						  						  						  <option value="http://opencart.magentech.com/themes/so_maxshop/layout7/index.php?route=product/category&amp;path=25&amp;sort=p.price&amp;order=ASC">Price (Low &gt; High)</option>
-						  						  						  						  <option value="http://opencart.magentech.com/themes/so_maxshop/layout7/index.php?route=product/category&amp;path=25&amp;sort=p.price&amp;order=DESC">Price (High &gt; Low)</option>
-						  						  						  						  <option value="http://opencart.magentech.com/themes/so_maxshop/layout7/index.php?route=product/category&amp;path=25&amp;sort=rating&amp;order=DESC">Rating (Highest)</option>
-						  						  						  						  <option value="http://opencart.magentech.com/themes/so_maxshop/layout7/index.php?route=product/category&amp;path=25&amp;sort=rating&amp;order=ASC">Rating (Lowest)</option>
-						  						  						  						  <option value="http://opencart.magentech.com/themes/so_maxshop/layout7/index.php?route=product/category&amp;path=25&amp;sort=p.model&amp;order=ASC">Model (A - Z)</option>
-						  						  						  						  <option value="http://opencart.magentech.com/themes/so_maxshop/layout7/index.php?route=product/category&amp;path=25&amp;sort=p.model&amp;order=DESC">Model (Z - A)</option>
-						  						  						</select>
+							  <option value="/product/category&path=25&sort=p.sort_order&order=ASC" selected="selected"></option>
+							  <option value="/product/category&path=25&sort=pd.name&order=ASC">Name (A - Z)</option>
+							  <option value="/product/category&path=25&sort=pd.name&order=DESC">Name (Z - A)</option>
+							  <option value="/product/category&path=25&sort=p.price&order=ASC">Price (Low &gt; High)</option>
+							  <option value="/product/category&path=25&sort=p.price&order=DESC">Price (High &gt; Low)</option>
+							  <option value="/product/category&path=25&sort=rating&order=DESC">Rating (Highest)</option>
+							  <option value="/product/category&path=25&sort=rating&order=ASC">Rating (Lowest)</option>
+							  <option value="/product/category&path=25&sort=p.model&order=ASC">Model (A - Z)</option>
+							  <option value="/product/category&path=25&sort=p.model&order=DESC">Model (Z - A)</option>
+							</select>
 					</div>
 
 					<div class="form-group">
-						<label class="control-label" for="input-limit">Show:</label>
+						<label class="control-label" for="input-limit">Показывать:</label>
 						<select id="input-limit" class="form-control" onchange="location = this.value;">
-						  						  						  <option value="http://opencart.magentech.com/themes/so_maxshop/layout7/index.php?route=product/category&amp;path=25&amp;limit=15" selected="selected">15</option>
-						  						  						  						  <option value="http://opencart.magentech.com/themes/so_maxshop/layout7/index.php?route=product/category&amp;path=25&amp;limit=25">25</option>
-						  						  						  						  <option value="http://opencart.magentech.com/themes/so_maxshop/layout7/index.php?route=product/category&amp;path=25&amp;limit=50">50</option>
-						  						  						  						  <option value="http://opencart.magentech.com/themes/so_maxshop/layout7/index.php?route=product/category&amp;path=25&amp;limit=75">75</option>
-						  						  						  						  <option value="http://opencart.magentech.com/themes/so_maxshop/layout7/index.php?route=product/category&amp;path=25&amp;limit=100">100</option>
-						  						  						</select>
+						  <option value="/product/category&path=25&limit=15" selected="selected">15</option>
+						  <option value="/product/category&path=25&limit=25">25</option>
+						  <option value="/product/category&path=25&limit=50">50</option>
+						  <option value="/product/category&path=25&limit=75">75</option>
+						  <option value="/product/category&path=25&limit=100">100</option>
+						</select>
 					</div>
 									</div>
 							  </div>
@@ -103,7 +103,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			</div>
 		</div>
 	   <div class="short-by-show text-center col-md-10 col-xs-12">
-			<div class="form-group" style="margin: 7px 10px">Showing 1 to 8 of 8 (1 Pages)</div>
+			<div class="form-group" style="margin: 7px 10px">Показано 1 to 8 of 8 (1 страниц)</div>
 					</div>
 				
 	  </div>

@@ -81,64 +81,45 @@ class SiteController extends Controller
 
     public function actionCategory($alias=null)
     {
-
-        $model = Categories::find()->where(['url'=>$alias])->one();
-        $proucts_cat = ProductsCategories::find()->where(['category_id'=>$model->id])->with('products')->all();
-    //    print('<pre>');
-        //print_r($proucts_cat);
-     /*   $dataProvider = new ActiveDataProvider([
-            'query' => $proucts_cat['products'],
-            'pagination' => [
-                'pageSize' => 8,
-            ],
-        ]);*/
-
-        $dataProvider = new SqlDataProvider([
-            'sql' => 'SELECT
-s_products.id,
-s_products.url,
-s_products.`name`,
-s_products.brand_id,
-s_products.annotation,
-s_products.body,
-s_products.visible,
-s_products.position,
-s_products.meta_title,
-s_products.meta_keywords,
-s_products.meta_description
-FROM
-s_categories
-INNER JOIN s_products_categories ON s_categories.id = s_products_categories.category_id
-INNER JOIN s_products ON s_products_categories.product_id = s_products.id
-WHERE
-s_categories.url = :url',
-          'params' => [':url' => $alias],
-            'pagination' => [
-                'pageSize' => 20,
-            ],
-        ]);
-     //   $models = $dataProvider->getModels();
-
-        return $this->render('/products/category', [
-            'dataProvider' => $dataProvider,
-        ]);
-/*
-        $model = Articles::find()->where(['url' => $alias])->one();
+        if($alias!=null) {
+            $dataProvider = new SqlDataProvider([
+                'sql' => 'SELECT
+                s_products.id,
+                s_products.url,
+                s_products.`name`,
+                s_products.brand_id,
+                s_products.annotation,
+                s_products.body,
+                s_products.visible,
+                s_products.position,
+                s_products.meta_title,
+                s_products.meta_keywords,
+                s_products.meta_description
+                FROM
+                s_categories
+                INNER JOIN s_products_categories ON s_categories.id = s_products_categories.category_id
+                INNER JOIN s_products ON s_products_categories.product_id = s_products.id
+                WHERE
+                s_categories.url = :url',
+                'params' => [':url' => $alias],
+                'pagination' => [
+                    'pageSize' => 20,
+                ],
+            ]);
 
 
-        if($model){
-            return $this->render('/articles/view', [
-                'model' => $model,
+            return $this->render('/products/category', [
+                'dataProvider' => $dataProvider,
             ]);
         }else{
-            //return $this->render('index');
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }*/
-    }
+            return $this->render('/site/category-list');
+        }
+
+}
 
     public function actionProduct($alias=null)
     {
-
+        if($alias!=null) {
         $model = Products::find()->where(['url'=>$alias])->with(['productsCategories', 'relatedProducts', 'images', 'variants', 'brands'])->one();
 
       if($model){
@@ -146,20 +127,12 @@ s_categories.url = :url',
           'model' => $model,
         ]); }else{
            return $this->render('index');
-         throw new NotFoundHttpException('The requested page does not exist.');
+         throw new NotFoundHttpException('Запрашиваемая страница не существует.');
        }
-        /*
-                $model = Articles::find()->where(['url' => $alias])->one();
+    }else{
 
+}
 
-                if($model){
-                    return $this->render('/articles/view', [
-                        'model' => $model,
-                    ]);
-                }else{
-                    //return $this->render('index');
-                    throw new NotFoundHttpException('The requested page does not exist.');
-                }*/
     }
 
     public function actionArtikle($alias)

@@ -9,7 +9,7 @@ use yii\widgets\Menu;
 use app\models\Categories;
 ?>
 
-<div id="so_category_slider_<?=$model->id?>" class="container-slider module  item<?=$model->id?>"  >
+<div id="so_category_slider_<?=$model->id?>" class="container-slider module  item<?=$model->id<3?$model->id:3?>"  >
 		<div class="page-top">
 		<h3 class="modtitle">
 				<span><?=$model->name?></span>
@@ -34,31 +34,6 @@ use app\models\Categories;
 						?>
 
 
-
-
-
-			<!--			<ul>
-										<li>
-						<a href="index.php@route=product%252Fcategory&amp;path=27.html"
-						   title="Men Watches" target="_self" >
-							Men Watches													</a>
-					</li>
-										<li>
-						<a href="index.php@route=product%252Fcategory&amp;path=26.html"
-						   title="Wedding Rings" target="_self" >
-							Wedding Rings													</a>
-					</li>
-										<li>
-						<a href="index.php@route=product%252Fcategory&amp;path=76.html"
-						   title="Earings" target="_self" >
-							Earings													</a>
-					</li>
-										<li>
-						<a href="index.php@route=product%252Fcategory&amp;path=83.html"
-						   title="Monitor" target="_self" >
-							Monitor													</a>
-					</li>
-									</ul>-->
 			</div>
 						
 			
@@ -76,22 +51,26 @@ use app\models\Categories;
 
 									$dataProvider = new SqlDataProvider([
 											'sql' => 'SELECT
-s_products.id,
 s_products.url,
 s_products.brand_id,
 s_products.`name`,
-s_products.annotation,
-s_products.meta_keywords,
+s_variants.price,
+s_variants.compare_price,
+s_variants.position,
+s_variants.product_id,
 s_products.meta_description,
-s_products.created,
-s_products.featured,
-s_products.external_id,
-s_products.`update`
+s_products.annotation,
+s_variants.id variant_id,
+s_products.id
 FROM
 s_products
 INNER JOIN s_products_categories ON s_products_categories.product_id = s_products.id
+INNER JOIN s_variants ON s_variants.product_id = s_products.id
 WHERE
-s_products_categories.category_id = :id',
+s_products.visible = 1  AND
+s_products_categories.category_id = :id
+GROUP BY s_variants.product_id
+',
 											'params' => [':id' => $model->id],
 											'pagination' => false,
 									]);

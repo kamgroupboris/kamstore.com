@@ -1,401 +1,65 @@
+<?
+use app\models\Blog;
+use app\models\Products;
+use yii\widgets\ListView;
+use yii\data\ActiveDataProvider;
+use app\models\Comments;
+
+?>
 <div class="moduletable module best-seller">
-		<h3 class="modtitle"><span>Best Sellers</span></h3>
+		<h3 class="modtitle"><span>Популярные</span></h3>
 	
 		<div id="sp_extra_slider_19946720141465210953"
 			 class="so-extraslider buttom-type1 preset00-1 preset01-1 preset02-1 preset03-1 preset04-1 button-type1 ">
 			<!-- Begin extraslider-inner -->
 
 			<div class="extraslider-inner" data-effect="none">
-												<div class="item ">
-										<div class="item-wrap style1">
-						<div class="item-wrap-inner media">
-							<div class="media-left">
-								<div class="item-image">
-									<div class="item-img-info">
-																					<a class="product_img_link" href="index.php@route=product%252Fproduct&amp;product_id=57.html" target="_blank" title="Duis faucibus rutrum">
-																															<img src="image/cache/catalog/product/7-85x85.png" alt="Duis faucibus rutrum" title="Duis faucibus rutrum" class="img-responsive" />
-										</a>
-																													</div>
-								</div>
-							</div>
-															<div class="media-body">
-									<div class="item-info">
-																				<div class="rating">
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																					</div>
-																				
-																					<div class="item-title">
-												<a href="index.php@route=product%252Fproduct&amp;product_id=57.html" target="_blank"
-												   title="Duis faucibus rutrum"  >
-													Duis faucibus rutrum												</a>
-											</div>
-											
-										
-	
-																					<!-- Begin item-content -->
-											<div class="item-content">
-													
-																									<div  class="content_price">
-																													<span class="old-price product-price">$30.00</span>&nbsp;&nbsp;
-															<span class="price-old">$59.00</span>&nbsp;
-																																									</div>
-													
-													
-													
-											</div>
-											<!-- End item-content -->
-																			</div>
-								</div><!-- End item-info -->
-							
-						</div>
-						<!-- End item-wrap-inner -->
-					</div>
-					<!-- End item-wrap -->
-																		<div class="item-wrap style1">
-						<div class="item-wrap-inner media">
-							<div class="media-left">
-								<div class="item-image">
-									<div class="item-img-info">
-																					<a class="product_img_link" href="index.php@route=product%252Fproduct&amp;product_id=50.html" target="_blank" title="Hazen dima polan">
-																															<img src="image/cache/catalog/product/29-85x85.png" alt="Hazen dima polan" title="Hazen dima polan" class="img-responsive" />
-										</a>
-																													</div>
-								</div>
-							</div>
-															<div class="media-body">
-									<div class="item-info">
-																				<div class="rating">
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																					</div>
-																				
-																					<div class="item-title">
-												<a href="index.php@route=product%252Fproduct&amp;product_id=50.html" target="_blank"
-												   title="Hazen dima polan"  >
-													Hazen dima polan												</a>
-											</div>
-											
-										
-	
-																					<!-- Begin item-content -->
-											<div class="item-content">
-													
-																									<div  class="content_price">
-																												<span class="price product-price">
-															$43.00														</span>
-																																									</div>
-													
-													
-													
-											</div>
-											<!-- End item-content -->
-																			</div>
-								</div><!-- End item-info -->
-							
-						</div>
-						<!-- End item-wrap-inner -->
-					</div>
-					<!-- End item-wrap -->
-																		<div class="item-wrap style1">
-						<div class="item-wrap-inner media">
-							<div class="media-left">
-								<div class="item-image">
-									<div class="item-img-info">
-																					<a class="product_img_link" href="index.php@route=product%252Fproduct&amp;product_id=52.html" target="_blank" title="Phasellus ut vehicula">
-																															<img src="image/cache/catalog/product/6-85x85.png" alt="Phasellus ut vehicula" title="Phasellus ut vehicula" class="img-responsive" />
-										</a>
-																													</div>
-								</div>
-							</div>
-															<div class="media-body">
-									<div class="item-info">
-																				<div class="rating">
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																					</div>
-																				
-																					<div class="item-title">
-												<a href="index.php@route=product%252Fproduct&amp;product_id=52.html" target="_blank"
-												   title="Phasellus ut vehicula"  >
-													Phasellus ut vehicula												</a>
-											</div>
-											
-										
-	
-																					<!-- Begin item-content -->
-											<div class="item-content">
-													
-																									<div  class="content_price">
-																													<span class="old-price product-price">$45.00</span>&nbsp;&nbsp;
-															<span class="price-old">$78.00</span>&nbsp;
-																																									</div>
-													
-													
-													
-											</div>
-											<!-- End item-content -->
-																			</div>
-								</div><!-- End item-info -->
-							
-						</div>
-						<!-- End item-wrap-inner -->
-					</div>
-					<!-- End item-wrap -->
-									</div>
-																	<div class="item ">
-										<div class="item-wrap style1">
-						<div class="item-wrap-inner media">
-							<div class="media-left">
-								<div class="item-image">
-									<div class="item-img-info">
-																					<a class="product_img_link" href="index.php@route=product%252Fproduct&amp;product_id=54.html" target="_blank" title="Ruma huren chuma">
-																															<img src="image/cache/catalog/product/15-85x85.png" alt="Ruma huren chuma" title="Ruma huren chuma" class="img-responsive" />
-										</a>
-																													</div>
-								</div>
-							</div>
-															<div class="media-body">
-									<div class="item-info">
-																				<div class="rating">
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																					</div>
-																				
-																					<div class="item-title">
-												<a href="index.php@route=product%252Fproduct&amp;product_id=54.html" target="_blank"
-												   title="Ruma huren chuma"  >
-													Ruma huren chuma												</a>
-											</div>
-											
-										
-	
-																					<!-- Begin item-content -->
-											<div class="item-content">
-													
-																									<div  class="content_price">
-																													<span class="old-price product-price">$55.00</span>&nbsp;&nbsp;
-															<span class="price-old">$99.00</span>&nbsp;
-																																									</div>
-													
-													
-													
-											</div>
-											<!-- End item-content -->
-																			</div>
-								</div><!-- End item-info -->
-							
-						</div>
-						<!-- End item-wrap-inner -->
-					</div>
-					<!-- End item-wrap -->
-																		<div class="item-wrap style1">
-						<div class="item-wrap-inner media">
-							<div class="media-left">
-								<div class="item-image">
-									<div class="item-img-info">
-																					<a class="product_img_link" href="index.php@route=product%252Fproduct&amp;product_id=30.html" target="_blank" title="Fuzan suma mipon">
-																															<img src="image/cache/catalog/product/9-85x85.png" alt="Fuzan suma mipon" title="Fuzan suma mipon" class="img-responsive" />
-										</a>
-																													</div>
-								</div>
-							</div>
-															<div class="media-body">
-									<div class="item-info">
-																				<div class="rating">
-																																			<span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-																																															<span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-																																															<span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-																																															<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																																															<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																																	</div>
-																				
-																					<div class="item-title">
-												<a href="index.php@route=product%252Fproduct&amp;product_id=30.html" target="_blank"
-												   title="Fuzan suma mipon"  >
-													Fuzan suma mipon												</a>
-											</div>
-											
-										
-	
-																					<!-- Begin item-content -->
-											<div class="item-content">
-													
-																									<div  class="content_price">
-																													<span class="old-price product-price">$60.00</span>&nbsp;&nbsp;
-															<span class="price-old">$145.00</span>&nbsp;
-																																									</div>
-													
-													
-													
-											</div>
-											<!-- End item-content -->
-																			</div>
-								</div><!-- End item-info -->
-							
-						</div>
-						<!-- End item-wrap-inner -->
-					</div>
-					<!-- End item-wrap -->
-																		<div class="item-wrap style1">
-						<div class="item-wrap-inner media">
-							<div class="media-left">
-								<div class="item-image">
-									<div class="item-img-info">
-																					<a class="product_img_link" href="index.php@route=product%252Fproduct&amp;product_id=31.html" target="_blank" title="Duidem rerum facilis">
-																															<img src="image/cache/catalog/product/12-85x85.png" alt="Duidem rerum facilis" title="Duidem rerum facilis" class="img-responsive" />
-										</a>
-																													</div>
-								</div>
-							</div>
-															<div class="media-body">
-									<div class="item-info">
-																				<div class="rating">
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																					</div>
-																				
-																					<div class="item-title">
-												<a href="index.php@route=product%252Fproduct&amp;product_id=31.html" target="_blank"
-												   title="Duidem rerum facilis"  >
-													Duidem rerum facilis												</a>
-											</div>
-											
-										
-	
-																					<!-- Begin item-content -->
-											<div class="item-content">
-													
-																									<div  class="content_price">
-																												<span class="price product-price">
-															$80.00														</span>
-																																									</div>
-													
-													
-													
-											</div>
-											<!-- End item-content -->
-																			</div>
-								</div><!-- End item-info -->
-							
-						</div>
-						<!-- End item-wrap-inner -->
-					</div>
-					<!-- End item-wrap -->
-									</div>
-																	<div class="item ">
-										<div class="item-wrap style1">
-						<div class="item-wrap-inner media">
-							<div class="media-left">
-								<div class="item-image">
-									<div class="item-img-info">
-																					<a class="product_img_link" href="index.php@route=product%252Fproduct&amp;product_id=53.html" target="_blank" title="These cases are perfectly">
-																															<img src="image/cache/catalog/product/W8-85x85.jpg" alt="These cases are perfectly" title="These cases are perfectly" class="img-responsive" />
-										</a>
-																													</div>
-								</div>
-							</div>
-															<div class="media-body">
-									<div class="item-info">
-																				<div class="rating">
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																						<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																					</div>
-																				
-																					<div class="item-title">
-												<a href="index.php@route=product%252Fproduct&amp;product_id=53.html" target="_blank"
-												   title="These cases are perfectly"  >
-													These cases are perfectly												</a>
-											</div>
-											
-										
-	
-																					<!-- Begin item-content -->
-											<div class="item-content">
-													
-																									<div  class="content_price">
-																												<span class="price product-price">
-															$90.00														</span>
-																																									</div>
-													
-													
-													
-											</div>
-											<!-- End item-content -->
-																			</div>
-								</div><!-- End item-info -->
-							
-						</div>
-						<!-- End item-wrap-inner -->
-					</div>
-					<!-- End item-wrap -->
-																		<div class="item-wrap style1">
-						<div class="item-wrap-inner media">
-							<div class="media-left">
-								<div class="item-image">
-									<div class="item-img-info">
-																					<a class="product_img_link" href="index.php@route=product%252Fproduct&amp;product_id=42.html" target="_blank" title="Etiam nec interdum">
-																															<img src="image/cache/catalog/product/10-85x85.png" alt="Etiam nec interdum" title="Etiam nec interdum" class="img-responsive" />
-										</a>
-																													</div>
-								</div>
-							</div>
-															<div class="media-body">
-									<div class="item-info">
-																				<div class="rating">
-																																			<span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-																																															<span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-																																															<span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-																																															<span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-																																															<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-																																	</div>
-																				
-																					<div class="item-title">
-												<a href="index.php@route=product%252Fproduct&amp;product_id=42.html" target="_blank"
-												   title="Etiam nec interdum"  >
-													Etiam nec interdum												</a>
-											</div>
-											
-										
-	
-																					<!-- Begin item-content -->
-											<div class="item-content">
-													
-																									<div  class="content_price">
-																												<span class="price product-price">
-															$100.00														</span>
-																																									</div>
-													
-													
-													
-											</div>
-											<!-- End item-content -->
-																			</div>
-								</div><!-- End item-info -->
-							
-						</div>
-						<!-- End item-wrap-inner -->
-					</div>
-					<!-- End item-wrap -->
-									</div>
+
+					<?	$dataProvider = new ActiveDataProvider([
+							'query' => Products::find()->where(['visible'=>1])->orderBy('created DESC')->limit(3),
+							'pagination' => false,
+					]);
+
+					echo ListView::widget([
+							'dataProvider' => $dataProvider,
+							'summary' => false,
+							'itemView' => 'item-wrap',
+							'options' => [
+									'tag'=>'div',
+									'class' => 'item'
+							],
+					]);?>
+
+
+				<?	$dataProvider = new ActiveDataProvider([
+						'query' => Products::find()->where(['visible'=>1])->orderBy('created DESC')->limit(3),
+						'pagination' => false,
+				]);
+
+				echo ListView::widget([
+						'dataProvider' => $dataProvider,
+						'summary' => false,
+						'itemView' => 'item-wrap',
+						'options' => [
+								'tag'=>'div',
+								'class' => 'item'
+						],
+				]);?>
+
+				<?	$dataProvider = new ActiveDataProvider([
+						'query' => Products::find()->where(['visible'=>1])->orderBy('created DESC')->limit(3),
+						'pagination' => false,
+				]);
+
+				echo ListView::widget([
+						'dataProvider' => $dataProvider,
+						'summary' => false,
+						'itemView' => 'item-wrap',
+						'options' => [
+								'tag'=>'div',
+								'class' => 'item'
+						],
+				]);?>
 									
 			</div>
 			<!--End extraslider-inner -->

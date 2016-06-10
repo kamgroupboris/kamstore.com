@@ -1,3 +1,6 @@
+<?
+use yii\widgets\Menu;
+?>
 	<div class="footer-container">
 				<div class="footer-top">
 				<div class="container">
@@ -57,9 +60,9 @@
 <div class="news-letter col-lg-9 col-md-9 col-sm-12" > 
 		<div class="newsletter">
 				<div class="title-block">
-						<div class="page-heading">Sign up for our newsletter</div>
+						<div class="page-heading">Подпишитесь на нашу рассылку</div>
 						<div class="pre-text" data-scroll-reveal="enter bottom and move 40px over 0.6s">
-								Get our updates on new arrivals and discount												
+							Получайте обновления на свежие поступления и скидки
 						</div>
 				</div>
 				
@@ -67,10 +70,10 @@
 						<form method="post">
 								<div class="form-group required">
 										<div class="input-box">
-										  <input type="email" name="txtemail" id="txtemail" value="" placeholder="Enter your email" class="form-control input-lg"  /> 
+										  <input type="email" name="txtemail" id="txtemail" value="" placeholder="Введите адрес электронной почты" class="form-control input-lg"  />
 										</div>
 										<div class="subcribe">
-												<button type="submit" class="btn btn-default btn-lg" onclick="return subscribe();">Subscribe</button>  
+												<button type="submit" class="btn btn-default btn-lg" onclick="return subscribe();">Подписывайся</button>
 												
 										</div>
 								</div>
@@ -92,10 +95,10 @@
 										<div class="col-md-3 col-sm-6 col-xs-12 collapsed-block footer-links box-footer">
 						<div class="module clearfix">
 														<div  class="modcontent" >
-																																																																																																																																																																																																						<div class="content-block-footer"><div class="footer-logo"><img src="image/catalog/cms/logo-cyan.png" alt=""> </div>
+																																																																																																																																																																																																						<div class="content-block-footer"><div class="footer-logo"><img src="/image/catalog/cms/logo-cyan.png" alt=""> </div>
 
 
-<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+<p>Всегда онлайн и рядом. Теперь клиенты, легко переключаясь между категориями, могут выбирать, как и когда им удобно покупать – на сайте, в магазине или через мобильный сайт. </p>
 
 
 </div>																																																																																																																																																																																																					</div>
@@ -104,17 +107,16 @@
 										
 					 <div class="col-sm-6 col-md-3 box-account box-footer">
 						<div class="module clearfix">
-							<h3 class="modtitle">My Account</h3>
+							<h3 class="modtitle">Сообщения</h3>
 							<div  class="modcontent" >
-								<ul class="menu">
-									<li><a href="/index.php@route=product%252Fmanufacturer.html">Brands</a></li>
-									<li><a href="/index.php@route=account%252Fvoucher.html">Gift Vouchers</a></li>
-									<li><a href="/index.php@route=affiliate%252Flogin.html">Affiliates</a></li>
-									<li><a href="/index.php@route=product%252Fspecial.html">Specials</a></li>
+								<?= Menu::widget([
+									'options'=>['class'=>'menu'],
+										'items' => [
+												['label' => 'Главная', 'url' => ['/']],
+										],
+								]);
+								?>
 
-									<li><a href="/index.php@route=simple_blog%252Farticle.html" target="_blank">Our Blog</a></li>
-							
-								</ul>
 							</div>
 						</div>
 					</div>
@@ -122,15 +124,15 @@
 					
 											<div class="col-sm-6 col-md-3 box-information box-footer">
 							<div class="module clearfix">
-								<h3 class="modtitle">Information</h3>
+								<h3 class="modtitle">Информация</h3>
 								<div  class="modcontent" >
-									<ul class="menu">
-																				<li><a href="/index.php@route=information%252Finformation&amp;information_id=11.html">Gallery</a></li>
-																				<li><a href="/index.php@route=information%252Finformation&amp;information_id=4.html">About Us</a></li>
-																				<li><a href="/index.php@route=information%252Finformation&amp;information_id=6.html">FAQ</a></li>
-																				<li><a href="/index.php@route=information%252Finformation&amp;information_id=3.html">Pricing Tables</a></li>
-																				<li><a href="/index.php@route=information%252Finformation&amp;information_id=5.html">Terms &amp; Conditions</a></li>
-																			</ul>
+									<?= Menu::widget([
+											'options'=>['class'=>'menu'],
+											'items' => [
+													['label' => 'Главная', 'url' => ['/']],
+											],
+									]);
+									?>
 								</div>
 							</div>
 						</div>
@@ -141,20 +143,21 @@
 										<div class="col-sm-6 col-md-3 collapsed-block box-footer">
 						<div class="module clearfix">
 							<h3 class="modtitle">
-								Contact Us							</h3>
+								Свяжитесь с нами</h3>
 							<div  class="modcontent" >
 								<ul class="contact-address">
-	<li><span class="fa fa-home"></span> My Company, 42 avenue des Champs</li>
-<li><span class="fa fa-envelope"></span> Email: <a href="/index.html#"> sales@yourcompany.com</a></li>
-	<li><span class="fa fa-phone">&nbsp;</span> Phone 1: 0123456789</li>
-	</ul>
-<ul class="payment-method">
-		<li><a title="Payment Method" href="/index.html#"><img src="image/catalog/cms/payment/payment-1.png" alt="Payment"></a></li>
-		<li><a title="Payment Method" href="/index.html#"><img src="image/catalog/cms/payment/payment-2.png" alt="Payment"></a></li>
-		<li><a title="Payment Method" href="/index.html#"><img src="image/catalog/cms/payment/payment-3.png" alt="Payment"></a></li>
-		<li><a title="Payment Method" href="/index.html#"><img src="image/catalog/cms/payment/payment-4.png" alt="Payment"></a></li>
-		<li><a title="Payment Method" href="/index.html#"><img src="image/catalog/cms/payment/payment-5.png" alt="Payment"></a></li>
-	</ul>							</div>
+									<li><span class="fa fa-home"></span> Кам Стор, 42 </li>
+									<li><span class="fa fa-envelope"></span> Email: <a href="/index.html#"> sales@yourcompany.com</a></li>
+									<li><span class="fa fa-phone">&nbsp;</span> Телефон: 0123456789</li>
+								</ul>
+								<ul class="payment-method">
+									<li><a title="Payment Method" href="/index.html#"><img src="/image/catalog/cms/payment/payment-1.png" alt="Payment"></a></li>
+									<li><a title="Payment Method" href="/index.html#"><img src="/image/catalog/cms/payment/payment-2.png" alt="Payment"></a></li>
+									<li><a title="Payment Method" href="/index.html#"><img src="/image/catalog/cms/payment/payment-3.png" alt="Payment"></a></li>
+									<li><a title="Payment Method" href="/index.html#"><img src="/image/catalog/cms/payment/payment-4.png" alt="Payment"></a></li>
+									<li><a title="Payment Method" href="/index.html#"><img src="/image/catalog/cms/payment/payment-5.png" alt="Payment"></a></li>
+								</ul>
+							</div>
 						</div>
 					</div>
 										
@@ -167,7 +170,7 @@
 			<div class=" container">
 				<div class="row">
 					<div class="col-sm-5 copyright-text">
-						© 2016 SO Maxshop. All Rights Reserved.					</div>
+						© 2016 Кам Store. Все права защищены.					</div>
 
 					
 				</div>

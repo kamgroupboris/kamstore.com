@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\Products;
 
 /**
  * This is the model class for table "s_variants".
@@ -60,5 +61,10 @@ class Variants extends \yii\db\ActiveRecord
             'attachment' => 'Attachment',
             'external_id' => 'External ID',
         ];
+    }
+
+    public function getProduct()
+    {
+        return $this->hasOne(Products::className(), ['id' => 'product_id']);
     }
 }

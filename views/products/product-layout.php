@@ -52,9 +52,9 @@
 				  </div>
 
 				  <div class="button-group">
-					<button class="addToCart" type="button" data-toggle="tooltip" title="Добавить в корзину" onclick="cart.add('<?= $model['id'] ?>', '1');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs">Добавить в корзину</span></button>
-					<button class="wishlist" type="button" data-toggle="tooltip" title="Добавить в список пожеланий" onclick="wishlist.add('<?= $model['id'] ?>');"><i class="fa fa-heart"></i></button>
-					<button class="compare" type="button" data-toggle="tooltip" title="Сравнить этот продукт" onclick="compare.add('<?= $model['id'] ?>');"><i class="fa fa-exchange"></i></button>
+					<button class="addToCart" type="button" data-toggle="tooltip" title="Добавить в корзину" onclick="cart.add('<?= $variants1[0]['id'] ?>', '1');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs">Добавить в корзину</span></button>
+					<button class="wishlist" type="button" data-toggle="tooltip" title="Добавить в список пожеланий" onclick="wishlist.add('<?= $variants1[0]['id'] ?>');"><i class="fa fa-heart"></i></button>
+					<button class="compare" type="button" data-toggle="tooltip" title="Сравнить этот продукт" onclick="compare.add('<?= $variants1[0]['id'] ?>');"><i class="fa fa-exchange"></i></button>
 				  </div>
 
 				</div><!-- right block -->

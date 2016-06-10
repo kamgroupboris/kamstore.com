@@ -9,26 +9,18 @@ use app\models\Categories;
 	$this->registerMetaTag(['name' => 'description', 'content' => 'Кам Стор']);
 ?>
 
-<?=$this->render('/site/slider');?>
 
 <div class="container">
   <div class="row">
 	<div id="content" class="col-sm-12">
 		 
-		<?=$this->render('/site/mod-content');?>
 
-<script>
-//<![CDATA[
-	var listdeal1 = [];
-//]]>
-</script>
-		<?=$this->render('/site/hot-deals');?>
 
 
 		<?
 
 		$dataProvider = new ActiveDataProvider([
-				'query' => Categories::find()->where(['parent_id'=>0])->limit(3),
+				'query' => Categories::find(),
 				'pagination' => false,
 		]);
 
@@ -44,26 +36,17 @@ use app\models\Categories;
 				'itemOptions' => [
 						'tag'=>false,
 				],
-				'itemView' => 'category-slider',
+				'itemView' => '/site/category-slider',
 		]);
 
 		?>
 
 
-		<?//=$this->render('/site/category-slider');?>
 
-		<?//=$this->render('/site/category-slider1');?>
-
-		<?//=$this->render('/site/category-slider2');?>
-
-		<?//=$this->render('/site/category-slider3');?>
 
 
     </div>
   </div>
 </div>
 
-<?=$this->render('/site/spotlight');?>
-
-<?=$this->render('/site/spotlight2');?>
 
