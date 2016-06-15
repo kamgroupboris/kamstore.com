@@ -117,7 +117,7 @@ class SiteController extends Controller
 
 }
 
-    public function actionProduct($alias=null)
+    public function actionProduct($alias=null, $id=null)
     {
         if($alias!=null) {
         $model = Products::find()->where(['url'=>$alias])->with(['productsCategories', 'relatedProducts', 'images', 'variants', 'brands'])->one();
@@ -127,13 +127,23 @@ class SiteController extends Controller
           'model' => $model,
         ]); }else{
            return $this->render('index');
-         throw new NotFoundHttpException('Запрашиваемая страница не существует.');
+     //    throw new NotFoundHttpException('Запрашиваемая страница не существует.');
        }
     }else{
 
-}
+    }
 
     }
+
+    public function actionQuickview($id)
+    {
+        $model = Products::find()->where(['id'=>$id])->with(['productsCategories', 'relatedProducts', 'images', 'variants', 'brands'])->one();
+        return $this->renderAjax('/products/quickview', [
+            'model' => $model,
+        ]);
+
+    }
+
 
     public function actionArtikle($alias)
     {

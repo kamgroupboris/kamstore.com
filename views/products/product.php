@@ -19,9 +19,18 @@
 				</div> <!-- End related -->
 										
 				<div class="col-lg-9 col-md-8 col-sm-6 col-xs-12">
+
+					<div class="producttab ">
+
 					<?=$this->render('/products/product-tab',[
 						'model'=>$model
-					]);?> 				
+					]);?>
+
+					<?=$this->render('/products/up-sell');?>
+
+				</div>
+
+
 				</div><!-- End tabs -->
 		    </div>
 		</div>

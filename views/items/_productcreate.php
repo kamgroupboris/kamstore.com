@@ -25,18 +25,17 @@ use yii\helpers\ArrayHelper;
         'enableReplaceState'=>false,
         'enablePushState'=>false,
         'id' => 'product',
-        'clientOptions'=>[
+        'clientOptions'=> array(
             'container'=>'x1',
-        ]
+        )
     ]); ?>
-
     <?php $form = ActiveForm::begin([
         'id' => 'product-create',
         'method' => 'post',
         'action'=>Url::to(['items/product-create', 'action'=> 'create']),
         'enableAjaxValidation' => false,
         'options'=>[
-            'data-pjax'=>'#x'
+            'data-pjax'=>'#x2'
         ],
         'enableClientValidation' => true]); ?>
     <?= $form->field($model, 'id')->textInput()->hiddenInput()->label(false); ?>
@@ -97,7 +96,7 @@ use yii\helpers\ArrayHelper;
     ])->label(false); ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Обновить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Обновить', ['id'=>'create-product','class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

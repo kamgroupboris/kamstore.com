@@ -13,6 +13,7 @@ use app\models\CategoriesFeatures;
 use yii\widgets\Pjax;
 
 use yii\web\View;
+use yii\helpers\Url;
 
 use yii\data\ActiveDataProvider;
 
@@ -31,6 +32,19 @@ $this->params['breadcrumbs'][] = $this->title;
 $(document).on('pjax:beforeSend', function(xhr, options, settings) {
    // console.log(settings);
    settings.url =  settings.url+'&id='+$('input[name=\"Products[id]\"]').val()+'&category='+JSON.stringify($('select#select-category').val());
+});
+", View::POS_END);?>
+
+<?$this->registerJs("
+$('#product').on('pjax:end', function(data, status, xhr, options) {
+   // console.log(settings);
+   $.pjax.reload({container:'#variants-pjax',
+                            type:'post',
+                            url: '".Url::to(['items/options-variants', 'action'=> 'create'])."',
+                            replaceRedirect:false,
+                            replace    : false
+                        });
+
 });
 ", View::POS_END);?>
 

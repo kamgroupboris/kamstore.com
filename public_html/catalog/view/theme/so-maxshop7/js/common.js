@@ -54,7 +54,7 @@ $(document).ready(function() {
 
 	/* Search */
 	$('#search input[name=\'search\']').parent().find('button').on('click', function() {
-		url = $('base').attr('href') + 'index.php?route=product/search';
+		url = $('base').attr('href') + '/product/search';
 
 		var value = $('header input[name=\'search\']').val();
 
@@ -134,7 +134,7 @@ var cart = {
 	},
 	'update': function(key, quantity) {
 		$.ajax({
-			url: 'index.php?route=checkout/cart/edit',
+			url: '/cart/edit',
 			type: 'post',
 			data: 'key=' + key + '&quantity=' + (typeof(quantity) != 'undefined' ? quantity : 1),
 			dataType: 'json',
@@ -146,9 +146,9 @@ var cart = {
 				}, 100);
 
 				if (getURLVar('route') == 'checkout/cart' || getURLVar('route') == 'checkout/checkout') {
-					location = 'index.php?route=checkout/cart';
+					location = '/checkout/';
 				} else {
-					$('#cart > ul').load('index.php?route=common/cart/info ul li');
+					$('#cart > ul').load('/cart/info');
 				}
 			}
 		});
@@ -165,9 +165,13 @@ var cart = {
 				setTimeout(function () {
 					$('#cart  .text-shopping-cart').html(json['text_items_full'] );
 				}, 100);
+			
 					
-				if (getURLVar('route') == 'checkout/cart' || getURLVar('route') == 'checkout/checkout') {
-					location = 'index.php?route=checkout/cart';
+				//if (getURLVar('route') == 'checkout' || getURLVar('route') == 'checkout/checkout') {
+				//	location = '/checkout/cart';
+				if (document.location.pathname == '/cart/' || document.location.pathname ==  '/checkout/') {
+				
+					location = '/checkout/';
 				} else {
 					$('#cart > ul').load('/cart/info');
 				}
@@ -182,7 +186,7 @@ var voucher = {
 	},
 	'remove': function(key) {
 		$.ajax({
-			url: 'index.php?route=checkout/cart/remove',
+			url: '/cart/remove',
 			type: 'post',
 			data: 'key=' + key,
 			dataType: 'json',
@@ -198,10 +202,10 @@ var voucher = {
 					$('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
 				}, 100);
 
-				if (getURLVar('route') == 'checkout/cart' || getURLVar('route') == 'checkout/checkout') {
-					location = 'index.php?route=checkout/cart';
+				if (getURLVar('route') == '/cart/' || getURLVar('route') == '/checkout/') {
+					location = '/checkout/';
 				} else {
-					$('#cart > ul').load('index.php?route=common/cart/info ul li');
+					$('#cart > ul').load('/cart/info');
 				}
 			}
 		});

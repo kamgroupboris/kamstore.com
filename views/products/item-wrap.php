@@ -3,7 +3,7 @@
 							<div class="media-left">
 								<div class="item-image">
 									<div class="item-img-info">
-										<a class="product_img_link" href="index.php@route=product%252Fproduct&amp;product_id=57.html" target="_blank" title="Duis faucibus rutrum">
+										<a class="product_img_link" href="/product/57" target="_blank" title="Duis faucibus rutrum">
 												<img src="/image/cache/catalog/product/7-85x85.png" alt="Duis faucibus rutrum" title="Duis faucibus rutrum" class="img-responsive" />
 										</a>
 									</div>

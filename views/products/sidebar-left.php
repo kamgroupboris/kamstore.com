@@ -47,7 +47,7 @@ use app\models\Categories;
 			
 		<div class="module banner-left">
 			<div class="modcontent clearfix"><div class="static-image-home-left">
-					<a title="Static Image" href="index.html#">
+					<a title="Static Image" href="#">
 						<img src="/image/catalog/cms/left-image-static.png" alt="Static Image">
 					</a>
 				</div>

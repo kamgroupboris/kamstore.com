@@ -20,6 +20,7 @@ use app\models\Options;
 
 <div class="variants-form">
     <?php Pjax::begin([
+        'id'=>'variants-pjax',
         'enableReplaceState'=>false,
         'enablePushState'=>false,
         'clientOptions'=>[
@@ -45,7 +46,7 @@ use app\models\Options;
 
     $items = [];
     if( !isset($model[0]->attributes)){
-    for ($x=0; $x<2; $x++){
+    for ($x=0; $x<1; $x++){
         $item = new Variants();
         $items[] = $item;
     }}else{

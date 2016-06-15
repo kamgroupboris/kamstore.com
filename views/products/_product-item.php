@@ -1,7 +1,7 @@
 					<div class="product-item">
 				      <div class="media">
 						 <div class="media-left product-image-container  ">
-							      <img src="image/cache/catalog/product/14-80x80.png" alt="Lorem ipsum dolor sit" title="Lorem ipsum dolor sit" class="img-responsive" />
+							      <img src="/image/cache/catalog/product/14-80x80.png" alt="Lorem ipsum dolor sit" title="Lorem ipsum dolor sit" class="img-responsive" />
 							      						      
 						 <!--- New ------->
 						      						 

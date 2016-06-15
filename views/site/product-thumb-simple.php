@@ -9,7 +9,7 @@ $variants1 = Variants::find()->where(['product_id'=>$model['id']])->asArray()->a
 
 <div class="product-layout ">
 											<div class="product-thumb transition">
-							<div class="image"><a href="/product/<?= $model['url'] ?>"><img src="/files/products/<?= str_replace(".", ".200x200.",$img1['filename'])?>" alt="Ruma huren chuma" title="Ruma huren chuma" class="img-responsive" /></a></div>
+							<div class="image"><a href="/product/<?= $model['url'] ?>"><img src="/files/products/<?= str_replace(".", ".200x200.",$img1['filename'])?>" alt="<?= $model['name'] ?>" title="<?= $model['name'] ?>" class="img-responsive" /></a></div>
 							<div class="caption">
 								<div class="ratings">
 										<div class="rating-box">
@@ -20,7 +20,7 @@ $variants1 = Variants::find()->where(['product_id'=>$model['id']])->asArray()->a
 																																								<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
 																														</div>
 								</div>
-								<h4><a href="index.php@route=product%252Fproduct&amp;product_id=54.html"><?= $model['name'] ?></a></h4>
+								<h4><a href="/product/<?= $model['url'] ?>"><?= $model['name'] ?></a></h4>
 								<div class="description"><?= $model['meta_description'] ?></div>
 								
 							                <p class="price">

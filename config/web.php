@@ -58,6 +58,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'product/<id:[\d]+>' => 'site/quickview',
                 'product/<alias:[\w\d\-]+>' => 'site/product',
                 'category/<alias:[\w\d\-]*>' => 'site/category',
                 '<alias:[\w\d\-]+>/'=>'site/artikle',

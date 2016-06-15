@@ -45,8 +45,13 @@
                                         
 					<div class="large-image  vertical  ">
 						<?
-						$filename =	str_replace('.','.600x600.',$model['images'][0]->attributes['filename']);
-						$img600 = file_exists($filename)?$filename:$filename =	str_replace('.','.200x200.',$model['images'][0]->attributes['filename'])?>
+						if(isset($model['images'][0])){
+							$filename =	str_replace('.','.600x600.',$model['images'][0]->attributes['filename']);
+							$img600 = file_exists($filename)?$filename:$filename =	str_replace('.','.200x200.',$model['images'][0]->attributes['filename']);
+						}							
+						else
+							$img600 =	'no-image.jpg';
+						?>
 						<img itemprop="image" class="product-image-zoom" src="/files/products/<?=$img600?>" data-zoom-image="/files/products/<?=$img600?>" title="<?=$model->name?>" alt="<?=$model->name?>" />
 						
 						<!--New Label-->

@@ -34,7 +34,8 @@ class Purchases extends \yii\db\ActiveRecord
     {
         return [
             [['order_id', 'product_id', 'variant_id', 'amount'], 'integer'],
-            [['variant_name', 'sku'], 'required'],
+          //  [['variant_name', 'sku'], 'required'],
+		    [['variant_name', 'sku'], 'safe'],
             [['price'], 'number'],
             [['product_name', 'variant_name', 'sku'], 'string', 'max' => 255],
         ];

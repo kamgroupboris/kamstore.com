@@ -69,7 +69,24 @@ class ItemsController extends Controller
         else
             $model = new Products();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+           if(!$model->brand_id) $model->brand_id = Categories::find()->scalar();
+
+            $model->save();
+
+            $variant = Variants::find()->where(['product_id' => $model->id])->One();
+            if (!$variant) {
+                $variant = new Variants();
+                $variant->product_id = $model->id;
+                $variant->sku = (string)$model->id;
+                $variant->name = 'вариант 1';
+                $variant->price = 1;
+                $variant->position = 1;
+                $variant->save();
+            }
+          //  die(print_r($variant->getErrors()));
+
             return   $this->renderAjax('_productcreate', [
                 'model' => $model,
             ]);
@@ -127,8 +144,8 @@ class ItemsController extends Controller
     {
 
         if(isset($id) && $id!='') {
+           if(isset($_POST['Variants']))
             foreach ($_POST['Variants'] as $row) {
-
                 if (isset($row['price']) && $row['price'] != '') {
 
 

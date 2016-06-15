@@ -18,9 +18,9 @@ $variants1 = Variants::find()->where(['product_id'=>$model['id']])->asArray()->a
 								<img data-src="/files/products/<?= str_replace(".", ".200x200.",$img1['filename'])?>" src="/files/products/<?= str_replace(".", ".200x200.",$img1['filename'])?>" alt="<?= $model->name ?>" class="<?= $model->name ?>"  />
 						</a>
 			    </div>			
-			    			    				    <!--full quick view block-->
-					    					    <a class="quickview iframe-link visible-lg" data-toggle="tooltip" title="Быстрый просмотр" data-fancybox-type="iframe"  href="/product/<?= $model->url ?>">  Быстрый просмотр</a>
-				    <!--end full quick view block-->
+				<!--full quick view block-->
+					<a class="quickview iframe-link visible-lg" data-toggle="tooltip" title="Быстрый просмотр" data-fancybox-type="iframe"  href="/product/<?= $model->id ?>">  Быстрый просмотр</a>
+				<!--end full quick view block-->
 			    			    
 			</div>
 		    </div>
@@ -49,13 +49,12 @@ $variants1 = Variants::find()->where(['product_id'=>$model['id']])->asArray()->a
 														    </p>
 				    					
 				</div>
-						    							    <div class="button-group">
-							    								    <button type="button" class="addToCart" data-toggle="tooltip" title="В корзину" onclick="cart.add('<?= $model->variants[0]->id ?>');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">В корзину</span></button>
-							    							    	<button type="button" class="wishlist" data-toggle="tooltip" title="В избранное" onclick="wishlist.add('<?= $model->variants[0]->id ?>');"><i class="fa fa-heart"></i></button>
-							      
-							    								    <button type="button" class="compare" data-toggle="tooltip" title="Сравнить" onclick="compare.add('<?= $model->variants[0]->id ?>');"><i class="fa fa-exchange"></i></button>
-							       
-								    
-							    </div>
+				<div class="button-group">
+						<button type="button" class="addToCart" data-toggle="tooltip" title="В корзину" onclick="cart.add('<?= $model->variants[0]->id ?>');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">В корзину</span></button>
+						<button type="button" class="wishlist" data-toggle="tooltip" title="В избранное" onclick="wishlist.add('<?= $model->variants[0]->id ?>');"><i class="fa fa-heart"></i></button>
+
+						<button type="button" class="compare" data-toggle="tooltip" title="Сравнить" onclick="compare.add('<?= $model->variants[0]->id ?>');"><i class="fa fa-exchange"></i></button>
+
+				</div>
 						    			    </div>
 		     </div><!-- End right block -->

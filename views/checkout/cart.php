@@ -3,6 +3,10 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\models\Purchases;
+use app\models\Variants;
+use app\models\Images;
+use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
 
@@ -10,10 +14,6 @@ use yii\widgets\Pjax;
 /* @var $model app\models\Purchases */
 /* @var $form ActiveForm */
 
-use app\models\Purchases;
-use app\models\Variants;
-use app\models\Images;
-use yii\data\ActiveDataProvider;
 
 
 use yii\grid\GridView;
@@ -40,24 +40,25 @@ $provider = new ActiveDataProvider([
 ?>
  <h1><?=$this->title?></h1>
 <?php Pjax::begin([
-    'enableReplaceState'=>false,
-    'enablePushState'=>false,
-    'clientOptions'=>[
-        'container'=>'x8',
-    ]
+		'enableReplaceState'=>false,
+		'enablePushState'=>false,
+		'clientOptions'=>[
+				'container'=>'x8',
+		]
 ]); ?>
 
 <?php $form = ActiveForm::begin([
-    'id' => 'variants-form',
-    'method' => 'post',
-    // 'enableAjaxValidation' => false,
-    'action'=>Url::to(['/cart/edit']),
+		'id' => 'variants-form',
+		'method' => 'post',
+	// 'enableAjaxValidation' => false,
+		'action'=>Url::to(['/cart/edit']),
 
-    'options' => [
-        'enctype' => 'multipart/form-data',
-        'data-pjax'=>'#x9'
-    ]
+		'options' => [
+				'enctype' => 'multipart/form-data',
+				'data-pjax'=>'#x9'
+		]
 ]) ?>
+<!--<form action="/cart/edit" method="post" enctype="multipart/form-data">-->
     <?= GridView::widget([
         'dataProvider' => $provider,
         'columns' => [
@@ -115,11 +116,15 @@ $provider = new ActiveDataProvider([
 		 
 		 ],
     ]); ?>
-
 <?php ActiveForm::end(); ?>
-<?//print_r($total);
+
+
+	<?//print_r($total);
 $cost = $total?array_sum ($total):0;
 ?>
+
+
+
        
    
       <div class="row">
@@ -136,54 +141,9 @@ $cost = $total?array_sum ($total):0;
                       </table>
         </div>
       </div>
+
 <?Pjax::end();?>
-      <div class="buttons">
-        <div class="pull-left"><a href="<?=Url::to(['/'])?>" class="btn btn-default">Продолжить покупки</a></div>
-        <div class="pull-right"><a href="/checkout/" class="btn btn-primary">Оформить заказ</a></div>
-      </div>
-
-
 
 </div>
 
-
-  <?//= Html::encode($this->title) ?>
-
- 
-        <?//= Html::a('Create Orders', ['create'], ['class' => 'btn btn-success']) ?>
-  
-    <?/*= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'delivery_id',
-            'delivery_price',
-            'payment_method_id',
-            'paid',
-            // 'payment_date',
-            // 'closed',
-            // 'date',
-            // 'user_id',
-            // 'name',
-            // 'address',
-            // 'phone',
-            // 'email:email',
-            // 'comment',
-            // 'status',
-            // 'url:url',
-            // 'payment_details:ntext',
-            // 'ip',
-            // 'total_price',
-            // 'note',
-            // 'discount',
-            // 'coupon_discount',
-            // 'coupon_code',
-            // 'separate_delivery',
-            // 'modified',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); */?>
 

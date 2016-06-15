@@ -23,7 +23,7 @@
 
 
 											<!--full quick view block-->
-					<a class="quickview iframe-link visible-lg" data-toggle="tooltip" title="Быстрый просмотр" data-fancybox-type="iframe"  href="/product/<?= $model['url'] ?>">  Быстрый просмотр</a>
+					<a class="quickview iframe-link visible-lg" data-toggle="tooltip" title="Быстрый просмотр" data-fancybox-type="iframe"  href="/product/<?= $model['id'] ?>">  Быстрый просмотр</a>
 						<!--end full quick view block-->
 									</div>
 				<!-- end left block -->

@@ -148,6 +148,21 @@ class CartController extends \yii\web\Controller
 
 	}
 
+
+	public function actionEdit()
+	{
+		print('<pre>');
+	//	print_r($_POST);['quantity']
+		if(isset($_POST['quantity'])){
+			$session = Yii::$app->session;
+			$session->set('shopping_cart', $_POST['quantity']);
+		}
+	//	$model = new Orders();
+		return $this->renderAjax('/checkout/cart', [
+			//	'model' => $model,
+		]);
+	}
+
 	
 	public function actionInfo()
     {

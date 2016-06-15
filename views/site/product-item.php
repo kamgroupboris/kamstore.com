@@ -20,7 +20,7 @@ $variants1 = Variants::find()->where(['product_id'=>$model['id']])->asArray()->a
 													</a>
 												</div>
 																						<!--full quick view block-->
-												<a class="quickview iframe-link visible-lg" data-fancybox-type="iframe"  href="/product/<?=$model['url']?>" data-toggle="tooltip" title="Быстрый просмотр">  Быстрый просмотр</a>
+												<a class="quickview iframe-link visible-lg" data-fancybox-type="iframe"  href="/product/<?=$model['id']?>" data-toggle="tooltip" title="Быстрый просмотр">  Быстрый просмотр</a>
 												<!--end full quick view block-->
 																			</div>
 						</div>

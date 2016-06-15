@@ -104,7 +104,7 @@ GROUP BY s_variants.product_id
 	//<![CDATA[
 	jQuery(document).ready(function ($) {
 		;(function (element) {
-			var id = $("#so_category_slider_187");
+			var id = $("#so_category_slider_<?=$model->id?>");
 			var $element = $(element),
 					$extraslider = $(".slider", $element),
 					_delay = 500,

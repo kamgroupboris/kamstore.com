@@ -35,7 +35,7 @@
 						</ul>
 													
 <div class="form-group currencies-block">
-	<form action="http://opencart.magentech.com/themes/so_maxshop/layout7/index.php?route=common/currency/currency" method="post" enctype="multipart/form-data" id="currency">
+	<form action="/currency" method="post" enctype="multipart/form-data" id="currency">
 	<a class="btn btn-xs dropdown-toggle" data-toggle="dropdown">
         <span class="icon icon-credit "></span>
         RU руб.        <span class="fa fa-angle-down"></span>
@@ -55,7 +55,7 @@
 			</li>
 			</ul>
 	<input type="hidden" name="code" value="" />
-	<input type="hidden" name="redirect" value="http://opencart.magentech.com/themes/so_maxshop/layout7/index.php?route=information/information&amp;information_id=9" />
+	<input type="hidden" name="redirect" value="/information?information_id=9" />
 	</form>
 </div>
 
@@ -74,19 +74,19 @@
 <div class="form-group languages-block ">
 	<form action="/language" method="post" enctype="multipart/form-data" id="bt-language">
 		<a class="btn btn-xs dropdown-toggle" data-toggle="dropdown">
-												<img src="image/flags/rus.png" alt="Русский" title="Русский">
+												<img src="/image/flags/rus.png" alt="Русский" title="Русский">
 					<span>Русский</span>
 																	<span class="fa fa-angle-down"></span>
 		</a>
 		<ul class="dropdown-menu">
 		  		  <li> 
 				<a onclick="$('input[name=\'code\']').attr('value', 'en'); $('#bt-language').submit();">
-                    <img class="image_flag" src="image/flags/gb.png" alt="English" title="English" />
+                    <img class="image_flag" src="/image/flags/gb.png" alt="English" title="English" />
                     English                </a>
 			</li>
 		  		  <li> 
 				<a onclick="$('input[name=\'code\']').attr('value', 'ar'); $('#bt-language').submit();">
-                    <img class="image_flag" src="image/flags/lb.png" alt="Arabic" title="Arabic" />
+                    <img class="image_flag" src="/image/flags/lb.png" alt="Arabic" title="Arabic" />
                     Arabic                </a>
 			</li>
 		  		</ul>
