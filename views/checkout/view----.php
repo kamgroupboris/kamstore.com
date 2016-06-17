@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Products */
+/* @var $model app\models\Orders */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Orders', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="products-view">
+<div class="orders-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,19 +29,30 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'url:url',
-            'brand_id',
+            'delivery_id',
+            'delivery_price',
+            'payment_method_id',
+            'paid',
+            'payment_date',
+            'closed',
+            'date',
+            'user_id',
             'name',
-            'annotation:ntext',
-            'body:ntext',
-            'visible',
-            'position',
-            'meta_title',
-            'meta_keywords',
-            'meta_description',
-            'created',
-            'featured',
-            'external_id',
+            'address',
+            'phone',
+            'email:email',
+            'comment',
+            'status',
+            'url:url',
+            'payment_details:ntext',
+            'ip',
+            'total_price',
+            'note',
+            'discount',
+            'coupon_discount',
+            'coupon_code',
+            'separate_delivery',
+            'modified',
         ],
     ]) ?>
 

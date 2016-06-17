@@ -138,7 +138,7 @@ class CartController extends \yii\web\Controller
 		$item = [
 				"title" => "Товар добавлен в корзину",
 				"thumb" => '<img class="img-responsive" alt="'.$variant['product']['name'].'" src="/files/products/' . str_replace(".", ".200x200.", $img['filename']) . '">',
-				"success" => '<a href="/product/'.$variant['product']['url'].'">'.$variant['product']['name'].'</a> добавлен<a href="/cart/">в корзину</a>!',
+				"success" => '<a href="/product/'.$variant['product']['url'].'">'.$variant['product']['name'].'</a> добавлен <a href="/cart/"> в корзину</a>!',
 				"total" => "1",
 				"text_total" => $variant['price']." p.",
 				"text_items_full" => $count." шт. - ".$variant['price']." p.",
@@ -151,7 +151,7 @@ class CartController extends \yii\web\Controller
 
 	public function actionEdit()
 	{
-		print('<pre>');
+	//	print('<pre>');
 	//	print_r($_POST);['quantity']
 		if(isset($_POST['quantity'])){
 			$session = Yii::$app->session;

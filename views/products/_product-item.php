@@ -1,7 +1,15 @@
 					<div class="product-item">
 				      <div class="media">
 						 <div class="media-left product-image-container  ">
-							      <img src="/image/cache/catalog/product/14-80x80.png" alt="Lorem ipsum dolor sit" title="Lorem ipsum dolor sit" class="img-responsive" />
+							 <?
+							 if(isset($model['images'][0])){
+								 $filename =	str_replace('.','.600x600.',$model['images'][0]->attributes['filename']);
+								 $img600 = file_exists($filename)?$filename:$filename =	str_replace('.','.200x200.',$model['images'][0]->attributes['filename']);
+							 }
+							 else
+								 $img600 =	'no-image.jpg';
+							 ?>
+							      <img src="/files/products/<?=$img600?>" alt="<?=$model->name?>" title="<?=$model->name?>" class="<?=$model->name?>" />
 							      						      
 						 <!--- New ------->
 						      						 
@@ -9,31 +17,31 @@
 						  						 
 						 
 						      							      <!--full quick view block-->
-								      								      <a class="quickview iframe-link " data-fancybox-type="iframe"  href="index.php@route=product%252Fquickview&amp;product_id=28.html">  Quick view</a>
+								      								      <a class="quickview iframe-link " data-fancybox-type="iframe"  href="/product/<?=$model->id?>">  Быстрый просмотр</a>
 							      <!--end full quick view block-->
 						      						</div> 
 				     
 				      
 				      <div class="media-body">
 					<div class="caption">
-					    						<div class="ratings">
+					    <div class="ratings">
 							      <div class="rating-box">
-							      							      							      <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-							      							      							      							      <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-							      							      							      							      <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-							      							      							      							      <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-							      							      							      							      <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-							      							      							      </div>
+							  <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+							  <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+							  <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+							  <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+							  <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+							  </div>
 						 </div>
-						 						<h4><a class="preview-image" href="index.php@route=product%252Fproduct&amp;product_id=28.html">Lorem ipsum dolor sit</a></h4>
+						 						<h4><a class="preview-image" href="/product/<?=$model->url?>"><?= $model->name ?></a></h4>
 												<div class="price">
-						       							      								     <span class="price-new">$100.00</span>
-							      						       						</div>
-											</div>
+						       <span class="price-new"><?=$model['variants'][0]->attributes['price']?>₽</span>
+								</div>
+					</div>
 					 <div class="button-group">
-						<button class="addToCart" type="button" onclick="cart.add('28');"><i class="fa fa-shopping-cart"></i> <span>Add to Cart</span></button>
-						<button class="wishlist" type="button" data-toggle="tooltip" title="Add to Wish List" onclick="wishlist.add('28');"><i class="fa fa-heart"></i></button>
-						<button class="compare" type="button" data-toggle="tooltip" title="Compare this Product" onclick="compare.add('28');"><i class="fa fa-exchange"></i></button>
+						<button class="addToCart" type="button" onclick="cart.add('<?=$model->variants[0]->id?>');"><i class="fa fa-shopping-cart"></i> <span>Добавить в корзину</span></button>
+						<button class="wishlist" type="button" data-toggle="tooltip" title="Добавить в список желаний" onclick="wishlist.add('<?=$model->variants[0]->id?>');"><i class="fa fa-heart"></i></button>
+						<button class="compare" type="button" data-toggle="tooltip" title="Сравнить этот продукт" onclick="compare.add('<?=$model->variants[0]->id?>');"><i class="fa fa-exchange"></i></button>
 					 </div>
 				      </div>
 				 </div>

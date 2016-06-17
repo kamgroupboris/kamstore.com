@@ -12,7 +12,7 @@ use app\models\Categories;
 <div id="so_category_slider_<?=$model->id?>" class="container-slider module  item<?=$model->id<3?$model->id:3?>"  >
 		<div class="page-top">
 		<h3 class="modtitle">
-				<span><?=$model->name?></span>
+			<a href="/category/<?=$model->url?>"><span><?=$model->name?></span></a>
 		</h3>
 		
 	</div>

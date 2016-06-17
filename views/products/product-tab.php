@@ -4,7 +4,7 @@
 										<li class="active"><a data-toggle="tab" href="#tab-1">Описание</a></li>
 										
 					
-										<li class="item_nonactive"><a data-toggle="tab" href="#tab-review">Отзывы (1)</a></li>
+										<li class="item_nonactive"><a data-toggle="tab" href="#tab-review">Отзывы</a></li>
 										
 										<li class="item_nonactive"><a data-toggle="tab" href="#tab-4">Теги</a></li>
 					

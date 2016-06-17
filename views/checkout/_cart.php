@@ -9,6 +9,7 @@ use app\models\Images;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
+use \yii\widgets\MaskedInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Purchases */
@@ -39,6 +40,8 @@ $provider = new ActiveDataProvider([
 
 ?>
  <h1><?=$this->title?></h1>
+
+
 <?php Pjax::begin([
 		'enableReplaceState'=>false,
 		'enablePushState'=>false,

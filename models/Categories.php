@@ -64,4 +64,5 @@ class Categories extends \yii\db\ActiveRecord
             'external_id' => 'External ID',
         ];
     }
+
 }

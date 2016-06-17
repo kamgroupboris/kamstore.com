@@ -3,9 +3,11 @@
 namespace app\controllers;
 
 use app\models\Categories;
+use app\models\Pages;
 use app\models\ProductsCategories;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
@@ -13,6 +15,7 @@ use app\models\RegisterForm;
 use app\models\ContactForm;
 use app\models\Users;
 use app\models\Products;
+use app\models\Blog;
 use yii\data\ActiveDataProvider;
 
 use yii\data\SqlDataProvider;
@@ -79,7 +82,7 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionCategory($alias=null)
+    public function actionCat($alias=null)
     {
         if($alias!=null) {
             $dataProvider = new SqlDataProvider([
@@ -103,8 +106,13 @@ class SiteController extends Controller
                 s_categories.url = :url',
                 'params' => [':url' => $alias],
                 'pagination' => [
-                    'pageSize' => 20,
+                    'pageSize' => 10,
                 ],
+                'sort' => [
+                    'defaultOrder' => [
+                       // 'id' => SORT_DESC,
+                    ],
+                ]
             ]);
 
 
@@ -116,6 +124,69 @@ class SiteController extends Controller
         }
 
 }
+
+
+    public function actionCategory($alias=null)
+    {
+        if($alias!=null) {
+
+          $cat =  Categories::find()->where(['url'=>$alias])->one();
+            $prodcat =  ProductsCategories::find()->where(['category_id' => $cat->id])->asArray()->all();
+              $product =  ArrayHelper::getColumn($prodcat, 'product_id');
+
+
+            $dataProvider = new ActiveDataProvider([
+               'query' => Products::find()->with('variants')->where(['id'=>$product]),
+                'pagination' => [
+                    'pagesize' => 10,
+                ],
+                'sort' => [
+                    'defaultOrder' => [
+                         'id' => SORT_DESC,
+                    ],
+                ]
+            ]);
+
+
+        /*   $dataProvider = new SqlDataProvider([
+                'sql' => 'SELECT
+                s_products.id,
+                s_products.url,
+                s_products.`name`,
+                s_products.brand_id,
+                s_products.annotation,
+                s_products.body,
+                s_products.visible,
+                s_products.position,
+                s_products.meta_title,
+                s_products.meta_keywords,
+                s_products.meta_description
+                FROM
+                s_categories
+                INNER JOIN s_products_categories ON s_categories.id = s_products_categories.category_id
+                INNER JOIN s_products ON s_products_categories.product_id = s_products.id
+                WHERE
+                s_categories.url = :url',
+                'params' => [':url' => $alias],
+                'pagination' => [
+                    'pageSize' => 10,
+                ],
+                'sort' => [
+                    'defaultOrder' => [
+                        // 'id' => SORT_DESC,
+                    ],
+                ]
+            ]);*/
+
+
+            return $this->render('/category/category', [
+                'dataProvider' => $dataProvider,
+            ]);
+        }else{
+            return $this->render('/category/category-list');
+        }
+
+    }
 
     public function actionProduct($alias=null, $id=null)
     {
@@ -145,20 +216,36 @@ class SiteController extends Controller
     }
 
 
-    public function actionArtikle($alias)
+    public function actionArticle($alias)
     {
-
-
-        $model = Articles::find()->where(['url' => $alias])->one();
-
-
+        $model = Pages::find()->where(['url' => $alias])->one();
         if($model){
-            return $this->render('/articles/view', [
+            return $this->render('/articles/article', [
                 'model' => $model,
             ]);
         }else{
             //return $this->render('index');
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    public function actionNews($alias=null)
+    {
+        if($alias!=null){
+            $model = Blog::find()->where(['url' => $alias])->one();
+            if($model){
+                return $this->render('/news/news', [
+                    'model' => $model,
+                ]);
+            }else{
+                //return $this->render('index');
+                throw new NotFoundHttpException('The requested page does not exist.');
+            }
+        }else{
+                $model = Blog::find()->all();
+            return $this->render('/news/index', [
+                'model' => $model,
+            ]);
         }
     }
 

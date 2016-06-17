@@ -15,7 +15,9 @@
 		    <div class="row">
 				<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">										
 					<!-- Products widgets desktop-->
-					<?=$this->render('/products/products-list');?>
+					<?=$this->render('/products/products-list',[
+							'model'=>$model->relatedProducts
+					]);?>
 				</div> <!-- End related -->
 										
 				<div class="col-lg-9 col-md-8 col-sm-6 col-xs-12">

@@ -42,12 +42,24 @@ class CheckoutController extends \yii\web\Controller
         if ($model->load(Yii::$app->request->post()) ) {
 
 
+            $session = Yii::$app->session;
+
+            $shopping_cart = $session->get('shopping_cart') ? $session->get('shopping_cart') : [];
+            $keys = array_keys($shopping_cart);
+            $query = Variants::find()->where(['id' => $keys])->with('product')->all();
+
+            $total=[];
+
+            foreach ($shopping_cart as $k => $v){
+              $variant =  Variants::findOne($k);
+                $total[$variant->id]  = $v*$variant->price;       }
+
 
 
 
 			$model->ip = $_SERVER["REMOTE_ADDR"];
 
-			$model->total_price = 89;	
+			$model->total_price = array_sum ($total);;
 			$session = new Session;
 			$session->open();			
 			$model->url = $session->getId();
@@ -56,12 +68,7 @@ class CheckoutController extends \yii\web\Controller
 
 
 
-            $session = Yii::$app->session;
 
-            $shopping_cart = $session->get('shopping_cart') ? $session->get('shopping_cart') : [];
-            $keys = array_keys($shopping_cart);
-
-            $query = Variants::find()->where(['id' => $keys])->with('product')->all();
 
         foreach($query as $purchases){
             $pur =  new Purchases();
@@ -77,6 +84,13 @@ class CheckoutController extends \yii\web\Controller
 
         }
             $session->remove('shopping_cart');
+
+            Yii::$app->mailer->compose('@app/views/mail/callback',['model'=>$model])
+                ->setFrom(Yii::$app->params['adminEmail'])
+                ->setTo(Yii::$app->params['adminEmail'])
+                ->setSubject('Заказ с сайта')
+                ->send();
+
 
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -126,7 +140,8 @@ class CheckoutController extends \yii\web\Controller
 			$session->open();			
 			$model->url = $session->getId();
 			$model->save();
-			
+
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -145,7 +160,13 @@ class CheckoutController extends \yii\web\Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->mailer->compose('@app/views/mail/callback',['model'=>$model])
+            ->setFrom(Yii::$app->params['adminEmail'])
+            ->setTo(Yii::$app->params['adminEmail'])
+            ->setSubject('Заказ с сайта')
+            ->send();
+
+        if ($model->load(Yii::$app->request->post()) /*&& $model->save()*/) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

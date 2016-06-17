@@ -180,7 +180,7 @@ use yii\helpers\ArrayHelper;
 						html += '<li class="dropdown-header">' + category[i]['name'] + '</li>';
 	
 						for (j = 0; j < category[i]['item'].length; j++) {
-							html += '<li data-value="' + category[i]['item'][j]['value'] + '"><a href="/index.html#">&nbsp;&nbsp;&nbsp;' + category[i]['item'][j]['label'] + '</a></li>';
+							html += '<li data-value="' + category[i]['item'][j]['value'] + '"><a href="#">&nbsp;&nbsp;&nbsp;' + category[i]['item'][j]['label'] + '</a></li>';
 						}
 					}
 				}
@@ -219,7 +219,7 @@ $(document).ready(function() {
 			var limit = 5;
 			if(request.length >= character){
 				$.ajax({
-					url: 'index.php?route=module/so_searchpro/autocomplete&filter_category_id='+category_id+'&limit='+limit+'&width='+width+'&height='+height+'&filter_name='+encodeURIComponent(request),
+					url: '/search/?filter_category_id='+category_id+'&limit='+limit+'&width='+width+'&height='+height+'&filter_name='+encodeURIComponent(request),
 					dataType: 'json',
 					success: function(json) {		
 						response($.map(json, function(item) {

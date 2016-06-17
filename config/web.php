@@ -5,7 +5,7 @@ $params = require(__DIR__ . '/params.php');
 $config = [
     'id' => 'basic',
     'name'=>'Кам - Стор',
-    'language'=>'ru',
+    'language'=>'ru-RU',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'modules' => [
@@ -37,12 +37,25 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
+     //   'mailer' => [
+            // 'class' => 'yii\swiftmailer\Mailer',
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'useFileTransport' => true,
+            //'useFileTransport' => true,
+    //    ],
+
+        'mail' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.yandex.ru',
+                'username' => 'kamgroupboris@yandex.ru',
+                'password' => 'qweasdzxc123',
+                'port' => '465',
+                'encryption' => 'ssl',
+            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -58,9 +71,13 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'news/<alias:.*>' => 'site/news',
+                'article/<alias:[\w\d\-]+>' => 'site/article',
                 'product/<id:[\d]+>' => 'site/quickview',
                 'product/<alias:[\w\d\-]+>' => 'site/product',
-                'category/<alias:[\w\d\-]*>' => 'site/category',
+                'cat/<alias:[\w\d\-]*>' => 'site/cat',
+             //   'category/<alias:[\w\d\-]*>' => 'site/category',
+                'category/<alias:.*>' => 'site/category',
                 '<alias:[\w\d\-]+>/'=>'site/artikle',
           //      'products/<alias:[\w\d\-]+>'=>'products/product',
       //          '<controller:\w+>/<action:\w+>' => '<controller>/<action>',

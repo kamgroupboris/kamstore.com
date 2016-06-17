@@ -28,49 +28,7 @@ use app\models\Comments;
 					'itemView' => 'blog-external-simple',
 					]);?>
 
-<!--
-							<div class="media">
-					<div class="item">
-		<div class="media-body">
-		
-						<div class="media-date-added">28<br />
-				<span>Mar</span></div>
-					<div class="media-content">
-						<h4 class="media-heading">
-				<a href="index.php@route=simple_blog%252Farticle%252Fview&amp;simple_blog_article_id=8.html" title="Ac tincidunt Suspendisse malesuada" target="_blank">Ac tincidunt Suspendisse malesuada</a>
-			</h4>
-									<div class="description">
-												
-Commodo laoreet semper tincidunt lorem Vestibulum nunc at In 
-Curabitur magna.....
-				</div>
-								</div>
-	</div>
-</div>
 
-
-				</div>
-							<div class="media">
-					<div class="item">
-		<div class="media-body">
-		
-						<div class="media-date-added">28<br />
-				<span>Mar</span></div>
-					<div class="media-content">
-						<h4 class="media-heading">
-				<a href="index.php@route=simple_blog%252Farticle%252Fview&amp;simple_blog_article_id=7.html" title="Nure caten raverunt lector legere" target="_blank">Nure caten raverunt lector legere</a>
-			</h4>
-									<div class="description">
-												Neque
- porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-.....
-				</div>
-								</div>
-	</div>
-</div>
-
-
-				</div>-->
 					</div>
 			</div>
 	<script type="text/javascript">
@@ -235,62 +193,7 @@ Curabitur magna.....
 													'summary' => false,
 													'itemView' => 'product-thumb-simple',
 											]);?>
-<!--
-					<div class="product-layout ">
-											<div class="product-thumb transition">
-							<div class="image"><a href="index.php@route=product%252Fproduct&amp;product_id=54.html"><img src="image/cache/catalog/product/15-84x84.png" alt="Ruma huren chuma" title="Ruma huren chuma" class="img-responsive" /></a></div>
-							<div class="caption">
-								<div class="ratings">
-										<div class="rating-box">
-																														<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-																																								<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-																																								<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-																																								<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-																																								<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-																														</div>
-								</div>
-								<h4><a href="index.php@route=product%252Fproduct&amp;product_id=54.html">Ruma huren chuma</a></h4>
-								<div class="description">Anim cillum meatball et, shoulder cow pork belly flank tri-tip pig.  
-Occaecat culpa ut sint.  Rump..</div>
-								
-							                <p class="price">
-                                    <span class="price-new">$55.00</span> <span class="price-old">$99.00</span>
-                                                    </p>
-                							</div>
-							<div class="button-group">
-								<button type="button" onclick="cart.add('54');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">Add to Cart</span></button>
-								<button type="button" data-toggle="tooltip" title="Add to Wish List" onclick="wishlist.add('54');"><i class="fa fa-heart"></i></button>
-								<button type="button" data-toggle="tooltip" title="Compare this Product" onclick="compare.add('54');"><i class="fa fa-exchange"></i></button>
-							</div>
-						</div>
-					</div>
-										<div class="product-layout ">
-						<div class="product-thumb transition">
-							<div class="image"><a href="index.php@route=product%252Fproduct&amp;product_id=52.html"><img src="image/cache/catalog/product/6-84x84.png" alt="Phasellus ut vehicula" title="Phasellus ut vehicula" class="img-responsive" /></a></div>
-							<div class="caption">
-								<div class="ratings">
-										<div class="rating-box">
-																														<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-																																								<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-																																								<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-																																								<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-																																								<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-																														</div>
-								</div>
-								<h4><a href="index.php@route=product%252Fproduct&amp;product_id=52.html">Phasellus ut vehicula</a></h4>
-								<div class="description">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l..</div>
-								
-							                <p class="price">
-                                    <span class="price-new">$45.00</span> <span class="price-old">$78.00</span>
-                                                    </p>
-                							</div>
-							<div class="button-group">
-								<button type="button" onclick="cart.add('52');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">Add to Cart</span></button>
-								<button type="button" data-toggle="tooltip" title="Add to Wish List" onclick="wishlist.add('52');"><i class="fa fa-heart"></i></button>
-								<button type="button" data-toggle="tooltip" title="Compare this Product" onclick="compare.add('52');"><i class="fa fa-exchange"></i></button>
-							</div>
-						</div>
-					</div>-->
+
 									</div>
 		</div>
 </div>
@@ -317,42 +220,6 @@ Occaecat culpa ut sint.  Rump..</div>
 			],
 	]);?>
 
-<!--<div class="owl-carousel slider-clients-say">
-<div class="block_content"><div class="image"><img src="../image/catalog/cms/clients_say.png" alt="" width="46" height="46"></div>
-
-<div class="block-info"><div class="text">"Aliquam1 ut tellus dignissim, cursus erat ultricies tellus cursus erat ultricies tellus.. Nulla tempus sollicitudin mauris cursus dictum. Commodo laoreet semper tincidunt lorem. Etiam id diam diam."</div>
-
-<div class="info"><div class="author">Aliquam Tellus</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="block_content"><div class="image"><img src="../image/catalog/cms/clients_say.png" alt="" width="46" height="46"></div>
-
-<div class="block-info"><div class="text">"Aliquam1 ut tellus dignissim, cursus erat ultricies tellus cursus erat ultricies tellus.. Nulla tempus sollicitudin mauris cursus dictum. Commodo laoreet semper tincidunt lorem. Etiam id diam diam."</div>
-
-<div class="info"><div class="author">Aliquam Tellus</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="block_content"><div class="image"><img src="../image/catalog/cms/clients_say.png" alt="" width="46" height="46"></div>
-
-<div class="block-info"><div class="text">"Aliquam1 ut tellus dignissim, cursus erat ultricies tellus cursus erat ultricies tellus.. Nulla tempus sollicitudin mauris cursus dictum. Commodo laoreet semper tincidunt lorem. Etiam id diam diam."</div>
-
-<div class="info"><div class="author">Aliquam Tellus</div>
-
-</div>
-
-</div>
-</div>
-</div>-->
 
 
 

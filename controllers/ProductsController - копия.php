@@ -8,32 +8,20 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 
 /**
  * ProductsController implements the CRUD actions for Products model.
  */
 class ProductsController extends Controller
 {
+
+    public $layout = "/kamstorePage";
     /**
      * @inheritdoc
      */
     public function behaviors()
     {
         return [
-
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => [],
-                'rules' => [
-                    // разрешаем аутентифицированным пользователям
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                    // всё остальное по умолчанию запрещено
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -47,10 +35,11 @@ class ProductsController extends Controller
      * Lists all Products models.
      * @return mixed
      */
+
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Products::find(),
+            'query' => Products::find()->with(['image']),
         ]);
 
         return $this->render('index', [
@@ -67,6 +56,14 @@ class ProductsController extends Controller
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
+        ]);
+    }
+
+    public function actionProducts($alias)
+    {
+        $model = Products::find()->where(['url'=>$alias])->with(['productsCategories', 'relatedProducts', 'img', 'variants'])->one();
+        return $this->render('_view', [
+            'model' => $model,
         ]);
     }
 
@@ -132,7 +129,7 @@ class ProductsController extends Controller
         if (($model = Products::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException('Запрашиваемая страница не существует.');
         }
     }
 }

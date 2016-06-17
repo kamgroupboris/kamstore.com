@@ -16,7 +16,7 @@ use app\models\Comments;
 			<div class="extraslider-inner" data-effect="none">
 
 					<?	$dataProvider = new ActiveDataProvider([
-							'query' => Products::find()->where(['visible'=>1])->orderBy('created DESC')->limit(3),
+							'query' => Products::find()->where(['visible'=>1])->with('variants','images')->orderBy('created DESC')->limit(3),
 							'pagination' => false,
 					]);
 

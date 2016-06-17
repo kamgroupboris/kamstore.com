@@ -68,7 +68,7 @@ AppBasic::register($this);
 						<!--New Label-->
 																							
 						<!--Sale Label-->
-																					<span class="label label-sale">SALE</span>
+																					<span class="label label-sale">распродажа</span>
 													                   
 					
                 </div>
@@ -96,7 +96,7 @@ AppBasic::register($this);
 								
 				                <div class="product-label">
 					
-					   												<div class="product_page_price price" itemprop="offerDetails" itemscope itemtype="http://data-vocabulary.org/Offer">
+					   												<div class="product_page_price price" itemprop="offerDetails" itemscope itemtype="/Offer">
 							
 														<span class="price-new" itemprop="price"><?=$model['variants'][0]->attributes['price']?>₽</span>
 							<span class="price-old"><?=$model['variants'][0]->attributes['compare_price']?>₽</span>
@@ -122,7 +122,7 @@ AppBasic::register($this);
 						  <div class="input-group quantity-control">
 							  <label>Кол-во</label>
 							  <input class="form-control" type="text" name="quantity" value="1" />
-							  <input type="hidden" name="product_id" value="54" />
+							  <input type="hidden" name="product_id" value="<?=$model->variants[0]->id?>" />
 							  <span class="input-group-addon product_quantity_down">-</span>
 							  <span class="input-group-addon product_quantity_up">+</span>
 						  </div>
@@ -168,14 +168,14 @@ $('select[name=\'recurring_id\'], input[name="quantity"]').change(function(){
 		},
 		success: function(json) {
 			$('.alert, .text-danger').remove();
-			
+
 			if (json['success']) {
 				$('#recurring-description').html(json['success']);
 			}
 		}
 	});
 });
-//--></script> 
+//--></script>
 
 <script type="text/javascript"><!--
 $('#button-cart').on('click', function() {
@@ -191,12 +191,12 @@ $('#button-cart').on('click', function() {
 			$('#button-cart').button('reset');
 		},
 		success: function(json) {
-			
+
 			if (json['error']) {
 				if (json['error']['option']) {
 					for (i in json['error']['option']) {
 						var element = $('#input-option' + i.replace('_', '-'));
-						
+
 						if (element.parent().hasClass('input-group')) {
 							element.parent().after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
 						} else {
@@ -204,32 +204,32 @@ $('#button-cart').on('click', function() {
 						}
 					}
 				}
-				
+
 				if (json['error']['recurring']) {
 					$('select[name=\'recurring_id\']').after('<div class="text-danger">' + json['error']['recurring'] + '</div>');
 				}
-				
+
 				// Highlight any found errors
 				$('.text-danger').parent().addClass('has-error');
 			}
-			
+
 			if (json['success']) {
 				if (!parent.addProductNotice(json['title'], json['thumb'], json['success'], 'success')) {
                     $('.breadcrumb').after('<div class="alert alert-success success">' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
                 }
-				
+
 				// Need to set timeout otherwise it wont update the total
 				setTimeout(function () {
 					parent.$('#cart .text-shopping-cart').html(json['total'] );
 					$('.text-danger').remove();
 				}, 100);
-				parent.$('#cart > ul').load('/cart/info ul li');
+				parent.$('#cart > ul').load('/cart/info');
 			}
-			
+
 		}
 	});
 });
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
 $('.date').datetimepicker({
 	pickTime: false
@@ -246,11 +246,11 @@ $('.time').datetimepicker({
 
 $('button[id^=\'button-upload\']').on('click', function() {
 	var node = this;
-	
+
 	$('#form-upload').remove();
-	
+
 	$('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
-	
+
 	$('#form-upload input[name=\'file\']').trigger('click');
     if (typeof timer != 'undefined') {
         clearInterval(timer);
@@ -258,7 +258,7 @@ $('button[id^=\'button-upload\']').on('click', function() {
 	timer = setInterval(function() {
 		if ($('#form-upload input[name=\'file\']').val() != '') {
 			clearInterval(timer);
-			
+
 			$.ajax({
 				url: 'index.php?route=tool/upload',
 				type: 'post',
@@ -275,14 +275,14 @@ $('button[id^=\'button-upload\']').on('click', function() {
 				},
 				success: function(json) {
 					$('.text-danger').remove();
-					
+
 					if (json['error']) {
 						$(node).parent().find('input').after('<div class="text-danger">' + json['error'] + '</div>');
 					}
-					
+
 					if (json['success']) {
 						alert(json['success']);
-						
+
 						$(node).parent().find('input').attr('value', json['code']);
 					}
 				},
@@ -293,6 +293,6 @@ $('button[id^=\'button-upload\']').on('click', function() {
 		}
 	}, 500);
 });
-//--></script> 
+//--></script>
 
 

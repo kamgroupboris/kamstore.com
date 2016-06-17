@@ -4,6 +4,7 @@ use app\models\Variants;
 ?>
 <?
 $img1 = Images::find()->where(['product_id'=>$model['id'],'position'=>0])->asArray()->one();
+if(!$img1)$img1 = Images::find()->where(['product_id'=>$model['id']])->asArray()->one();
 $variants1 = Variants::find()->where(['product_id'=>$model['id']])->asArray()->all();
 ?>
 

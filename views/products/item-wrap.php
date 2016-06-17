@@ -3,8 +3,8 @@
 							<div class="media-left">
 								<div class="item-image">
 									<div class="item-img-info">
-										<a class="product_img_link" href="/product/57" target="_blank" title="Duis faucibus rutrum">
-												<img src="/image/cache/catalog/product/7-85x85.png" alt="Duis faucibus rutrum" title="Duis faucibus rutrum" class="img-responsive" />
+										<a class="product_img_link" href="/product/<?=$model->url?>" target="_blank" title="<?=$model->name?>">
+												<img src="/files/products/<?= str_replace(".", ".100x100.",$model->images[0]['filename'])?>" alt="<?=$model->name?>" title="<?=$model->name?>" class="img-responsive" />
 										</a>
 									</div>
 								</div>
@@ -20,7 +20,7 @@
 																					</div>
 																				
 																					<div class="item-title">
-												<a href="#" target="_blank"
+												<a href="/product/<?=$model->url?>" target="_blank"
 												   title="<?=$model->name?>"  >
 													<?=$model->name?></a>
 											</div>
@@ -31,8 +31,8 @@
 											<div class="item-content">
 													
 																									<div  class="content_price">
-																													<span class="old-price product-price">$30.00</span>&nbsp;&nbsp;
-															<span class="price-old">$59.00</span>&nbsp;
+																													<span class="old-price product-price"><?if(isset($model->variants[0]['price']))echo $model->variants[0]['price'];?>₽</span>&nbsp;&nbsp;
+															<span class="price-old"><?if(isset($model->variants[0]['price']))echo $model->variants[0]['price'];?>₽</span>&nbsp;
 																																									</div>
 													
 													

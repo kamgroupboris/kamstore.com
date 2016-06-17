@@ -46,6 +46,7 @@ class ArticlesController extends Controller
         ]);
     }
 
+
     /**
      * Displays a single Articles model.
      * @param integer $id

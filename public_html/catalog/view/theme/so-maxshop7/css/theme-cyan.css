@@ -5862,8 +5862,8 @@ div.left-content-product .content-product-right .box-info-product .add-to-links 
       .related.products-list .releate-products .product-item-container .product-item .product-image-container {
         float: left; }
         .related.products-list .releate-products .product-item-container .product-item .product-image-container img {
-          width: 84px;
-          height: 84px; }
+        /*  width: 84px; */
+          height: 84px;}
         .related.products-list .releate-products .product-item-container .product-item .product-image-container:hover img {
           opacity: 0.8; }
       .related.products-list .releate-products .product-item-container .product-item .quickview, .related.products-list .releate-products .product-item-container .product-item .button-group {

@@ -1,64 +1,33 @@
- <div class="product-view row">
+
+<div class="product-view row">
 		  <div class="left-content-product col-xs-12">
 			<div class="row">
 						
                 <div class="content-product-left  col-md-6 col-xs-12 ">
-					                                            <div id="thumb-slider" class="thumb-vertical-outer">
-														<div id="thumb-slider-next" class="slider-btn lSNext"><i class="fa fa-chevron-up"></i></div>
-														<ul class="thumb-vertical previews-list ">
-														<?foreach($model['images'] as $img):?>
-																<li class="owl2-item">
-																	<a data-index="0" class="img thumbnail" data-image="/files/products/<?=str_replace('.','.600x600.',$img->attributes['filename']);?>" title="<?=$model->name?>">
-																		<img src="/files/products/<?=str_replace('.','.200x200.',$img->attributes['filename']);?>" title="<?=$model->name?>" alt="<?=$model->name?>" />
-																	</a>
-																</li>
-														<?endforeach;?>
-																<!--																<li class="owl2-item">
-																	<a data-index="1" class="img thumbnail" data-image="http://opencart.magentech.com/themes/so_maxshop/layout7/image/cache/catalog/product/e6-600x600.JPG" title="Dail miren tukan potrem">
-																		<img src="image/cache/catalog/product/e6-1000x1000.JPG" title="Dail miren tukan potrem" alt="Dail miren tukan potrem" />
-																	</a>
-																</li>
-																																<li class="owl2-item">
-																	<a data-index="2" class="img thumbnail" data-image="http://opencart.magentech.com/themes/so_maxshop/layout7/image/cache/catalog/product/e14-600x600.jpg" title="Dail miren tukan potrem">
-																		<img src="image/cache/catalog/product/e14-1000x1000.jpg" title="Dail miren tukan potrem" alt="Dail miren tukan potrem" />
-																	</a>
-																</li>
-																																<li class="owl2-item">
-																	<a data-index="3" class="img thumbnail" data-image="http://opencart.magentech.com/themes/so_maxshop/layout7/image/cache/catalog/product/e13-600x600.jpg" title="Dail miren tukan potrem">
-																		<img src="image/cache/catalog/product/e13-1000x1000.jpg" title="Dail miren tukan potrem" alt="Dail miren tukan potrem" />
-																	</a>
-																</li>
-																																<li class="owl2-item">
-																	<a data-index="4" class="img thumbnail" data-image="http://opencart.magentech.com/themes/so_maxshop/layout7/image/cache/catalog/product/6-600x600.png" title="Dail miren tukan potrem">
-																		<img src="image/cache/catalog/product/6-1000x1000.png" title="Dail miren tukan potrem" alt="Dail miren tukan potrem" />
-																	</a>
-																</li>
-																																<li class="owl2-item">
-																	<a data-index="5" class="img thumbnail" data-image="http://opencart.magentech.com/themes/so_maxshop/layout7/image/cache/catalog/product/e7-600x600.JPG" title="Dail miren tukan potrem">
-																		<img src="image/cache/catalog/product/e7-1000x1000.JPG" title="Dail miren tukan potrem" alt="Dail miren tukan potrem" />
-																	</a>
-																</li>-->
-																																														
-														</ul>
-														<div id="thumb-slider-prev" class="slider-btn lSPrev"><i class="fa fa-chevron-down"></i></div>
+					<div id="thumb-slider" class="thumb-vertical-outer">
+							<div id="thumb-slider-next" class="slider-btn lSNext"><i class="fa fa-chevron-up"></i></div>
+							<ul class="thumb-vertical previews-list ">
+							<?foreach($model['images'] as $img):?>
+									<li class="owl2-item">
+										<a data-index="0" class="img thumbnail" data-image="/files/products/<?=str_replace('.','.600x600.',$img->attributes['filename']);?>" title="<?=$model->name?>">
+											<img src="/files/products/<?=str_replace('.','.600x600.',$img->attributes['filename']);?>" title="<?=$model->name?>" alt="<?=$model->name?>" />
+										</a>
+									</li>
+							<?endforeach;?>
+
+
+							</ul>
+							<div id="thumb-slider-prev" class="slider-btn lSPrev"><i class="fa fa-chevron-down"></i></div>
                     </div>
-                                        
+
 					<div class="large-image  vertical  ">
-						<?
-						if(isset($model['images'][0])){
-							$filename =	str_replace('.','.600x600.',$model['images'][0]->attributes['filename']);
-							$img600 = file_exists($filename)?$filename:$filename =	str_replace('.','.200x200.',$model['images'][0]->attributes['filename']);
-						}							
-						else
-							$img600 =	'no-image.jpg';
-						?>
-						<img itemprop="image" class="product-image-zoom" src="/files/products/<?=$img600?>" data-zoom-image="/files/products/<?=$img600?>" title="<?=$model->name?>" alt="<?=$model->name?>" />
-						
+						<?$filename =	str_replace('.','.600x600.',$model->images[0]->filename)?>
+						<img itemprop="image" class="product-image-zoom" src="/files/products/<?=$filename?>" data-zoom-image="/files/products/<?=$filename?>" title="<?=$model->name?>" alt="<?=$model->name?>" />
+
 						<!--New Label-->
-																							
+
 						<!--Sale Label-->
-																					<span class="label label-sale">SALE</span>
-																		</div>
+					</div>
 						
                     
 					
@@ -81,12 +50,12 @@
 						  						  						  </div>
 					  </div>
 			 
-					   <a class="reviews_button" href="index.html" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">1 review (s)</a> | <a class="write_review_button" href="index.html" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">Write a review</a>
+					   <a class="reviews_button" href="#" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">нет отзывов</a> | <a class="write_review_button" href="#" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">Написать отзыв</a>
 				    </div>
 								
 			                 <div class="product-label">
-					<div class="stock"><span>Доступность:</span> <span class="status-stock">В наличии</span></div>
-					   												<div class="product_page_price price" itemprop="offerDetails" itemscope itemtype="http://data-vocabulary.org/Offer">
+					<div class="stock"><span>Доступность:</span> <span class="status-stock"><?=$model->visible==1?'В наличии':'Нет в наличии'?></span></div>
+					   												<div class="product_page_price price" itemprop="offerDetails" itemscope itemtype="/Offer">
 														<span class="price-old"><?=$model['variants'][0]->attributes['compare_price']?>₽</span>
 							<span class="price-new" itemprop="price"><?=$model['variants'][0]->attributes['price']?>₽</span>
 														
@@ -173,9 +142,9 @@
 	foreach($model['images'] as $img):?>
 		<? $items[]['src'] = '/files/products/'.str_replace('.','.600x600.',$img->attributes['filename']); ?>
 	<?endforeach;?>
-	
-	
-		
+
+
+
 				<script type="text/javascript">
 		$(document).ready(function() {
 			var zoomCollection = '.large-image img';
@@ -183,21 +152,14 @@
 								zoomType        : "inner",
 								lensSize    :"200",
 				easing:true,
-				
+
 				gallery:'thumb-slider',
 				cursor: 'pointer',
 				galleryActiveClass: "active"
 			});
 			$('.large-image').magnificPopup({
 				items: <?=json_encode($items);?>,
-				/*[				
-							{src: 'http://opencart.magentech.com/themes/so_maxshop/layout7/image/cache/catalog/product/8-600x600.png'},
-							{src: 'http://opencart.magentech.com/themes/so_maxshop/layout7/image/cache/catalog/product/e6-600x600.JPG'},
-							{src: 'http://opencart.magentech.com/themes/so_maxshop/layout7/image/cache/catalog/product/e14-600x600.jpg'},
-							{src: 'http://opencart.magentech.com/themes/so_maxshop/layout7/image/cache/catalog/product/e13-600x600.jpg'},
-							{src: 'http://opencart.magentech.com/themes/so_maxshop/layout7/image/cache/catalog/product/6-600x600.png'},
-							{src: 'http://opencart.magentech.com/themes/so_maxshop/layout7/image/cache/catalog/product/e7-600x600.JPG'},
-						],*/
+
 				gallery: { enabled: true, preload: [0,2] },
 				type: 'image',
 				mainClass: 'mfp-fade',
@@ -209,7 +171,7 @@
 					}
 				}
 			});
-			
+
 		});
-				
+
 		</script>

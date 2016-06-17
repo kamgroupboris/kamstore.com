@@ -32,8 +32,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'meta_description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'created')->textInput() ?>
-
     <?= $form->field($model, 'featured')->textInput() ?>
 
     <?= $form->field($model, 'external_id')->textInput(['maxlength' => true]) ?>

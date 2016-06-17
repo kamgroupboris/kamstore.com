@@ -7,6 +7,9 @@ use yii\widgets\ListView;
 use yii\data\ActiveDataProvider;
 use app\models\Products;
 use yii\widgets\Pjax;
+use yii\helpers\Url;
+
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -22,14 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
 													<div class="col-sm-12"><p><img src="/image/catalog/category/fashion-cat.png"><br></p></div>
 							  </div>
 
-			<?php Pjax::begin([
-					'id'=>'variants-pjax',
-					'enableReplaceState'=>false,
-					'enablePushState'=>false,
-					'clientOptions'=>[
-							'container'=>'x8',
-					]
-			]); ?>
+
+
+
 	  
 					<!-- Filters -->
 			<div class="product-filter filters-panel">
@@ -58,19 +56,40 @@ $this->params['breadcrumbs'][] = $this->title;
 							  <option value="/product/category&path=25&sort=p.model&order=DESC">Model (Z - A)</option>
 							</select>-->
 
-						<?php
+						<?
 						//$items = ArrayHelper::map(Categories::find()->all(), 'id', 'name');
 						//array_unshift($items, "Все категории");
 						$items	= [
-								'?path=25&sort=name&order=ASC' => 'Имени (по возрастанию)',
-								'?path=25&sort=price&order=ASC' => 'Цене (по возрастанию)',
-								'?path=25&sort=rating&order=ASC'=>'Рейтингу (по возрастанию)',
-								'?path=25&sort=model&order=ASC'=>'Модели (по возрастанию)',
+								'sort=name&order=ASC' => 'Имени (по возрастанию)',
+								'sort=name&order=DESC' => 'Имени (по убыванию)',
+								'sort=price&order=ASC' => 'Цене (по возрастанию)',
+								'sort=price&order=DESC' => 'Цене (по убыванию)',
+						//		'path=25&sort=rating&order=ASC'=>'Рейтингу (по возрастанию)',
+								'sort=variant&order=ASC'=>'Модели (по возрастанию)',
+								'sort=variant&order=ASC'=>'Модели (по убыванию)',
 						];
-						echo Html::dropDownList('category_id',null,$items, ['class'=>'form-control', 'id'=>'input-sort', 'onchange'=>"location = this.value;"]);
+						echo Html::dropDownList('category_id',null,$items, ['class'=>'form-control', 'id'=>'input-sort']);
 						?>
 
-
+				<?
+/*
+				$data	= [
+						'path=25&sort=name&order=ASC' => 'Имени (по возрастанию)',
+						'path=25&sort=price&order=ASC' => 'Цене (по возрастанию)',
+						'path=25&sort=rating&order=ASC'=>'Рейтингу (по возрастанию)',
+						'path=25&sort=model&order=ASC'=>'Модели (по возрастанию)',
+				];
+				echo Select2::widget([
+						'name' => 'category',
+						'attribute' => 'state_2',
+						'data' => $data,
+						'options' => ['placeholder' => 'Select a state ...'],
+						'pluginOptions' => [
+						'allowClear' => true
+						],
+						]);
+				*/
+				?>
 					</div>
 
 					<div class="form-group">
@@ -86,11 +105,11 @@ $this->params['breadcrumbs'][] = $this->title;
 						//$items = ArrayHelper::map(Categories::find()->all(), 'id', 'name');
 						//array_unshift($items, "Все категории");
 						$items	= [
-								'15' => '15',
-								'25' => '25',
-								'50'=>'50',
-								'75'=>'75',
-								'100'=>'100',
+								'path=15' => '15',
+								'path=25' => '25',
+								'path=50'=>'50',
+								'path=75'=>'75',
+								'path=100'=>'100',
 						];
 						echo Html::dropDownList('category_id',null,$items, ['class'=>'form-control', 'id'=>'input-limit']);
 						?>
@@ -102,6 +121,14 @@ $this->params['breadcrumbs'][] = $this->title;
 			<!-- //end Filters -->
 	
 		<!--changed listings-->
+			<?php Pjax::begin([
+					'id'=>'variants-pjax',
+					'enableReplaceState'=>false,
+					'enablePushState'=>false,
+					'clientOptions'=>[
+							'container'=>'x8',
+					]
+			]); ?>
 		
 		<div class="products-list row grid">		
  
@@ -111,7 +138,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 echo ListView::widget([
                     'dataProvider' => $dataProvider,
-
+				//	'layout' => '{summary}{items}{pager}',
+				//		'filterPosition' => FILTER_POS_FOOTER,
                 //    'summary' => false,
                     'options' => [
                         'tag'=>'ul',
@@ -147,6 +175,35 @@ $this->params['breadcrumbs'][] = $this->title;
 	  </div>
 	</div>
 	<!-- //end Filters -->
+
+		<script>
+			$(document).ready(function() {
+				$("#input-sort").change( function() {
+					$.pjax.reload({container:"#variants-pjax",
+								type:'get',
+								url: '<?=Url::to(['categories/sort','action'=> 'create' ])?>',
+							data: $(this).val(),
+							replaceRedirect:false,
+							replace    : false}).success(function(){$('.products-list .product-layout .item-desc').addClass('hidden')});  //Reload GridView
+				});
+
+
+				$("#input-limit").change( function() {
+					$.pjax.reload({container:"#variants-pjax",
+						type:'get',
+						url: '<?=Url::to(['categories/sort','action'=> 'create' ])?>',
+						data: $(this).val()+$("#input-sort").val(),
+						replaceRedirect:false,
+						replace    : false}).success(function(){$('.products-list .product-layout .item-desc').addClass('hidden')});  //Reload GridView
+				});
+
+
+
+
+			});
+
+		</script>
+
 
 	<!--changed listings-->
     	
